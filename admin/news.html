@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ管理｜Salesaurus Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+  <div class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <h2>🦕 Salesaurus Admin</h2>
+      <p>コンテンツ管理</p>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
+      <a href="/admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
+      <a href="/admin/news.html" class="active"><span class="nav-icon">📰</span> お知らせ管理</a>
+      <div style="margin:16px 20px;border-top:1px solid rgba(255,255,255,.1);"></div>
+      <a href="/news/" target="_blank"><span class="nav-icon">🔗</span> お知らせ一覧を見る</a>
+      <a href="/" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <h1>📰 お知らせ管理</h1>
+      <button class="btn btn-primary btn-sm" onclick="showTab('new')">+ 新規追加</button>
+    </div>
+
+    <div class="admin-tab">
+      <button class="admin-tab-btn active" onclick="showTab('list')">一覧</button>
+      <button class="admin-tab-btn" onclick="showTab('new')">新規追加</button>
+    </div>
+
+    <!-- 一覧 -->
+    <div id="tab-list">
+      <div class="notice" style="margin-bottom:20px;">
+        💡 お知らせを追加・編集するには、<code>/data/news.js</code> ファイルを直接編集するか、「新規追加」タブからデータを生成してください。
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>タイトル</th><th>種別</th><th>日付</th><th>ステータス</th><th>操作</th></tr>
+        </thead>
+        <tbody id="news-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- 新規追加 -->
+    <div id="tab-new" style="display:none;">
+      <div class="section-card">
+        <h3>📌 基本情報</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-row">
+            <div class="form-col">
+              <label>タイトル<span class="required-mark">*</span></label>
+              <input type="text" id="n-title" placeholder="お知らせタイトル">
+            </div>
+            <div class="form-col">
+              <label>スラッグ<span class="required-mark">*</span></label>
+              <input type="text" id="n-slug" placeholder="news-20260320">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>日付<span class="required-mark">*</span></label>
+              <input type="date" id="n-date">
+            </div>
+            <div class="form-col">
+              <label>種別</label>
+              <select id="n-type">
+                <option>お知らせ</option>
+                <option>キャンペーン</option>
+                <option>メディア掲載</option>
+                <option>イベント・セミナー</option>
+                <option>プレスリリース</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>公開状態</label>
+              <select id="n-status">
+                <option value="published">公開</option>
+                <option value="draft">下書き</option>
+              </select>
+            </div>
+            <div class="form-col">
+              <label>関連リンク（任意）</label>
+              <input type="text" id="n-link" placeholder="/contact/">
+            </div>
+          </div>
+          <div class="form-col">
+            <label>本文（HTML可）<span class="required-mark">*</span></label>
+            <textarea id="n-content" rows="8" placeholder="<p>お知らせ本文を入力してください。</p>"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-primary btn-lg" onclick="generateNewsCode()">📋 コードを生成する</button>
+        <button class="btn btn-secondary btn-lg" onclick="clearNewsForm()">クリア</button>
+      </div>
+
+      <div id="news-generated-code" style="display:none;margin-top:24px;">
+        <div class="section-card">
+          <h3>📋 生成されたデータコード</h3>
+          <p style="font-size:13px;color:#666;margin-bottom:16px;">
+            以下のコードを <code>/data/news.js</code> の <code>NEWS_ITEMS = [</code> の直後にコピー＆ペーストしてください。
+          </p>
+          <div class="export-box" id="news-code-output"></div>
+          <div style="margin-top:16px;">
+            <button class="btn btn-primary" onclick="copyNewsCode()">📋 コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script>
+function showTab(tab) {
+  ['list','new'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.admin-tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['list','new'][i] === tab);
+  });
+  if (tab === 'list') renderNewsTable();
+}
+
+function renderNewsTable() {
+  const tbody = document.getElementById('news-tbody');
+  tbody.innerHTML = NEWS_ITEMS.map(n => `
+    <tr>
+      <td><a href="/news/detail/?slug=${n.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;">${n.title}</a></td>
+      <td>${n.type}</td>
+      <td>${n.date}</td>
+      <td><span class="status-badge ${n.status === 'published' ? 'status-published' : 'status-draft'}">${n.status === 'published' ? '公開中' : '下書き'}</span></td>
+      <td><a href="/news/detail/?slug=${n.slug}" target="_blank" class="admin-btn-sm admin-btn-secondary">表示</a></td>
+    </tr>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderNewsTable();
+  document.getElementById('n-date').value = new Date().toISOString().split('T')[0];
+});
+
+function generateNewsCode() {
+  const v = id => document.getElementById(id).value;
+  if (!v('n-title') || !v('n-slug') || !v('n-content')) {
+    alert('タイトル・スラッグ・本文は必須です'); return;
+  }
+  const maxId = Math.max(...NEWS_ITEMS.map(n => n.id), 0);
+  const code = `  {
+    id: ${maxId + 1},
+    slug: '${v('n-slug')}',
+    title: '${v('n-title').replace(/'/g,"\\'")}',
+    date: '${v('n-date')}',
+    type: '${v('n-type')}',
+    status: '${v('n-status')}',
+    content: \`${v('n-content').replace(/`/g,'\\`')}\`,
+    link: '${v('n-link')}',
+  },`;
+  document.getElementById('news-code-output').textContent = code;
+  document.getElementById('news-generated-code').style.display = '';
+  document.getElementById('news-generated-code').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyNewsCode() {
+  navigator.clipboard.writeText(document.getElementById('news-code-output').textContent)
+    .then(() => alert('コピーしました！\n/data/news.js の NEWS_ITEMS = [ の直後に貼り付けてください。'));
+}
+
+function clearNewsForm() {
+  ['n-title','n-slug','n-date','n-link','n-content'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('news-generated-code').style.display = 'none';
+}
+</script>
+</body>
+</html>

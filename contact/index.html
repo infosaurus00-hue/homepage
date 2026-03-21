@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ｜株式会社Salesaurus</title>
+  <meta name="description" content="Salesaurusへのお問い合わせ。サービスに関するご相談・資料請求は無料です。フォームまたは公式LINEからお気軽にどうぞ。">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div id="breadcrumb-placeholder"></div>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">お問い合わせ</span>
+      <h1>お問い合わせ</h1>
+      <p>ご相談・資料請求は無料です。お気軽にご連絡ください。</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- フォーム -->
+        <div class="contact-form-wrap">
+          <h2 style="font-size:22px;font-weight:700;color:var(--color-primary);margin-bottom:24px;">お問い合わせフォーム</h2>
+          <div class="notice" style="margin-bottom:28px;">
+            <i class="fas fa-info-circle"></i> 送信いただいた後、担当者より2営業日以内にご連絡します。急ぎの場合は公式LINEをご利用ください。
+          </div>
+
+          <!-- ★ 実際の運用では、このフォームをフォームサービス（Formspree, Netlify Forms等）に接続してください -->
+          <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">会社名<span class="form-required">*必須</span></label>
+              <input type="text" class="form-input" name="company" placeholder="株式会社○○" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">お名前<span class="form-required">*必須</span></label>
+              <input type="text" class="form-input" name="name" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">メールアドレス<span class="form-required">*必須</span></label>
+              <input type="email" class="form-input" name="email" placeholder="info@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">電話番号</label>
+              <input type="tel" class="form-input" name="tel" placeholder="03-XXXX-XXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">役職</label>
+              <input type="text" class="form-input" name="position" placeholder="代表取締役・営業部長など">
+            </div>
+            <div class="form-group">
+              <label class="form-label">従業員数</label>
+              <select class="form-select" name="employees">
+                <option value="">選択してください</option>
+                <option>1〜5名</option>
+                <option>6〜20名</option>
+                <option>21〜50名</option>
+                <option>51〜100名</option>
+                <option>101名以上</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ご興味のあるサービス<span class="form-required">*必須</span></label>
+              <select class="form-select" name="service" required>
+                <option value="">選択してください</option>
+                <option>アポヨロ！｜営業代行サービス</option>
+                <option>セールス航海士｜営業コンサルサービス</option>
+                <option>BPO・CSOレンタル｜BPO・営業支援サービス</option>
+                <option>補完サービス（人材・AI活用）</option>
+                <option>どのサービスが合うか分からない</option>
+                <option>採用について</option>
+                <option>その他</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">お問い合わせ内容<span class="form-required">*必須</span></label>
+              <textarea class="form-textarea" name="message" rows="6" placeholder="現在の課題・ご要望・ご質問などをご記入ください" required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-checkbox">
+                <input type="checkbox" required>
+                <span class="form-checkbox-text">
+                  <a href="/privacy-policy/" style="color:var(--color-accent);" target="_blank">プライバシーポリシー</a>に同意します
+                </span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">送信する →</button>
+          </form>
+
+          <!-- 送信完了メッセージ（非表示） -->
+          <div id="form-success" style="display:none;text-align:center;padding:48px;background:var(--color-bg-light);border-radius:16px;margin-top:24px;">
+            <div style="font-size:48px;margin-bottom:16px;color:var(--color-accent);"><i class="fas fa-check-circle"></i></div>
+            <h3 style="font-size:22px;font-weight:700;color:var(--color-primary);margin-bottom:12px;">送信完了しました</h3>
+            <p style="color:var(--color-text-mid);">2営業日以内に担当者よりご連絡します。<br>お急ぎの方は公式LINEをご利用ください。</p>
+          </div>
+        </div>
+
+        <!-- サイドバー -->
+        <div class="contact-sidebar">
+          <div class="contact-alt-card">
+            <div style="font-size:32px;margin-bottom:12px;color:var(--color-accent);"><i class="fab fa-line"></i></div>
+            <div class="contact-alt-title">公式LINEで相談する</div>
+            <p class="contact-alt-desc">フォームより気軽に相談できます。リアルタイムでやり取り可能。営業時間外でもメッセージを受け付けています。</p>
+            <a href="#" class="btn btn-line btn-block">LINEで相談する →</a>
+          </div>
+
+          <div class="contact-alt-card">
+            <div style="font-size:32px;margin-bottom:12px;color:var(--color-accent);"><i class="fas fa-calendar-alt"></i></div>
+            <div class="contact-alt-title">60分の無料相談を予約する</div>
+            <p class="contact-alt-desc">オンライン面談にて、現状の課題ヒアリング・サービス提案を無料で実施します。</p>
+            <a href="#" class="btn btn-secondary btn-block">日程を選んで予約 →</a>
+          </div>
+
+          <div style="background:var(--color-bg-light);border-radius:16px;padding:24px;">
+            <h4 style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:16px;">よくある相談内容</h4>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;gap:8px;font-size:13px;color:var(--color-text-mid);"><span style="color:var(--color-accent);">→</span>新規開拓のリソースが不足している</div>
+              <div style="display:flex;gap:8px;font-size:13px;color:var(--color-text-mid);"><span style="color:var(--color-accent);">→</span>月間アポ数を○件増やしたい</div>
+              <div style="display:flex;gap:8px;font-size:13px;color:var(--color-text-mid);"><span style="color:var(--color-accent);">→</span>受注率を改善したい</div>
+              <div style="display:flex;gap:8px;font-size:13px;color:var(--color-text-mid);"><span style="color:var(--color-accent);">→</span>営業責任者が不在で困っている</div>
+              <div style="display:flex;gap:8px;font-size:13px;color:var(--color-text-mid);"><span style="color:var(--color-accent);">→</span>どのサービスが合うか相談したい</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/dynamic.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderBreadcrumb([{ label: 'お問い合わせ' }]);
+
+  // URLパラメータでサービス・タイプを自動選択
+  const params = new URLSearchParams(window.location.search);
+  const serviceParam = params.get('service');
+  const typeParam = params.get('type');
+  if (serviceParam || typeParam) {
+    const select = document.querySelector('select[name="service"]');
+    if (select && serviceParam) {
+      const serviceMap = {
+        'apo-yoro': 'アポヨロ！｜営業代行サービス',
+        'sales-pilot': 'セールス航海士｜営業コンサルサービス',
+        'bpo-cso-rental': 'BPO・CSOレンタル｜BPO・営業支援サービス',
+        'recruit': '採用について',
+      };
+      const val = serviceMap[serviceParam] || serviceMap[typeParam];
+      if (val) {
+        for (let opt of select.options) {
+          if (opt.value === val || opt.text === val) { opt.selected = true; break; }
+        }
+      }
+    }
+  }
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  // ★ 実際の送信処理をここに実装してください
+  // 例: Formspree, Netlify Forms, GASなど
+  // 現在はデモとして送信完了画面を表示します
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>

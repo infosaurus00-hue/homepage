@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブログ｜営業ノウハウ・KPI設計・BPO活用 | 株式会社Salesaurus</title>
+  <meta name="description" content="Salesaurusの営業ノウハウブログ。営業代行・コンサル・BPO活用のTips、KPI設計、アポ獲得のノウハウを定期配信しています。">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div id="breadcrumb-placeholder"></div>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">ブログ</span>
+      <h1>営業ノウハウブログ</h1>
+      <p>現場で使える営業Tips・KPI設計・BPO活用法などを定期配信しています。</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="list-header">
+        <div id="blog-filter" class="category-filter"></div>
+      </div>
+      <div class="posts-grid" id="blog-list-container">
+        <div class="loading-spinner" style="grid-column:1/-1;">読み込み中...</div>
+      </div>
+      <div style="text-align:center;margin-top:32px;display:none;" id="load-more-wrap">
+        <button class="btn btn-secondary" id="load-more-btn">さらに読み込む</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-light);">
+    <div class="container" style="max-width:680px;text-align:center;">
+      <span class="section-label">ご相談</span>
+      <h2 class="section-title">記事を読んで相談したくなったら</h2>
+      <p style="color:var(--color-text-mid);margin-bottom:28px;">初回相談は無料です。現状の課題を整理するところからお手伝いします。</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/contact/" class="btn btn-primary"><i class="fas fa-envelope"></i> 無料相談はこちら</a>
+        <a href="#" class="btn btn-line"><i class="fab fa-line"></i> LINEで相談</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/dynamic.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderBreadcrumb([{ label: 'ブログ' }]);
+});
+</script>
+</body>
+</html>

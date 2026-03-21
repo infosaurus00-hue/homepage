@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブログ管理｜Salesaurus Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+  <!-- サイドバー -->
+  <div class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <h2>🦕 Salesaurus Admin</h2>
+      <p>コンテンツ管理</p>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/blog.html" class="active"><span class="nav-icon">📝</span> ブログ管理</a>
+      <a href="/admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
+      <a href="/admin/news.html"><span class="nav-icon">📰</span> お知らせ管理</a>
+      <div style="margin:16px 20px;border-top:1px solid rgba(255,255,255,.1);"></div>
+      <a href="/blog/" target="_blank"><span class="nav-icon">🔗</span> ブログ一覧を見る</a>
+      <a href="/" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
+    </nav>
+  </div>
+
+  <!-- メイン -->
+  <div class="admin-main">
+    <div class="admin-header">
+      <h1>📝 ブログ管理</h1>
+      <button class="btn btn-primary btn-sm" onclick="showTab('new')">+ 新規記事作成</button>
+    </div>
+
+    <!-- タブ -->
+    <div class="admin-tab">
+      <button class="admin-tab-btn active" onclick="showTab('list')">記事一覧</button>
+      <button class="admin-tab-btn" onclick="showTab('new')">新規作成</button>
+      <button class="admin-tab-btn" onclick="showTab('export')">データ出力</button>
+    </div>
+
+    <!-- 記事一覧タブ -->
+    <div id="tab-list">
+      <div class="notice" style="margin-bottom:20px;">
+        💡 記事を追加・編集するには、<code>/data/blogs.js</code> ファイルを直接編集するか、「新規作成」タブからデータを生成してください。
+      </div>
+      <table class="admin-table" id="blog-table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>カテゴリ</th>
+            <th>公開日</th>
+            <th>ステータス</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="blog-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- 新規作成タブ -->
+    <div id="tab-new" style="display:none;">
+      <div class="section-card">
+        <h3>📌 基本情報</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-row">
+            <div class="form-col">
+              <label>記事タイトル<span class="required-mark">*</span></label>
+              <input type="text" id="f-title" placeholder="記事タイトルを入力" oninput="autoSlug()">
+            </div>
+            <div class="form-col">
+              <label>スラッグ（URL）<span class="required-mark">*</span></label>
+              <input type="text" id="f-slug" placeholder="eigyo-kpi-design">
+              <span class="hint">URL: /blog/detail/?slug=（スラッグ）</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>公開日<span class="required-mark">*</span></label>
+              <input type="date" id="f-date">
+            </div>
+            <div class="form-col">
+              <label>カテゴリ<span class="required-mark">*</span></label>
+              <select id="f-category">
+                <option>営業ノウハウ</option>
+                <option>営業設計 / KPI</option>
+                <option>BPO / 業務効率化</option>
+                <option>実績 / 活動報告</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>公開状態</label>
+              <select id="f-status">
+                <option value="published">公開</option>
+                <option value="draft">下書き</option>
+              </select>
+            </div>
+            <div class="form-col">
+              <label>関連サービス</label>
+              <select id="f-service">
+                <option value="">なし</option>
+                <option value="apo-yoro">アポヨロ！｜営業代行</option>
+                <option value="sales-pilot">セールス航海士｜営業コンサル</option>
+                <option value="bpo-cso-rental">BPO・CSOレンタル</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-col">
+            <label>外部記事URL（任意）</label>
+            <input type="url" id="f-external-url" placeholder="https://note.com/daiki_toge/n/xxxxx">
+            <span class="hint">noteなど外部サービスの記事URLを入力すると、一覧からそのURLに直接リンクします。入力した場合、本文は不要です。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>✍️ コンテンツ</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-col">
+            <label>アイキャッチ絵文字（画像の代わり）</label>
+            <input type="text" id="f-emoji" placeholder="📊" style="max-width:100px;">
+          </div>
+          <div class="form-col">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>導入文</label>
+              <button class="ai-btn" onclick="aiLead()">🤖 AI生成</button>
+            </div>
+            <textarea id="f-lead" rows="3" placeholder="記事の冒頭に表示される導入文（1〜2文）"></textarea>
+          </div>
+          <div class="form-col">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>抜粋文（一覧表示用）</label>
+              <button class="ai-btn" onclick="aiExcerpt()">🤖 AI生成</button>
+            </div>
+            <textarea id="f-excerpt" rows="2" placeholder="一覧ページに表示される短い説明（2〜3文）"></textarea>
+          </div>
+          <div class="form-col">
+            <label>本文（HTML）<span class="required-mark">*</span></label>
+            <textarea id="f-content" rows="20" placeholder="<h2>見出し</h2><p>本文...</p>"></textarea>
+            <span class="hint">H2・H3・P・UL・OL・STRONG タグが使用可能です</span>
+          </div>
+          <div class="form-col">
+            <label>CTA文言</label>
+            <input type="text" id="f-cta" placeholder="このサービスについて相談する">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>🔍 SEO設定</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-col">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>SEO Title</label>
+              <button class="ai-btn" onclick="aiSeoTitle()">🤖 AI生成</button>
+            </div>
+            <input type="text" id="f-seo-title" placeholder="記事タイトル | 株式会社Salesaurus">
+            <span class="hint" id="seo-title-count">0 / 60文字推奨</span>
+          </div>
+          <div class="form-col">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <label>Meta Description</label>
+              <button class="ai-btn" onclick="aiMetaDesc()">🤖 AI生成</button>
+            </div>
+            <textarea id="f-meta-desc" rows="2" placeholder="120〜160文字の説明文"></textarea>
+            <span class="hint" id="meta-desc-count">0 / 120-160文字推奨</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-primary btn-lg" onclick="generateCode()">📋 コードを生成する</button>
+        <button class="btn btn-secondary btn-lg" onclick="clearForm()">クリア</button>
+      </div>
+
+      <div id="generated-code" style="display:none;margin-top:24px;">
+        <div class="section-card">
+          <h3>📋 生成されたデータコード</h3>
+          <p style="font-size:13px;color:#666;margin-bottom:16px;">
+            以下のコードを <code>/data/blogs.js</code> の <code>BLOG_POSTS = [</code> の直後にコピー＆ペーストしてください。
+          </p>
+          <div class="export-box" id="code-output"></div>
+          <div style="margin-top:16px;">
+            <button class="btn btn-primary" onclick="copyCode()">📋 コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- データ出力タブ -->
+    <div id="tab-export" style="display:none;">
+      <div class="section-card">
+        <h3>💾 現在のブログデータ</h3>
+        <p style="font-size:13px;color:#666;margin-bottom:16px;">以下が現在の <code>BLOG_POSTS</code> の内容です。バックアップとして保管してください。</p>
+        <div class="export-box" id="export-output"></div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="exportData()">データを表示</button>
+          <button class="btn btn-secondary" style="margin-left:8px;" onclick="copyExport()">📋 コピー</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrap -->
+
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script>
+// タブ切り替え
+function showTab(tab) {
+  ['list','new','export'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.admin-tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['list','new','export'][i] === tab);
+  });
+  if (tab === 'list') renderBlogTable();
+  if (tab === 'export') exportData();
+}
+
+// 記事一覧レンダリング
+function renderBlogTable() {
+  const tbody = document.getElementById('blog-tbody');
+  tbody.innerHTML = BLOG_POSTS.map(p => {
+    const isExternal = !!p.externalUrl;
+    const viewUrl = isExternal ? p.externalUrl : `/blog/detail/?slug=${p.slug}`;
+    const externalLabel = isExternal ? ' <span style="font-size:10px;background:#41c9b4;color:#fff;padding:1px 6px;border-radius:3px;margin-left:4px;">note</span>' : '';
+    return `
+    <tr>
+      <td><a href="${viewUrl}" target="_blank" style="color:#1a2f5e;font-weight:600;">${p.title}</a>${externalLabel}</td>
+      <td>${p.category}</td>
+      <td>${p.date}</td>
+      <td><span class="status-badge ${p.status === 'published' ? 'status-published' : 'status-draft'}">${p.status === 'published' ? '公開中' : '下書き'}</span></td>
+      <td>
+        <div class="admin-actions">
+          <a href="${viewUrl}" target="_blank" class="admin-btn-sm admin-btn-secondary">表示</a>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// スラッグ自動生成（簡易版）
+function autoSlug() {
+  const title = document.getElementById('f-title').value;
+  // タイトルを英数字・ハイフンに変換（実際は手動で整形推奨）
+  const slug = title.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60);
+  document.getElementById('f-slug').value = slug;
+}
+
+// 文字数カウント
+document.addEventListener('DOMContentLoaded', () => {
+  renderBlogTable();
+
+  // 今日の日付をデフォルト設定
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('f-date').value = today;
+
+  document.getElementById('f-seo-title').addEventListener('input', function() {
+    document.getElementById('seo-title-count').textContent = this.value.length + ' / 60文字推奨';
+  });
+  document.getElementById('f-meta-desc').addEventListener('input', function() {
+    document.getElementById('meta-desc-count').textContent = this.value.length + ' / 120-160文字推奨';
+  });
+});
+
+// AI補助（モック：実際のAI接続はAPIキーが必要）
+function aiLead() {
+  const title = document.getElementById('f-title').value;
+  if (!title) { alert('まず記事タイトルを入力してください'); return; }
+  document.getElementById('f-lead').value = `「${title}」について詳しく解説します。営業担当者・責任者の方にとって、すぐに実践できる内容をお届けします。`;
+  alert('AI生成（デモ）：実際の運用ではClaude APIと連携することで高品質な文章を自動生成できます。');
+}
+function aiExcerpt() {
+  const lead = document.getElementById('f-lead').value || document.getElementById('f-title').value;
+  document.getElementById('f-excerpt').value = lead.slice(0, 80) + '...';
+}
+function aiSeoTitle() {
+  const title = document.getElementById('f-title').value;
+  document.getElementById('f-seo-title').value = title + ' | 株式会社Salesaurus';
+}
+function aiMetaDesc() {
+  const lead = document.getElementById('f-lead').value;
+  document.getElementById('f-meta-desc').value = lead.slice(0, 120);
+}
+
+// コード生成
+function generateCode() {
+  const title = document.getElementById('f-title').value;
+  const slug = document.getElementById('f-slug').value;
+  const date = document.getElementById('f-date').value;
+  const category = document.getElementById('f-category').value;
+  const status = document.getElementById('f-status').value;
+  const service = document.getElementById('f-service').value;
+  const emoji = document.getElementById('f-emoji').value || '📝';
+  const lead = document.getElementById('f-lead').value;
+  const excerpt = document.getElementById('f-excerpt').value;
+  const content = document.getElementById('f-content').value;
+  const cta = document.getElementById('f-cta').value;
+  const seoTitle = document.getElementById('f-seo-title').value;
+  const metaDesc = document.getElementById('f-meta-desc').value;
+  const externalUrl = document.getElementById('f-external-url').value.trim();
+
+  if (!title || !slug || !date || (!content && !externalUrl)) {
+    alert('タイトル・スラッグ・公開日は必須です。外部URLがない場合は本文も必須です。');
+    return;
+  }
+
+  // IDを生成（現在の最大+1）
+  const maxId = Math.max(...BLOG_POSTS.map(p => p.id), 0);
+  const newId = maxId + 1;
+
+  const code = `  {
+    id: ${newId},
+    slug: '${slug}',
+    title: '${title.replace(/'/g, "\\'")}',
+    category: '${category}',
+    date: '${date}',
+    status: '${status}',
+    externalUrl: '${externalUrl}',
+    eyecatch: '',
+    eyecatchEmoji: '${emoji}',
+    lead: '${lead.replace(/'/g, "\\'")}',
+    excerpt: '${excerpt.replace(/'/g, "\\'")}',
+    content: \`${content.replace(/`/g, '\\`')}\`,
+    relatedService: '${service}',
+    seoTitle: '${seoTitle.replace(/'/g, "\\'")}',
+    metaDescription: '${metaDesc.replace(/'/g, "\\'")}',
+    ctaText: '${cta.replace(/'/g, "\\'")}',
+  },`;
+
+  document.getElementById('code-output').textContent = code;
+  document.getElementById('generated-code').style.display = '';
+  document.getElementById('generated-code').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyCode() {
+  const text = document.getElementById('code-output').textContent;
+  navigator.clipboard.writeText(text).then(() => alert('コピーしました！\n/data/blogs.js の BLOG_POSTS = [ の直後に貼り付けてください。'));
+}
+
+function exportData() {
+  const text = 'const BLOG_POSTS = ' + JSON.stringify(BLOG_POSTS, null, 2) + ';';
+  document.getElementById('export-output').textContent = text;
+}
+
+function copyExport() {
+  const text = document.getElementById('export-output').textContent;
+  if (!text) { exportData(); }
+  navigator.clipboard.writeText(text).then(() => alert('コピーしました！'));
+}
+
+function clearForm() {
+  ['f-title','f-slug','f-date','f-emoji','f-lead','f-excerpt','f-content','f-cta','f-seo-title','f-meta-desc','f-external-url'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('generated-code').style.display = 'none';
+}
+</script>
+</body>
+</html>

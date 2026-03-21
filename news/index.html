@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ｜株式会社Salesaurus</title>
+  <meta name="description" content="株式会社Salesaurusからのお知らせ・プレスリリース・キャンペーン情報をご確認いただけます。">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div id="breadcrumb-placeholder"></div>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">お知らせ</span>
+      <h1>お知らせ</h1>
+      <p>Salesaurusからの最新情報をお届けします。</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:880px;">
+      <div id="news-list-container">
+        <div class="loading-spinner">読み込み中...</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/dynamic.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderBreadcrumb([{ label: 'お知らせ' }]);
+});
+</script>
+</body>
+</html>

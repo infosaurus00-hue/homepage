@@ -1,0 +1,38 @@
+/* Admin CSS - 管理画面専用スタイル */
+body { background: #f7f8fa; }
+.admin-wrap { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+.admin-header-bar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+.admin-header-bar h1 { font-size: 16px; font-weight: 700; color: #1a2f5e; }
+.admin-header-bar a { font-size: 13px; color: #718096; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row.full { grid-template-columns: 1fr; }
+.form-col { display: flex; flex-direction: column; gap: 6px; }
+.form-col label { font-size: 13px; font-weight: 600; color: #1a2f5e; }
+.form-col input, .form-col textarea, .form-col select {
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+.form-col input:focus, .form-col textarea:focus, .form-col select:focus {
+  outline: none;
+  border-color: #1a2f5e;
+}
+.form-col textarea { resize: vertical; min-height: 120px; }
+.form-col .hint { font-size: 11px; color: #718096; margin-top: 2px; }
+.admin-tab { display: flex; gap: 4px; margin-bottom: 24px; background: #fff; padding: 6px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.08); width: fit-content; }
+.admin-tab-btn { padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 7px; cursor: pointer; border: none; background: none; color: #718096; transition: all 0.2s; }
+.admin-tab-btn.active { background: #1a2f5e; color: #fff; }
+.section-card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 24px; }
+.section-card h3 { font-size: 15px; font-weight: 700; color: #1a2f5e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; }
+.required-mark { color: #e85c1f; margin-left: 4px; }
+.ai-btn { padding: 6px 12px; font-size: 12px; background: linear-gradient(135deg,#6c47ff,#a855f7); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+.ai-btn:hover { opacity: .85; }
+.preview-box { background: #f5f8ff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; font-size: 14px; color: #4a5568; line-height: 1.7; min-height: 60px; }
+@media (max-width: 768px) {
+  .admin-wrap { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}

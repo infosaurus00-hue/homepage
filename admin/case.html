@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事例管理｜Salesaurus Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+  <div class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <h2>🦕 Salesaurus Admin</h2>
+      <p>コンテンツ管理</p>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
+      <a href="/admin/case.html" class="active"><span class="nav-icon">📋</span> 事例管理</a>
+      <a href="/admin/news.html"><span class="nav-icon">📰</span> お知らせ管理</a>
+      <div style="margin:16px 20px;border-top:1px solid rgba(255,255,255,.1);"></div>
+      <a href="/case/" target="_blank"><span class="nav-icon">🔗</span> 事例一覧を見る</a>
+      <a href="/" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <h1>📋 事例管理</h1>
+      <button class="btn btn-primary btn-sm" onclick="showTab('new')">+ 新規事例追加</button>
+    </div>
+
+    <div class="admin-tab">
+      <button class="admin-tab-btn active" onclick="showTab('list')">事例一覧</button>
+      <button class="admin-tab-btn" onclick="showTab('new')">新規追加</button>
+      <button class="admin-tab-btn" onclick="showTab('export')">データ出力</button>
+    </div>
+
+    <!-- 事例一覧 -->
+    <div id="tab-list">
+      <div class="notice" style="margin-bottom:20px;">
+        💡 事例を追加・編集するには、<code>/data/cases.js</code> ファイルを直接編集するか、「新規追加」タブからデータを生成してください。
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>タイトル</th><th>サービス</th><th>課題カテゴリ</th><th>公開日</th><th>ステータス</th><th>操作</th></tr>
+        </thead>
+        <tbody id="case-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- 新規追加 -->
+    <div id="tab-new" style="display:none;">
+      <div class="section-card">
+        <h3>📌 基本情報</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-row">
+            <div class="form-col">
+              <label>事例タイトル<span class="required-mark">*</span></label>
+              <input type="text" id="c-title" placeholder="IT系スタートアップ｜導入で○○が改善">
+            </div>
+            <div class="form-col">
+              <label>スラッグ<span class="required-mark">*</span></label>
+              <input type="text" id="c-slug" placeholder="it-startup-apo-3x">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>公開日</label>
+              <input type="date" id="c-date">
+            </div>
+            <div class="form-col">
+              <label>公開状態</label>
+              <select id="c-status">
+                <option value="published">公開</option>
+                <option value="draft">下書き</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>対応サービス<span class="required-mark">*</span></label>
+              <select id="c-service">
+                <option value="apo-yoro">アポヨロ！｜営業代行</option>
+                <option value="sales-pilot">セールス航海士｜営業コンサル</option>
+                <option value="bpo-cso-rental">BPO・CSOレンタル</option>
+              </select>
+            </div>
+            <div class="form-col">
+              <label>課題カテゴリ</label>
+              <select id="c-issue-cat">
+                <option>商談数を増やしたい</option>
+                <option>営業設計を見直したい</option>
+                <option>受注率を改善したい</option>
+                <option>業務負荷を減らしたい</option>
+                <option>営業責任者機能を補いたい</option>
+                <option>組織体制を整えたい</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label>クライアント属性</label>
+              <input type="text" id="c-client" placeholder="ITスタートアップ（従業員20名）">
+            </div>
+            <div class="form-col">
+              <label>業界</label>
+              <input type="text" id="c-industry" placeholder="IT・SaaS">
+            </div>
+          </div>
+          <div class="form-col">
+            <label>アイキャッチ絵文字</label>
+            <input type="text" id="c-emoji" placeholder="📞" style="max-width:100px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>📊 事例内容</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-col">
+            <label>リード文</label>
+            <textarea id="c-lead" rows="2" placeholder="この事例の概要を1〜2文で説明"></textarea>
+          </div>
+          <div class="form-col">
+            <label>成果サマリー<span class="required-mark">*</span></label>
+            <input type="text" id="c-result-summary" placeholder="月間アポ数：8件 → 25件（3.1倍）">
+          </div>
+          <div class="form-col">
+            <label>背景<span class="required-mark">*</span></label>
+            <textarea id="c-background" rows="4" placeholder="クライアントの状況・背景を記述"></textarea>
+          </div>
+          <div class="form-col">
+            <label>課題<span class="required-mark">*</span></label>
+            <textarea id="c-challenge" rows="4" placeholder="・課題1&#10;・課題2&#10;・課題3"></textarea>
+          </div>
+          <div class="form-col">
+            <label>支援内容<span class="required-mark">*</span></label>
+            <textarea id="c-support" rows="4" placeholder="どのような支援を行ったか"></textarea>
+          </div>
+          <div class="form-col">
+            <label>実施施策</label>
+            <textarea id="c-activities" rows="4" placeholder="・施策1&#10;・施策2"></textarea>
+          </div>
+          <div class="form-col">
+            <label>成果<span class="required-mark">*</span></label>
+            <textarea id="c-results" rows="4" placeholder="・成果1&#10;・成果2"></textarea>
+          </div>
+          <div class="form-col">
+            <label>担当者コメント（任意）</label>
+            <textarea id="c-comment" rows="3" placeholder="「クライアントの声・コメント」（担当者名）"></textarea>
+          </div>
+          <div class="form-col">
+            <label>CTA文言</label>
+            <input type="text" id="c-cta" placeholder="この事例と同じ課題でお悩みですか？">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>🔍 SEO設定</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="form-col">
+            <label>SEO Title</label>
+            <input type="text" id="c-seo-title" placeholder="事例タイトル | Salesaurus">
+          </div>
+          <div class="form-col">
+            <label>Meta Description</label>
+            <textarea id="c-meta-desc" rows="2" placeholder="120〜160文字"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-primary btn-lg" onclick="generateCaseCode()">📋 コードを生成する</button>
+        <button class="btn btn-secondary btn-lg" onclick="clearCaseForm()">クリア</button>
+      </div>
+
+      <div id="case-generated-code" style="display:none;margin-top:24px;">
+        <div class="section-card">
+          <h3>📋 生成されたデータコード</h3>
+          <p style="font-size:13px;color:#666;margin-bottom:16px;">
+            以下のコードを <code>/data/cases.js</code> の <code>CASE_STUDIES = [</code> の直後にコピー＆ペーストしてください。
+          </p>
+          <div class="export-box" id="case-code-output"></div>
+          <div style="margin-top:16px;">
+            <button class="btn btn-primary" onclick="copyCaseCode()">📋 コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- データ出力 -->
+    <div id="tab-export" style="display:none;">
+      <div class="section-card">
+        <h3>💾 現在の事例データ</h3>
+        <div class="export-box" id="case-export-output"></div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="exportCaseData()">データを表示</button>
+          <button class="btn btn-secondary" style="margin-left:8px;" onclick="copyCaseExport()">📋 コピー</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script>
+function showTab(tab) {
+  ['list','new','export'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.admin-tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['list','new','export'][i] === tab);
+  });
+  if (tab === 'list') renderCaseTable();
+  if (tab === 'export') exportCaseData();
+}
+
+function renderCaseTable() {
+  const serviceNames = { 'apo-yoro':'アポヨロ！','sales-pilot':'セールス航海士','bpo-cso-rental':'BPO・CSOレンタル' };
+  const tbody = document.getElementById('case-tbody');
+  tbody.innerHTML = CASE_STUDIES.map(c => `
+    <tr>
+      <td><a href="/case/detail/?slug=${c.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;">${c.title}</a></td>
+      <td>${serviceNames[c.service] || c.service}</td>
+      <td>${c.issueCategory}</td>
+      <td>${c.date}</td>
+      <td><span class="status-badge ${c.status === 'published' ? 'status-published' : 'status-draft'}">${c.status === 'published' ? '公開中' : '下書き'}</span></td>
+      <td><a href="/case/detail/?slug=${c.slug}" target="_blank" class="admin-btn-sm admin-btn-secondary">表示</a></td>
+    </tr>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCaseTable();
+  document.getElementById('c-date').value = new Date().toISOString().split('T')[0];
+});
+
+function generateCaseCode() {
+  const v = id => document.getElementById(id).value;
+  if (!v('c-title') || !v('c-slug') || !v('c-background') || !v('c-results')) {
+    alert('タイトル・スラッグ・背景・成果は必須です'); return;
+  }
+  const maxId = Math.max(...CASE_STUDIES.map(c => c.id), 0);
+  const code = `  {
+    id: ${maxId + 1},
+    slug: '${v('c-slug')}',
+    title: '${v('c-title').replace(/'/g,"\\'")}',
+    service: '${v('c-service')}',
+    serviceDisplay: '${document.getElementById('c-service').options[document.getElementById('c-service').selectedIndex].text}',
+    date: '${v('c-date')}',
+    status: '${v('c-status')}',
+    eyecatch: '',
+    eyecatchEmoji: '${v('c-emoji') || '📋'}',
+    clientType: '${v('c-client').replace(/'/g,"\\'")}',
+    industry: '${v('c-industry').replace(/'/g,"\\'")}',
+    issueCategory: '${v('c-issue-cat')}',
+    lead: '${v('c-lead').replace(/'/g,"\\'")}',
+    resultSummary: '${v('c-result-summary').replace(/'/g,"\\'")}',
+    background: '${v('c-background').replace(/'/g,"\\'").replace(/\n/g,'\\n')}',
+    challenge: '${v('c-challenge').replace(/'/g,"\\'").replace(/\n/g,'\\n')}',
+    supportContent: '${v('c-support').replace(/'/g,"\\'").replace(/\n/g,'\\n')}',
+    activities: '${v('c-activities').replace(/'/g,"\\'").replace(/\n/g,'\\n')}',
+    results: '${v('c-results').replace(/'/g,"\\'").replace(/\n/g,'\\n')}',
+    managerComment: '${v('c-comment').replace(/'/g,"\\'")}',
+    ctaText: '${v('c-cta').replace(/'/g,"\\'")}',
+    seoTitle: '${v('c-seo-title').replace(/'/g,"\\'")}',
+    metaDescription: '${v('c-meta-desc').replace(/'/g,"\\'")}',
+  },`;
+  document.getElementById('case-code-output').textContent = code;
+  document.getElementById('case-generated-code').style.display = '';
+  document.getElementById('case-generated-code').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyCaseCode() {
+  navigator.clipboard.writeText(document.getElementById('case-code-output').textContent)
+    .then(() => alert('コピーしました！\n/data/cases.js の CASE_STUDIES = [ の直後に貼り付けてください。'));
+}
+function exportCaseData() {
+  document.getElementById('case-export-output').textContent = 'const CASE_STUDIES = ' + JSON.stringify(CASE_STUDIES, null, 2) + ';';
+}
+function copyCaseExport() {
+  exportCaseData();
+  navigator.clipboard.writeText(document.getElementById('case-export-output').textContent).then(() => alert('コピーしました！'));
+}
+function clearCaseForm() {
+  ['c-title','c-slug','c-date','c-emoji','c-lead','c-result-summary','c-background','c-challenge','c-support','c-activities','c-results','c-comment','c-cta','c-seo-title','c-meta-desc'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('case-generated-code').style.display = 'none';
+}
+</script>
+</body>
+</html>

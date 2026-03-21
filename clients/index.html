@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>取引実績｜株式会社Salesaurus</title>
+  <meta name="description" content="株式会社Salesaurusの取引実績・クライアント企業一覧です。IT・SaaS・HR・コンサルティングなど多様な業種の企業様と取り組みを行っています。">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ---- ロゴグリッド ---- */
+    .client-logo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      row-gap: 56px;
+      column-gap: 40px;
+    }
+    .client-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+    .client-logo-item img {
+      max-width: 240px;
+      max-height: 110px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(80%) opacity(0.75);
+      transition: filter 0.25s ease;
+    }
+    .client-logo-item:hover img {
+      filter: grayscale(0%) opacity(1);
+    }
+    .client-logo-item.logo-lg img {
+      max-width: 280px;
+      max-height: 140px;
+    }
+    .client-logo-item.logo-sq img {
+      max-width: 140px;
+      max-height: 140px;
+    }
+    .client-logo-item.logo-invert img {
+      filter: invert(1) grayscale(0%) opacity(1);
+    }
+    .client-logo-item.logo-invert:hover img {
+      filter: invert(1) grayscale(0%) opacity(1);
+    }
+
+    /* ---- 実績カウンター ---- */
+    .clients-stats {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      padding: 64px 0;
+    }
+    .clients-stat-item { text-align: center; }
+    .clients-stat-value {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .clients-stat-value span {
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-left: 2px;
+    }
+    .clients-stat-label {
+      font-size: 13px;
+      color: var(--color-text-sub);
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ---- 営業手法カード ---- */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .method-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border-light);
+      border-radius: 8px;
+      padding: 28px 16px;
+      text-align: center;
+    }
+    .method-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .method-icon i {
+      font-size: 22px;
+      color: var(--color-accent);
+    }
+    .method-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    /* ---- 実績商材グリッド ---- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .product-item {
+      padding: 20px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text-mid);
+      border-bottom: 1px solid var(--color-border-light);
+      border-right: 1px solid var(--color-border-light);
+    }
+    .product-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    /* ---- 成果実績バナー ---- */
+    .results-banner {
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 8px;
+      padding: 48px 56px;
+    }
+    .results-banner h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .results-banner ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 40px;
+    }
+    .results-banner li {
+      font-size: 15px;
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
+      opacity: 0.92;
+    }
+    .results-banner li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 10px;
+      top: 5px;
+    }
+
+    @media (max-width: 1024px) {
+      .client-logo-grid { grid-template-columns: repeat(3, 1fr); row-gap: 48px; }
+      .method-grid { grid-template-columns: repeat(3, 1fr); }
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .product-item:nth-child(4n) { border-right: 1px solid var(--color-border-light); }
+      .product-item:nth-child(3n) { border-right: none; }
+    }
+    @media (max-width: 768px) {
+      .client-logo-grid { grid-template-columns: repeat(2, 1fr); row-gap: 40px; column-gap: 24px; }
+      .clients-stats { gap: 40px; }
+      .clients-stat-value { font-size: 2.8rem; }
+      .method-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-item:nth-child(3n) { border-right: 1px solid var(--color-border-light); }
+      .product-item:nth-child(2n) { border-right: none; }
+      .results-banner { padding: 32px 28px; }
+      .results-banner ul { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .client-logo-grid { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+      .client-logo-item img { max-width: 130px; max-height: 60px; }
+      .client-logo-item.logo-sq img { max-width: 80px; max-height: 80px; }
+      .method-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div id="breadcrumb-placeholder"></div>
+
+<main>
+
+  <!-- ページヒーロー -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Client</span>
+      <h1>取引実績</h1>
+      <p>IT・SaaS・HR・コンサルティングなど、多様な業種・規模の企業様と<br>営業支援・営業代行のお取り組みを行っています。</p>
+    </div>
+  </div>
+
+  <!-- 実績統計 -->
+  <section style="background:var(--color-white);border-bottom:1px solid var(--color-border-light);">
+    <div class="container">
+      <div class="clients-stats">
+        <div class="clients-stat-item">
+          <div class="clients-stat-value">30<span>社+</span></div>
+          <div class="clients-stat-label">設立3ヶ月でのお取引実績</div>
+        </div>
+        <div class="clients-stat-item">
+          <div class="clients-stat-value">200<span>件</span></div>
+          <div class="clients-stat-label">10日間でのアポトスアップ実績</div>
+        </div>
+        <div class="clients-stat-item">
+          <div class="clients-stat-value">30<span>種類+</span></div>
+          <div class="clients-stat-label">対応商材ジャンル</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 営業手法 -->
+  <section class="section" style="background:var(--color-bg-light);">
+    <div class="container">
+      <div style="margin-bottom:48px;">
+        <span class="section-label">Approach</span>
+        <h2 style="font-size:2rem;font-weight:700;color:var(--color-primary);margin-top:8px;">営業手法</h2>
+        <p style="color:var(--color-text-sub);margin-top:12px;">貴社の商材・ターゲットに合わせた最適な営業手法で成果を創出します。</p>
+      </div>
+      <div class="method-grid">
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-running"></i></div>
+          <div class="method-name">飛び込み営業</div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="method-name">テレアポ</div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-headset"></i></div>
+          <div class="method-name">テレマ</div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-envelope"></i></div>
+          <div class="method-name">DM・メール</div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-video"></i></div>
+          <div class="method-name">Web商談</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 一部実績商材 -->
+  <section class="section" style="background:var(--color-white);">
+    <div class="container">
+      <div style="margin-bottom:48px;">
+        <span class="section-label">Products</span>
+        <h2 style="font-size:2rem;font-weight:700;color:var(--color-primary);margin-top:8px;">一部実績商材</h2>
+        <p style="color:var(--color-text-sub);margin-top:12px;">幅広い業種・商材での営業支援実績があります。</p>
+      </div>
+      <div class="product-grid">
+        <div class="product-item">MEO対策</div>
+        <div class="product-item">SaaS</div>
+        <div class="product-item">システム開発</div>
+        <div class="product-item">管理者研修</div>
+        <div class="product-item">AI研修</div>
+        <div class="product-item">広告運用</div>
+        <div class="product-item">eラーニング</div>
+        <div class="product-item">外国人材紹介</div>
+        <div class="product-item">SNS運用代行</div>
+        <div class="product-item">健康管理SaaS</div>
+        <div class="product-item">機器</div>
+        <div class="product-item">保険</div>
+        <div class="product-item">インフラ</div>
+        <div class="product-item">フードデリバリ</div>
+        <div class="product-item">Wi-Fi</div>
+        <div class="product-item">太陽光パネル</div>
+        <div class="product-item">アライアンス</div>
+        <div class="product-item">カードケース</div>
+        <div class="product-item">福祉関連</div>
+        <div class="product-item">AI SaaS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 一部実績企業（ロゴ一覧） -->
+  <section class="section" style="background:var(--color-bg-light);">
+    <div class="container">
+      <div style="margin-bottom:64px;">
+        <span class="section-label">Partners &amp; Clients</span>
+        <h2 style="font-size:2rem;font-weight:700;color:var(--color-primary);margin-top:8px;">一部実績企業</h2>
+      </div>
+
+      <div class="client-logo-grid">
+
+        <!-- Aidma Holdings -->
+        <div class="client-logo-item">
+          <img src="/images/clients/aidma-holdings.png" alt="Aidma Holdings">
+        </div>
+
+        <!-- accele：縦長フクロウアイコン -->
+        <div class="client-logo-item logo-sq">
+          <img src="/images/clients/accele.jpg" alt="accele">
+        </div>
+
+        <!-- MAKOTO Prime -->
+        <div class="client-logo-item logo-lg">
+          <img src="/images/clients/makoto-prime.png" alt="MAKOTO Prime">
+        </div>
+
+        <!-- 燈 AKARI -->
+        <div class="client-logo-item logo-lg">
+          <img src="/images/clients/akari.png" alt="燈株式会社">
+        </div>
+
+        <!-- StartGear：黒背景白文字 → invert -->
+        <div class="client-logo-item logo-invert">
+          <img src="/images/clients/startgear.png" alt="StartGear">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 上記以外の実績 -->
+  <section class="section" style="background:var(--color-white);">
+    <div class="container">
+      <div class="results-banner">
+        <h3>上記以外にも、多くの実績がございます</h3>
+        <ul>
+          <li><strong style="color:#fff;">稼働開始から10日間で200アポイントをトスアップ</strong></li>
+          <li>開始から158コールで14アポイントをご提供</li>
+          <li>大手エンタメ企業にて、別代理店がアポが取れず撤退していく中ダントツでアポ獲得</li>
+          <li>稼働40時間でアポ30件以上</li>
+          <li>初のアウトバウンド施策で開始2日目から10日以上連続してアポイントのご提供</li>
+          <li>大手IT・広告企業にて45件架電し3件のアポ獲得</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>貴社の営業課題、まずはご相談ください</h2>
+      <p>業種・規模を問わず、営業代行・コンサルティング・BPOで<br>御社の営業成果向上を全力でサポートします。</p>
+      <div class="final-cta-buttons">
+        <a href="/contact/" class="btn btn-white btn-lg"><i class="fas fa-envelope"></i> 無料相談はこちら</a>
+        <a href="/case/" class="btn btn-outline-white btn-lg">導入事例を見る</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/data/config.js"></script>
+<script src="/data/blogs.js"></script>
+<script src="/data/cases.js"></script>
+<script src="/data/news.js"></script>
+<script src="/data/jobs.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/dynamic.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderBreadcrumb([{ label: '取引実績' }]);
+});
+</script>
+</body>
+</html>
