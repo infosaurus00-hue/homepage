@@ -5,6 +5,24 @@
    ============================================================ */
 const BLOG_POSTS = [
   {
+    id: 6,
+    slug: 'test-auto-publish',
+    title: '自動投稿テスト記事',
+    category: '実績 / 活動報告',
+    date: '2026-03-21',
+    status: 'published',
+    externalUrl: '',
+    eyecatch: '',
+    eyecatchEmoji: '🚀',
+    lead: 'Claude Codeによる自動投稿システムのテスト記事です。',
+    excerpt: 'Salesaurusのブログ自動投稿システムが正常に稼働しているかを確認するためのテスト記事です。',
+    content: `<h2>自動投稿システム稼働中</h2><p>このブログ記事はClaude Codeによって自動生成・自動投稿されました。</p><p>以後、テーマとキーワードを伝えるだけで記事の生成から公開まで全自動で行えます。</p>`,
+    relatedService: '',
+    seoTitle: '自動投稿テスト | Salesaurus',
+    metaDescription: 'Claude Codeによる自動投稿システムのテスト記事です。',
+    ctaText: 'お問い合わせはこちら',
+  },
+  {
     id: 5,
     slug: 'note-eigyo-knowhow',
     title: 'noteで営業ノウハウを発信中',
