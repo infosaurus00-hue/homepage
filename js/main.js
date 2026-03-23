@@ -27,24 +27,24 @@ function renderHeader() {
   };
 
   const serviceLinks = cfg.nav.services.map(s => `
-    <a href="${s.url}">
+    <a href="${SITE_BASE}${s.url}">
       <span class="dd-icon">${navIconMap[s.url] || '<i class="fas fa-circle"></i>'}</span>
       <span>${s.name}<span class="dd-desc">${s.type}</span></span>
     </a>`).join('');
 
   const companyLinks = cfg.nav.company.map(c => `
-    <a href="${c.url}">${c.name}</a>`).join('');
+    <a href="${SITE_BASE}${c.url}">${c.name}</a>`).join('');
 
   const html = `
   <header id="site-header">
     <div class="container">
       <div class="header-inner">
-        <a href="/" class="header-logo">
-          <img src="/images/logo.png" alt="Salesaurus" class="header-logo-img">
+        <a href="${SITE_BASE}/" class="header-logo">
+          <img src="${SITE_BASE}/images/logo.png" alt="Salesaurus" class="header-logo-img">
         </a>
         <nav class="header-nav">
           <div class="nav-item">
-            <a href="/services/" class="nav-link ${currentPath.startsWith('/services') ? 'active' : ''}">
+            <a href="${SITE_BASE}/services/" class="nav-link ${currentPath.startsWith('/services') ? 'active' : ''}">
               サービス <span class="nav-arrow">▼</span>
             </a>
             <div class="nav-dropdown">
@@ -53,16 +53,16 @@ function renderHeader() {
             </div>
           </div>
           <div class="nav-item">
-            <a href="/case/" class="nav-link ${currentPath.startsWith('/case') ? 'active' : ''}">導入事例</a>
+            <a href="${SITE_BASE}/case/" class="nav-link ${currentPath.startsWith('/case') ? 'active' : ''}">導入事例</a>
           </div>
           <div class="nav-item">
-            <a href="/blog/" class="nav-link ${currentPath.startsWith('/blog') ? 'active' : ''}">ブログ</a>
+            <a href="${SITE_BASE}/blog/" class="nav-link ${currentPath.startsWith('/blog') ? 'active' : ''}">ブログ</a>
           </div>
           <div class="nav-item">
-            <a href="/flow/" class="nav-link ${currentPath.startsWith('/flow') ? 'active' : ''}">導入の流れ</a>
+            <a href="${SITE_BASE}/flow/" class="nav-link ${currentPath.startsWith('/flow') ? 'active' : ''}">導入の流れ</a>
           </div>
           <div class="nav-item">
-            <a href="/company/" class="nav-link ${currentPath.startsWith('/company') || currentPath.startsWith('/message') || currentPath.startsWith('/faq') ? 'active' : ''}">
+            <a href="${SITE_BASE}/company/" class="nav-link ${currentPath.startsWith('/company') || currentPath.startsWith('/message') || currentPath.startsWith('/faq') ? 'active' : ''}">
               会社情報 <span class="nav-arrow">▼</span>
             </a>
             <div class="nav-dropdown">
@@ -70,12 +70,12 @@ function renderHeader() {
             </div>
           </div>
           <div class="nav-item">
-            <a href="/recruit/" class="nav-link ${currentPath.startsWith('/recruit') ? 'active' : ''}">採用</a>
+            <a href="${SITE_BASE}/recruit/" class="nav-link ${currentPath.startsWith('/recruit') ? 'active' : ''}">採用</a>
           </div>
         </nav>
         <div class="header-cta">
           <a href="${cfg.lineUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-line">LINE相談</a>
-          <a href="${cfg.contactFormUrl}" class="btn btn-sm btn-primary">お問い合わせ</a>
+          <a href="${SITE_BASE}${cfg.contactFormUrl}" class="btn btn-sm btn-primary">お問い合わせ</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="メニュー">
           <span></span><span></span><span></span>
@@ -86,26 +86,26 @@ function renderHeader() {
   <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-section">
       <div class="mobile-nav-label">サービス</div>
-      ${cfg.nav.services.map(s => `<a href="${s.url}">${navIconMap[s.url] || ''} ${s.name} ｜ ${s.type}</a>`).join('')}
+      ${cfg.nav.services.map(s => `<a href="${SITE_BASE}${s.url}">${navIconMap[s.url] || ''} ${s.name} ｜ ${s.type}</a>`).join('')}
     </div>
     <div class="mobile-nav-section">
       <div class="mobile-nav-label">コンテンツ</div>
-      <a href="/clients/">取引実績</a>
-      <a href="/case/">導入事例</a>
-      <a href="/blog/">ブログ</a>
-      <a href="/news/">お知らせ</a>
-      <a href="/flow/">導入の流れ</a>
-      <a href="/faq/">よくある質問</a>
+      <a href="${SITE_BASE}/clients/">取引実績</a>
+      <a href="${SITE_BASE}/case/">導入事例</a>
+      <a href="${SITE_BASE}/blog/">ブログ</a>
+      <a href="${SITE_BASE}/news/">お知らせ</a>
+      <a href="${SITE_BASE}/flow/">導入の流れ</a>
+      <a href="${SITE_BASE}/faq/">よくある質問</a>
     </div>
     <div class="mobile-nav-section">
       <div class="mobile-nav-label">会社情報</div>
-      <a href="/company/">会社概要</a>
-      <a href="/message/">代表メッセージ</a>
-      <a href="/recruit/">採用情報</a>
+      <a href="${SITE_BASE}/company/">会社概要</a>
+      <a href="${SITE_BASE}/message/">代表メッセージ</a>
+      <a href="${SITE_BASE}/recruit/">採用情報</a>
     </div>
     <div class="mobile-nav-cta">
       <a href="${cfg.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-block"><i class="fab fa-line"></i> LINEで相談する</a>
-      <a href="${cfg.contactFormUrl}" class="btn btn-primary btn-block"><i class="fas fa-envelope"></i> お問い合わせ</a>
+      <a href="${SITE_BASE}${cfg.contactFormUrl}" class="btn btn-primary btn-block"><i class="fas fa-envelope"></i> お問い合わせ</a>
     </div>
   </div>`;
 
@@ -122,7 +122,7 @@ function renderFooter() {
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="/images/logo.png" alt="Salesaurus" class="footer-logo-img">
+            <img src="${SITE_BASE}/images/logo.png" alt="Salesaurus" class="footer-logo-img">
           </div>
           <p class="footer-tagline">${cfg.tagline}<br>営業代行・営業コンサル・BPOで<br>御社の営業成果を最大化します。</p>
           <div class="footer-contact-info">
@@ -131,37 +131,37 @@ function renderFooter() {
           </div>
           <div style="margin-top:20px;display:flex;gap:10px;">
             <a href="${cfg.lineUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-line"><i class="fab fa-line"></i> LINE相談</a>
-            <a href="${cfg.contactFormUrl}" class="btn btn-sm btn-outline-white">お問い合わせ</a>
+            <a href="${SITE_BASE}${cfg.contactFormUrl}" class="btn btn-sm btn-outline-white">お問い合わせ</a>
           </div>
         </div>
         <div class="footer-nav-grid">
           <div class="footer-nav-col">
             <h4>サービス</h4>
-            ${cfg.services.map(s => `<a href="${s.url}">${s.name}｜${s.type}</a>`).join('')}
-            <a href="/services/support/">補完サービス</a>
-            <a href="/flow/">導入の流れ</a>
+            ${cfg.services.map(s => `<a href="${SITE_BASE}${s.url}">${s.name}｜${s.type}</a>`).join('')}
+            <a href="${SITE_BASE}/services/support/">補完サービス</a>
+            <a href="${SITE_BASE}/flow/">導入の流れ</a>
           </div>
           <div class="footer-nav-col">
             <h4>コンテンツ</h4>
-            <a href="/clients/">取引実績</a>
-            <a href="/case/">導入事例</a>
-            <a href="/blog/">ブログ</a>
-            <a href="/news/">お知らせ</a>
-            <a href="/faq/">よくある質問</a>
+            <a href="${SITE_BASE}/clients/">取引実績</a>
+            <a href="${SITE_BASE}/case/">導入事例</a>
+            <a href="${SITE_BASE}/blog/">ブログ</a>
+            <a href="${SITE_BASE}/news/">お知らせ</a>
+            <a href="${SITE_BASE}/faq/">よくある質問</a>
           </div>
           <div class="footer-nav-col">
             <h4>会社情報</h4>
-            <a href="/company/">会社概要</a>
-            <a href="/message/">代表メッセージ</a>
-            <a href="/recruit/">採用情報</a>
-            <a href="/contact/">お問い合わせ</a>
+            <a href="${SITE_BASE}/company/">会社概要</a>
+            <a href="${SITE_BASE}/message/">代表メッセージ</a>
+            <a href="${SITE_BASE}/recruit/">採用情報</a>
+            <a href="${SITE_BASE}/contact/">お問い合わせ</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
         <div>${cfg.copyright}</div>
         <div class="footer-bottom-links">
-          <a href="/privacy-policy/">プライバシーポリシー</a>
+          <a href="${SITE_BASE}/privacy-policy/">プライバシーポリシー</a>
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ function renderFooter() {
 /* ---- パンくず生成 ---- */
 function renderBreadcrumb(items) {
   // items: [{label:'', url:''}, ...]
-  const breadcrumbItems = [{ label: 'ホーム', url: '/' }, ...items];
+  const breadcrumbItems = [{ label: 'ホーム', url: `${SITE_BASE}/` }, ...items];
   const html = `
   <div class="breadcrumb-wrap">
     <div class="container">
@@ -261,7 +261,7 @@ function renderContactCTA(ctaText = 'まずはお気軽にご相談ください'
     <h3>${ctaText}</h3>
     <p>初回相談は無料です。現状の課題を整理するところからお手伝いします。</p>
     <div class="detail-cta-buttons">
-      <a href="/contact/" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> お問い合わせ</a>
+      <a href="${SITE_BASE}/contact/" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> お問い合わせ</a>
       <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> LINEで相談する</a>
     </div>
   </div>`;
@@ -270,7 +270,7 @@ function renderContactCTA(ctaText = 'まずはお気軽にご相談ください'
 /* ---- 関連サービスサイドバー ---- */
 function renderServiceSidebar() {
   const links = SITE_CONFIG.services.map(s => `
-    <a href="${s.url}" class="sidebar-service-link">
+    <a href="${SITE_BASE}${s.url}" class="sidebar-service-link">
       <span class="sidebar-service-icon">${getServiceIcon(s.id)}</span>
       <span>
         <span class="sidebar-service-name">${s.name}</span>
@@ -285,7 +285,7 @@ function renderServiceSidebar() {
   <div class="sidebar-card">
     <div class="sidebar-card-title">お問い合わせ</div>
     <p style="font-size:13px;color:#666;margin-bottom:16px;">無料相談・資料請求はこちらから</p>
-    <a href="/contact/" class="btn btn-primary btn-block" style="margin-bottom:10px;">お問い合わせ</a>
+    <a href="${SITE_BASE}/contact/" class="btn btn-primary btn-block" style="margin-bottom:10px;">お問い合わせ</a>
     <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-block"><i class="fab fa-line"></i> LINEで相談</a>
   </div>`;
 }

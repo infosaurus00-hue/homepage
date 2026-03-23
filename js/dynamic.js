@@ -43,7 +43,7 @@ function renderBlogList() {
 
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
-    const href = isExternal ? post.externalUrl : `/blog/detail/?slug=${post.slug}`;
+    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/detail/?slug=${post.slug}`;
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     const externalBadge = isExternal ? '<span class="badge-external">note</span>' : '';
     return `
@@ -79,7 +79,7 @@ function renderBlogDetail() {
   const post = BLOG_POSTS.find(p => p.slug === slug && p.status === 'published');
 
   if (!post) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>記事が見つかりませんでした。</p><a href="/blog/" class="btn btn-primary" style="margin-top:20px">ブログ一覧へ</a></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>記事が見つかりませんでした。</p><a href="${SITE_BASE}/blog/" class="btn btn-primary" style="margin-top:20px">ブログ一覧へ</a></div>`;
     return;
   }
 
@@ -89,7 +89,7 @@ function renderBlogDetail() {
 
   // パンくず
   renderBreadcrumb([
-    { label: 'ブログ', url: '/blog/' },
+    { label: 'ブログ', url: `${SITE_BASE}/blog/` },
     { label: post.title }
   ]);
 
@@ -122,7 +122,7 @@ function renderBlogDetail() {
           ${renderServiceSidebar()}
           <div class="sidebar-card">
             <div class="sidebar-card-title">カテゴリ</div>
-            ${BLOG_CATEGORIES.map(c => `<a href="/blog/?cat=${encodeURIComponent(c)}" style="display:block;padding:8px;font-size:13px;color:var(--color-text-mid);border-bottom:1px solid var(--color-border-light);">${c}</a>`).join('')}
+            ${BLOG_CATEGORIES.map(c => `<a href="${SITE_BASE}/blog/?cat=${encodeURIComponent(c)}" style="display:block;padding:8px;font-size:13px;color:var(--color-text-mid);border-bottom:1px solid var(--color-border-light);">${c}</a>`).join('')}
           </div>
         </aside>
       </div>
@@ -166,7 +166,7 @@ function renderCaseList() {
     const service = SITE_CONFIG.services.find(s => s.id === c.service);
     return `
     <div class="case-card-wrap" data-service-item="${c.service}">
-      <a href="/case/detail/?slug=${c.slug}" class="post-card">
+      <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="post-card">
         <div class="post-card-thumb">
           ${c.eyecatch ? `<img src="${c.eyecatch}" alt="${c.title}" loading="lazy">` : `<span class="thumb-icon">${c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>'}</span>`}
         </div>
@@ -197,7 +197,7 @@ function renderCaseDetail() {
   const cs = CASE_STUDIES.find(c => c.slug === slug && c.status === 'published');
 
   if (!cs) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>事例が見つかりませんでした。</p><a href="/case/" class="btn btn-primary" style="margin-top:20px">事例一覧へ</a></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>事例が見つかりませんでした。</p><a href="${SITE_BASE}/case/" class="btn btn-primary" style="margin-top:20px">事例一覧へ</a></div>`;
     return;
   }
 
@@ -205,7 +205,7 @@ function renderCaseDetail() {
   document.querySelector('meta[name="description"]')?.setAttribute('content', cs.metaDescription || '');
 
   renderBreadcrumb([
-    { label: '導入事例', url: '/case/' },
+    { label: '導入事例', url: `${SITE_BASE}/case/` },
     { label: cs.title }
   ]);
 
@@ -293,7 +293,7 @@ function renderNewsList() {
   <div class="news-list" style="max-width:800px;margin:0 auto;">
     ${items.map(n => `
     <div>
-      <a href="/news/detail/?slug=${n.slug}" style="display:block;text-decoration:none;color:inherit;">
+      <a href="${SITE_BASE}/news/detail/?slug=${n.slug}" style="display:block;text-decoration:none;color:inherit;">
         <div class="news-item" style="cursor:pointer;">
           <span class="news-date">${formatDate(n.date)}</span>
           <span class="news-cat"><span class="badge badge-outline">${n.type}</span></span>
@@ -315,13 +315,13 @@ function renderNewsDetail() {
   const item = NEWS_ITEMS.find(n => n.slug === slug && n.status === 'published');
 
   if (!item) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>お知らせが見つかりませんでした。</p><a href="/news/" class="btn btn-primary" style="margin-top:20px">一覧へ戻る</a></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>お知らせが見つかりませんでした。</p><a href="${SITE_BASE}/news/" class="btn btn-primary" style="margin-top:20px">一覧へ戻る</a></div>`;
     return;
   }
 
   document.title = item.title + ' | 株式会社Salesaurus';
   renderBreadcrumb([
-    { label: 'お知らせ', url: '/news/' },
+    { label: 'お知らせ', url: `${SITE_BASE}/news/` },
     { label: item.title }
   ]);
 
@@ -340,7 +340,7 @@ function renderNewsDetail() {
         ${item.link ? `<div style="margin-top:20px;"><a href="${item.link}" class="btn btn-primary">詳しくはこちら</a></div>` : ''}
       </div>
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--color-border);text-align:center;">
-        <a href="/news/" class="btn btn-secondary">← お知らせ一覧へ戻る</a>
+        <a href="${SITE_BASE}/news/" class="btn btn-secondary">← お知らせ一覧へ戻る</a>
       </div>
     </div>
   </section>`;
@@ -357,13 +357,13 @@ function renderJobDetail() {
   const job = JOB_LISTINGS.find(j => j.slug === slug && j.status === 'published');
 
   if (!job) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>求人が見つかりませんでした。</p><a href="/recruit/" class="btn btn-primary" style="margin-top:20px">採用情報へ</a></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-frown"></i></div><p>求人が見つかりませんでした。</p><a href="${SITE_BASE}/recruit/" class="btn btn-primary" style="margin-top:20px">採用情報へ</a></div>`;
     return;
   }
 
   document.title = job.title + 'の募集要項 | 株式会社Salesaurus';
   renderBreadcrumb([
-    { label: '採用情報', url: '/recruit/' },
+    { label: '採用情報', url: `${SITE_BASE}/recruit/` },
     { label: job.title }
   ]);
 
@@ -386,7 +386,7 @@ function renderJobDetail() {
             <h3>この求人に応募する</h3>
             <p>まずはお気軽にお問い合わせください。カジュアル面談も歓迎しています。</p>
             <div class="detail-cta-buttons">
-              <a href="/contact/?type=recruit&job=${job.slug}" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> 応募する</a>
+              <a href="${SITE_BASE}/contact/?type=recruit&job=${job.slug}" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> 応募する</a>
               <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> LINEで質問する</a>
             </div>
           </div>
@@ -403,7 +403,7 @@ function renderJobDetail() {
           <div class="sidebar-card">
             <div class="sidebar-card-title">採用に関するお問い合わせ</div>
             <p style="font-size:13px;color:#666;margin-bottom:16px;">ご不明点はお気軽にどうぞ</p>
-            <a href="/contact/?type=recruit" class="btn btn-primary btn-block" style="margin-bottom:10px;"><i class="fas fa-envelope"></i> 問い合わせる</a>
+            <a href="${SITE_BASE}/contact/?type=recruit" class="btn btn-primary btn-block" style="margin-bottom:10px;"><i class="fas fa-envelope"></i> 問い合わせる</a>
             <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-block"><i class="fab fa-line"></i> LINEで聞く</a>
           </div>
         </aside>
@@ -421,7 +421,7 @@ function renderTopBlog() {
   const posts = BLOG_POSTS.filter(p => p.status === 'published').slice(0, 3);
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
-    const href = isExternal ? post.externalUrl : `/blog/detail/?slug=${post.slug}`;
+    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/detail/?slug=${post.slug}`;
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     return `
     <a href="${href}" ${targetAttr} class="blog-teaser-card">
@@ -446,7 +446,7 @@ function renderTopCase() {
   container.innerHTML = cases.map(c => {
     const service = SITE_CONFIG.services.find(s => s.id === c.service);
     return `
-    <a href="/case/detail/?slug=${c.slug}" class="case-teaser-card">
+    <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="case-teaser-card">
       <div class="case-teaser-thumb">${c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>'}</div>
       <div class="case-teaser-body">
         <div class="case-teaser-meta">
@@ -465,7 +465,7 @@ function renderTopNews() {
   if (!container) return;
   const items = NEWS_ITEMS.filter(n => n.status === 'published').slice(0, 5);
   container.innerHTML = items.map(n => `
-    <a href="/news/detail/?slug=${n.slug}" style="display:block;text-decoration:none;color:inherit;">
+    <a href="${SITE_BASE}/news/detail/?slug=${n.slug}" style="display:block;text-decoration:none;color:inherit;">
       <div class="news-item">
         <span class="news-date">${formatDate(n.date)}</span>
         <span class="news-cat"><span class="badge badge-outline">${n.type}</span></span>
@@ -508,7 +508,7 @@ function renderRecruitList() {
   }
   container.innerHTML = `<div class="jobs-grid">
     ${jobs.map(job => `
-    <a href="/recruit/detail/?slug=${job.slug}" class="job-card">
+    <a href="${SITE_BASE}/recruit/detail/?slug=${job.slug}" class="job-card">
       <div class="job-type">${job.type}</div>
       <div class="job-title">${job.title}</div>
       <div class="job-tags">${job.tags.map(t => `<span class="job-tag">${t}</span>`).join('')}</div>
