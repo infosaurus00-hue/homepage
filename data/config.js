@@ -3,8 +3,8 @@
    ここを編集すると全ページに反映されます
    ============================================================ */
 
-// GitHub Pages のサブディレクトリ対応
-const SITE_BASE = location.hostname === 'infosaurus00-hue.github.io' ? '/homepage' : '';
+// カスタムドメイン対応（sales-saurus.com はルート配信）
+const SITE_BASE = '';
 
 const SITE_CONFIG = {
   companyName: '株式会社Salesaurus',
