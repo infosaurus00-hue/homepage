@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <base href="/homepage/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>管理ダッシュボード｜Salesaurus Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 <div class="admin-wrap">
@@ -18,18 +19,18 @@
       <p>コンテンツ管理</p>
     </div>
     <nav class="admin-nav">
-      <a href="/admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
-      <a href="/admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
-      <a href="/admin/news.html"><span class="nav-icon">📰</span> お知らせ管理</a>
+      <a href="admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
+      <a href="admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
+      <a href="admin/news.html"><span class="nav-icon">📰</span> お知らせ管理</a>
       <div style="margin:16px 20px;border-top:1px solid rgba(255,255,255,.1);"></div>
-      <a href="/" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
+      <a href="" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
     </nav>
   </div>
 
   <div class="admin-main">
     <div class="admin-header">
       <h1>🦕 ダッシュボード</h1>
-      <a href="/" target="_blank" style="font-size:13px;color:#718096;">サイトを表示 →</a>
+      <a href="" target="_blank" style="font-size:13px;color:#718096;">サイトを表示 →</a>
     </div>
 
     <!-- 統計カード -->
@@ -39,9 +40,9 @@
     <div class="section-card">
       <h3>⚡ クイックアクション</h3>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-        <a href="/admin/blog.html" class="btn btn-primary btn-block" style="text-decoration:none;">📝 ブログ記事を追加</a>
-        <a href="/admin/case.html" class="btn btn-primary btn-block" style="text-decoration:none;">📋 事例を追加</a>
-        <a href="/admin/news.html" class="btn btn-primary btn-block" style="text-decoration:none;">📰 お知らせを追加</a>
+        <a href="admin/blog.html" class="btn btn-primary btn-block" style="text-decoration:none;">📝 ブログ記事を追加</a>
+        <a href="admin/case.html" class="btn btn-primary btn-block" style="text-decoration:none;">📋 事例を追加</a>
+        <a href="admin/news.html" class="btn btn-primary btn-block" style="text-decoration:none;">📰 お知らせを追加</a>
       </div>
     </div>
 
@@ -50,12 +51,12 @@
       <div class="section-card">
         <h3>📝 最新ブログ記事</h3>
         <div id="recent-blogs"></div>
-        <a href="/admin/blog.html" class="arrow-link" style="font-size:13px;margin-top:12px;display:inline-flex;">管理画面へ</a>
+        <a href="admin/blog.html" class="arrow-link" style="font-size:13px;margin-top:12px;display:inline-flex;">管理画面へ</a>
       </div>
       <div class="section-card">
         <h3>📋 最新事例</h3>
         <div id="recent-cases"></div>
-        <a href="/admin/case.html" class="arrow-link" style="font-size:13px;margin-top:12px;display:inline-flex;">管理画面へ</a>
+        <a href="admin/case.html" class="arrow-link" style="font-size:13px;margin-top:12px;display:inline-flex;">管理画面へ</a>
       </div>
     </div>
 
@@ -101,11 +102,11 @@
   </div>
 </div>
 
-<script src="/data/config.js"></script>
-<script src="/data/blogs.js"></script>
-<script src="/data/cases.js"></script>
-<script src="/data/news.js"></script>
-<script src="/data/jobs.js"></script>
+<script src="data/config.js"></script>
+<script src="data/blogs.js"></script>
+<script src="data/cases.js"></script>
+<script src="data/news.js"></script>
+<script src="data/jobs.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const pub = arr => arr.filter(i => i.status === 'published').length;
@@ -124,13 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('recent-blogs').innerHTML = BLOG_POSTS.slice(0,4).map(p => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eef1f6;font-size:13px;">
-      <a href="/blog/detail/?slug=${p.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px;">${p.title}</a>
+      <a href="blog/detail/?slug=${p.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px;">${p.title}</a>
       <span class="status-badge ${p.status === 'published' ? 'status-published' : 'status-draft'}" style="flex-shrink:0;">${p.status === 'published' ? '公開' : '下書き'}</span>
     </div>`).join('');
 
   document.getElementById('recent-cases').innerHTML = CASE_STUDIES.slice(0,4).map(c => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eef1f6;font-size:13px;">
-      <a href="/case/detail/?slug=${c.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px;">${c.title}</a>
+      <a href="case/detail/?slug=${c.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px;">${c.title}</a>
       <span class="status-badge ${c.status === 'published' ? 'status-published' : 'status-draft'}" style="flex-shrink:0;">${c.status === 'published' ? '公開' : '下書き'}</span>
     </div>`).join('');
 });

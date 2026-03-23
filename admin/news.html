@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <base href="/homepage/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お知らせ管理｜Salesaurus Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 <div class="admin-wrap">
@@ -18,12 +19,12 @@
       <p>コンテンツ管理</p>
     </div>
     <nav class="admin-nav">
-      <a href="/admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
-      <a href="/admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
-      <a href="/admin/news.html" class="active"><span class="nav-icon">📰</span> お知らせ管理</a>
+      <a href="admin/blog.html"><span class="nav-icon">📝</span> ブログ管理</a>
+      <a href="admin/case.html"><span class="nav-icon">📋</span> 事例管理</a>
+      <a href="admin/news.html" class="active"><span class="nav-icon">📰</span> お知らせ管理</a>
       <div style="margin:16px 20px;border-top:1px solid rgba(255,255,255,.1);"></div>
-      <a href="/news/" target="_blank"><span class="nav-icon">🔗</span> お知らせ一覧を見る</a>
-      <a href="/" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
+      <a href="news/" target="_blank"><span class="nav-icon">🔗</span> お知らせ一覧を見る</a>
+      <a href="" target="_blank"><span class="nav-icon">🏠</span> サイトを開く</a>
     </nav>
   </div>
 
@@ -123,11 +124,11 @@
   </div>
 </div>
 
-<script src="/data/config.js"></script>
-<script src="/data/blogs.js"></script>
-<script src="/data/cases.js"></script>
-<script src="/data/news.js"></script>
-<script src="/data/jobs.js"></script>
+<script src="data/config.js"></script>
+<script src="data/blogs.js"></script>
+<script src="data/cases.js"></script>
+<script src="data/news.js"></script>
+<script src="data/jobs.js"></script>
 <script>
 function showTab(tab) {
   ['list','new'].forEach(t => {
@@ -143,11 +144,11 @@ function renderNewsTable() {
   const tbody = document.getElementById('news-tbody');
   tbody.innerHTML = NEWS_ITEMS.map(n => `
     <tr>
-      <td><a href="/news/detail/?slug=${n.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;">${n.title}</a></td>
+      <td><a href="news/detail/?slug=${n.slug}" target="_blank" style="color:#1a2f5e;font-weight:600;">${n.title}</a></td>
       <td>${n.type}</td>
       <td>${n.date}</td>
       <td><span class="status-badge ${n.status === 'published' ? 'status-published' : 'status-draft'}">${n.status === 'published' ? '公開中' : '下書き'}</span></td>
-      <td><a href="/news/detail/?slug=${n.slug}" target="_blank" class="admin-btn-sm admin-btn-secondary">表示</a></td>
+      <td><a href="news/detail/?slug=${n.slug}" target="_blank" class="admin-btn-sm admin-btn-secondary">表示</a></td>
     </tr>`).join('');
 }
 
