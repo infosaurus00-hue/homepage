@@ -447,7 +447,7 @@ function renderTopCase() {
     const service = SITE_CONFIG.services.find(s => s.id === c.service);
     return `
     <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="case-teaser-card">
-      <div class="case-teaser-thumb">${c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>'}</div>
+      <div class="case-teaser-thumb">${c.eyecatch ? `<img src="${c.eyecatch}" alt="${c.title}" style="width:100%;height:100%;object-fit:cover;">` : (c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>')}</div>
       <div class="case-teaser-body">
         <div class="case-teaser-meta">
           <span class="badge ${service?.badgeClass || 'badge-primary'}">${service?.name || ''}</span>
