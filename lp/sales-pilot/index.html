@@ -4,45 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>受注率が2倍になった会社が、最初に変えたのは営業設計だった。｜セールス航海士</title>
-  <meta name="description" content="年商3,000万〜3億円のBtoB経営者へ。施策を打っても売上が安定しない原因は現場ではなく営業設計にあります。25歳・飛び込み1万回の現役代表が現場に入り、仕組みから変えます。無料相談受付中。">
+  <meta name="description" content="年商3,000万〜3億円のBtoB経営者へ。施策を打っても売上が安定しない原因は現場ではなく営業設計にあります。26歳・飛び込み1万回の現役代表が現場に入り、仕組みから変えます。無料相談受付中。">
   <meta name="robots" content="noindex">
-
-  <!-- Fonts: Noto Sans JP (Japanese) + DM Sans (numbers/latin) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ============================================================
-       RESET & TOKENS
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Brand colors */
-      --navy:        #0e2240;
-      --navy-mid:    #1a3a5c;
-      --navy-light:  #2a5280;
-      --blue:        #2b8fcb;
-      --gold:        #c9a84c;
-      --gold-light:  #e8cc78;
-
-      /* UI */
-      --white:       #ffffff;
-      --bg:          #f4f7fb;
-      --bg2:         #edf1f8;
-      --text:        #111827;
-      --text-mid:    #374151;
-      --text-sub:    #6b7280;
-      --border:      #e2e8f0;
-      --line-green:  #06c755;
-      --line-hover:  #05a847;
-
-      /* Gradient */
-      --grad-hero:   linear-gradient(145deg, #060f1e 0%, #0e2240 55%, #1a3a5c 100%);
-      --grad-gold:   linear-gradient(90deg, #c9a84c, #f0d78c, #c9a84c);
-      --grad-text:   linear-gradient(120deg, #ffffff 0%, #b8d4f0 100%);
+      --navy:   #0d2137;
+      --blue:   #1a5fa8;
+      --gold:   #b8942a;
+      --white:  #ffffff;
+      --off:    #f7f8fa;
+      --line:   #e8edf2;
+      --text:   #111827;
+      --mid:    #374151;
+      --sub:    #6b7280;
+      --lg:     #06c755;
     }
 
     html { scroll-behavior: smooth; }
@@ -50,1030 +32,910 @@
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
       background: var(--white);
-      line-height: 1.7;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
+    strong { font-weight: 700; }
 
-    /* Numbers use DM Sans */
-    .num { font-family: 'DM Sans', sans-serif; }
-
-    /* ============================================================
-       FLOATING HEADER CTA
-    ============================================================ */
-    .float-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(9, 18, 35, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      padding: 12px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 16px;
-      transform: translateY(-100%);
-      transition: transform .35s cubic-bezier(.4,0,.2,1);
-    }
-    .float-header.visible { transform: translateY(0); }
-    .float-header-brand {
-      font-size: 13px; font-weight: 700;
-      color: rgba(255,255,255,.7);
-      white-space: nowrap;
-      letter-spacing: .05em;
-    }
-    .float-header-brand em { color: var(--gold); font-style: normal; }
-    .float-header-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--line-green); color: #fff;
-      font-size: 13px; font-weight: 700;
-      padding: 9px 22px; border-radius: 999px;
-      white-space: nowrap;
-      transition: background .2s, transform .15s;
-    }
-    .float-header-cta:hover { background: var(--line-hover); transform: scale(1.02); }
-
-    /* ============================================================
-       LAYOUT
-    ============================================================ */
-    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-    .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
-
-    .section { padding: 96px 0; }
-    .section-sm { padding: 72px 0; }
-    .section-dark { background: var(--navy); color: var(--white); }
-    .section-navy-deep { background: var(--navy); }
-    .section-bg { background: var(--bg); }
-    .section-bg2 { background: var(--bg2); }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: .16em; color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .eyebrow-blue { color: var(--blue); }
-    .section-title {
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 900; color: var(--navy);
-      line-height: 1.4; margin-bottom: 48px;
-    }
-    .section-title-white { color: var(--white); }
-    .section-title em { color: var(--blue); font-style: normal; }
-    .section-title em.gold { color: var(--gold); }
-
-    /* ============================================================
-       HERO
-    ============================================================ */
+    /* ── HERO ────────────────────────────────── */
     .hero {
-      background: var(--grad-hero);
-      padding: 120px 24px 100px;
-      position: relative; overflow: hidden;
+      background: var(--navy);
+      color: var(--white);
+      padding: 100px 40px 88px;
     }
-    /* Decorative orbs */
-    .hero::before, .hero::after {
-      content: '';
-      position: absolute; border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero::before {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(43,143,203,.14) 0%, transparent 70%);
-      top: -100px; right: -100px;
-    }
-    .hero::after {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 70%);
-      bottom: -80px; left: -60px;
-    }
-    .hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .hero-wrap { max-width: 820px; margin: 0 auto; }
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(201,168,76,.12);
-      border: 1px solid rgba(201,168,76,.4);
-      color: var(--gold-light);
-      font-size: 12px; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: 7px 18px; border-radius: 999px;
-      margin-bottom: 32px;
-    }
-    .hero-badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
-
-    .hero-target-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(43,143,203,.18);
-      border: 1px solid rgba(43,143,203,.45);
-      color: rgba(255,255,255,.85);
-      font-size: 13px; font-weight: 500;
-      padding: 6px 16px; border-radius: 4px;
+    .hero-service {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
       margin-bottom: 28px;
     }
-    .hero-target-tag i { color: var(--blue); font-size: 12px; }
 
     .hero h1 {
-      font-size: clamp(28px, 5.5vw, 52px);
-      font-weight: 900;
-      line-height: 1.35;
-      letter-spacing: -.02em;
-      margin-bottom: 32px;
-      /* Gradient text */
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 5vw, 50px);
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -.01em;
+      margin-bottom: 36px;
+      color: var(--white);
     }
-    .hero h1 .highlight {
-      background: var(--grad-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero h1 mark {
+      background: none;
+      color: var(--gold);
+      font-style: normal;
     }
 
-    .hero-sub {
-      font-size: clamp(14px, 2.2vw, 17px);
-      color: rgba(255,255,255,.65);
-      line-height: 1.9;
-      margin-bottom: 48px;
-      max-width: 560px;
+    .hero-body {
+      font-size: 15px;
+      color: rgba(255,255,255,.62);
+      line-height: 1.95;
+      max-width: 520px;
+      margin-bottom: 52px;
     }
 
-    .hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-
-    .btn-line-pill {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      background: var(--line-green); color: #fff;
-      font-size: 16px; font-weight: 700;
-      padding: 18px 48px; border-radius: 999px;
-      width: 100%; max-width: 380px;
-      box-shadow: 0 8px 24px rgba(6,199,85,.3);
-      transition: background .2s, transform .15s, box-shadow .2s;
-    }
-    .btn-line-pill:hover {
-      background: var(--line-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(6,199,85,.38);
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
     }
 
-    .btn-outline-pill {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      background: transparent; color: rgba(255,255,255,.7);
-      font-size: 14px; font-weight: 500;
-      padding: 14px 36px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.25);
-      width: 100%; max-width: 380px;
-      transition: background .2s, border-color .2s;
+    .btn-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 17px 44px;
+      border-radius: 3px;
+      transition: opacity .18s;
+      min-width: 300px;
+      text-align: center;
     }
-    .btn-outline-pill:hover {
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.45);
+    .btn-lg:hover { opacity: .85; }
+    .btn-line { background: var(--lg); color: #fff; }
+    .btn-border { background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.28); }
+
+    .hero-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,.3);
     }
 
-    .hero-free-note { font-size: 12px; color: rgba(255,255,255,.32); margin-top: 14px; }
-
-    /* Hero stat pills */
-    .hero-stats {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-top: 56px; padding-top: 40px;
+    /* hero bottom strip */
+    .hero-strip {
+      max-width: 820px;
+      margin: 64px auto 0;
+      padding-top: 40px;
       border-top: 1px solid rgba(255,255,255,.1);
-    }
-    .hero-stat {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 999px; padding: 8px 18px;
-    }
-    .hero-stat-num {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 18px; font-weight: 700; color: var(--gold-light);
-      line-height: 1;
-    }
-    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,.55); }
-
-    /* ============================================================
-       SOCIAL PROOF LOGOS (early trust)
-    ============================================================ */
-    .proof-bar {
-      background: var(--bg2);
-      padding: 28px 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .proof-bar-inner {
-      max-width: 900px; margin: 0 auto;
-      display: flex; align-items: center; gap: 32px;
+      display: flex;
+      gap: 40px;
       flex-wrap: wrap;
     }
-    .proof-bar-label {
-      font-size: 11px; font-weight: 700;
-      color: var(--text-sub); letter-spacing: .1em;
-      white-space: nowrap; flex-shrink: 0;
+    .hero-kpi { }
+    .hero-kpi-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -.02em;
     }
-    .proof-bar-logos {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    .hero-kpi-num small { font-size: .55em; font-weight: 500; }
+    .hero-kpi-label {
+      font-size: 12px;
+      color: rgba(255,255,255,.45);
     }
-    .proof-logo {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--text-mid);
-      padding: 6px 14px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
+
+    /* ── CLIENT STRIP ─────────────────────────── */
+    .client-strip {
+      background: var(--off);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 40px;
+    }
+    .client-strip-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .client-strip-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--sub);
       white-space: nowrap;
     }
-    .proof-bar-count {
-      margin-left: auto; font-size: 12px; color: var(--text-sub);
-      white-space: nowrap; flex-shrink: 0;
+    .client-names {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    .proof-bar-count strong { color: var(--navy); font-weight: 700; }
-
-    /* ============================================================
-       PAIN SECTION
-    ============================================================ */
-    .pain-intro {
-      font-size: 16px; color: var(--text-mid);
-      margin-bottom: 40px; line-height: 1.8;
-    }
-    .pain-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    }
-    .pain-card {
+    .client-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mid);
       background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px 20px;
-      display: flex; align-items: flex-start; gap: 14px;
-      transition: border-color .2s, box-shadow .2s;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      padding: 4px 12px;
     }
-    .pain-card:hover { border-color: var(--navy-mid); box-shadow: 0 4px 16px rgba(14,34,64,.07); }
-    .pain-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--bg2); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .pain-icon i { color: var(--navy-mid); font-size: 16px; }
-    .pain-card p { font-size: 14px; font-weight: 500; line-height: 1.65; color: var(--text-mid); }
 
-    /* Root cause callout */
-    .cause-callout {
-      margin-top: 40px;
-      background: var(--navy);
-      border-radius: 12px;
-      padding: 40px 40px;
-      position: relative; overflow: hidden;
+    /* ── SECTION BASE ─────────────────────────── */
+    .section { padding: 96px 40px; }
+    .section-off { background: var(--off); }
+    .wrap { max-width: 820px; margin: 0 auto; }
+    .wrap-sm { max-width: 660px; margin: 0 auto; }
+
+    .sec-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--sub);
+      margin-bottom: 20px;
     }
-    .cause-callout::before {
+
+    h2.sec-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 3.8vw, 34px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 44px;
+      letter-spacing: -.01em;
+    }
+    h2.sec-title em { color: var(--blue); font-style: normal; }
+
+    /* ── PAIN ─────────────────────────────────── */
+    .pain-text {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 2;
+      margin-bottom: 48px;
+    }
+
+    .pain-list {
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+    .pain-list li {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--mid);
+      padding: 20px 0 20px 32px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      line-height: 1.7;
+    }
+    .pain-list li::before {
       content: '';
-      position: absolute; top: -40px; right: -40px;
-      width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.15) 0%, transparent 70%);
+      position: absolute;
+      left: 0; top: 27px;
+      width: 14px; height: 2px;
+      background: var(--navy);
     }
-    .cause-callout-label {
-      font-size: 11px; font-weight: 700; letter-spacing: .14em;
-      color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
-    }
-    .cause-callout h3 {
-      font-size: clamp(18px, 3vw, 24px);
-      font-weight: 900; color: var(--white);
-      line-height: 1.5; margin-bottom: 14px;
-    }
-    .cause-callout h3 em { color: var(--gold-light); font-style: normal; }
-    .cause-callout p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.85; }
 
-    /* ============================================================
-       WHAT / PROCESS
-    ============================================================ */
-    .process-grid { display: flex; flex-direction: column; gap: 0; }
+    .pain-conclusion {
+      margin-top: 48px;
+      padding: 36px 40px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 15px;
+      line-height: 1.9;
+      font-weight: 500;
+    }
+    .pain-conclusion strong { color: var(--gold); font-weight: 700; }
+
+    /* ── WHAT ─────────────────────────────────── */
+    .what-lead {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.95;
+      margin-bottom: 52px;
+    }
+
+    .process {
+      counter-reset: step;
+    }
     .process-item {
-      display: grid; grid-template-columns: 64px 1fr; gap: 24px;
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 24px;
       padding: 32px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--line);
       align-items: start;
     }
-    .process-item:last-child { border-bottom: none; }
-    .process-num-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .process-num {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 32px; font-weight: 800;
-      color: var(--navy); line-height: 1;
+    .process-item:first-child { border-top: 1px solid var(--line); }
+    .process-count {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      padding-top: 3px;
+      letter-spacing: .04em;
     }
-    .process-bar {
-      width: 2px; flex: 1; min-height: 40px;
-      background: linear-gradient(to bottom, var(--border), transparent);
+    .process-count::before { content: "0" counter(step); }
+    .process-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.5;
     }
-    .process-body h4 {
-      font-size: 17px; font-weight: 700; color: var(--navy);
-      margin-bottom: 8px; line-height: 1.4;
-    }
-    .process-body p { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
-
-    /* ============================================================
-       RESULT / STATS
-    ============================================================ */
-    .result-feature {
-      background: var(--navy);
-      border-radius: 16px;
-      padding: 48px 40px;
-      margin-bottom: 24px;
-      position: relative; overflow: hidden;
-      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
-    }
-    .result-feature::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,.1) 0%, transparent 60%);
-    }
-    .result-feature-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: .14em; color: rgba(255,255,255,.4);
-      text-transform: uppercase; margin-bottom: 12px;
-    }
-    .result-feature-title {
-      font-size: 15px; font-weight: 700;
-      color: rgba(255,255,255,.8); margin-bottom: 8px;
-    }
-    .result-feature-client {
-      font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.6;
-    }
-    .result-ba {
-      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
-    }
-    .result-ba-num {
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(42px, 7vw, 64px);
-      font-weight: 800; line-height: 1;
-    }
-    .result-ba-num.before { color: rgba(255,255,255,.28); text-decoration: line-through; text-decoration-color: rgba(255,255,255,.2); }
-    .result-ba-num.after { color: var(--gold); }
-    .result-ba-unit { font-size: .38em; font-weight: 500; }
-    .result-ba-arrow { color: rgba(255,255,255,.3); font-size: 20px; }
-    .result-ba-badge {
-      font-size: 12px; font-weight: 700; color: var(--navy);
-      background: var(--gold); padding: 4px 10px; border-radius: 999px;
-      margin-top: 8px; text-align: center;
+    .process-body p {
+      font-size: 14px;
+      color: var(--sub);
+      line-height: 1.85;
     }
 
-    .result-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .result-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; padding: 28px 20px; text-align: center;
+    /* ── RESULT ───────────────────────────────── */
+    .result-case {
+      padding: 52px 52px;
+      border: 1px solid var(--line);
+      margin-bottom: 0;
     }
-    .result-card-num {
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 800; color: var(--navy);
-      line-height: 1; margin-bottom: 8px;
+    .result-case-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sub);
+      margin-bottom: 20px;
     }
-    .result-card-num .unit { font-size: .46em; font-weight: 500; }
-    .result-card-label { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+    .result-case-client {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
 
-    /* ============================================================
-       TESTIMONIALS
-    ============================================================ */
-    .voice-grid { display: flex; flex-direction: column; gap: 20px; }
-    .voice-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      position: relative;
-      transition: box-shadow .2s;
+    .result-numbers {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
     }
-    .voice-card:hover { box-shadow: 0 8px 32px rgba(14,34,64,.09); }
-    .voice-quote-mark {
-      font-family: Georgia, serif;
-      font-size: 64px; line-height: .8;
-      color: var(--bg2); font-weight: 900;
-      position: absolute; top: 20px; left: 24px;
-      user-select: none;
+    .result-number { }
+    .result-number-val {
+      font-size: clamp(44px, 7vw, 68px);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -.03em;
     }
-    .voice-result-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--navy); color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 700;
-      padding: 6px 14px; border-radius: 6px;
+    .result-number-val small { font-size: .4em; font-weight: 500; letter-spacing: 0; }
+    .result-number-val .arrow {
+      font-size: .35em;
+      font-weight: 400;
+      color: var(--sub);
+      margin: 0 4px;
+    }
+    .result-number-after { color: var(--blue); }
+    .result-number-label {
+      font-size: 13px;
+      color: var(--sub);
+      margin-top: 6px;
+    }
+
+    .result-voice {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--mid);
+      line-height: 1.85;
+      padding-left: 20px;
+      border-left: 3px solid var(--gold);
       margin-bottom: 16px;
     }
-    .voice-result-badge i { color: var(--gold); font-size: 11px; }
-    .voice-text {
-      font-size: 15px; line-height: 1.9; color: var(--text-mid);
-      margin-bottom: 20px; padding-top: 4px;
+    .result-voice-meta {
+      font-size: 13px;
+      color: var(--sub);
+      padding-left: 20px;
     }
-    .voice-footer {
-      padding-top: 16px; border-top: 1px solid var(--border);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .voice-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: var(--bg2); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .voice-avatar i { color: var(--text-sub); font-size: 16px; }
-    .voice-meta-name { font-size: 13px; font-weight: 700; color: var(--navy); }
-    .voice-meta-co { font-size: 12px; color: var(--text-sub); }
 
-    /* ============================================================
-       PROFILE
-    ============================================================ */
-    .profile-grid {
-      display: grid; grid-template-columns: 160px 1fr; gap: 48px;
+    /* note link */
+    .result-note-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 28px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--blue);
+    }
+
+    /* other service results */
+    .other-results {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .other-result-item {
+      background: var(--white);
+      padding: 28px 32px;
+    }
+    .other-result-service {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--sub);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .other-result-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+    .other-result-num small { font-size: .5em; font-weight: 500; letter-spacing: 0; }
+    .other-result-label {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    /* ── PROFILE ──────────────────────────────── */
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
       align-items: start;
     }
-    .profile-photo-wrap { position: relative; }
+    .profile-photo-block { }
     .profile-photo-placeholder {
-      width: 160px; height: 160px; border-radius: 16px;
-      background: var(--navy); color: rgba(255,255,255,.4);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px;
+      aspect-ratio: 4 / 5;
+      background: var(--off);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sub);
+      font-size: 48px;
+      margin-bottom: 16px;
     }
-    .profile-age-badge {
-      position: absolute; bottom: -10px; right: -10px;
-      background: var(--gold); color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 800;
-      padding: 6px 12px; border-radius: 999px;
-      box-shadow: 0 4px 12px rgba(201,168,76,.4);
-    }
-    .profile-name {
-      font-size: 26px; font-weight: 900;
-      color: var(--navy); margin-bottom: 4px;
-    }
-    .profile-role { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; }
-    .profile-copy {
-      font-size: 15px; line-height: 1.9;
-      color: var(--text-mid); margin-bottom: 20px;
-    }
-    .profile-highlight {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      border-radius: 10px; padding: 20px 24px;
-      font-size: 14px; color: rgba(255,255,255,.8);
-      font-weight: 500; line-height: 1.75;
-      margin-bottom: 24px;
-    }
-    .profile-highlight em { color: var(--gold-light); font-style: normal; font-weight: 700; }
-    .profile-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .profile-tag {
-      font-size: 12px; padding: 5px 14px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 999px; color: var(--navy); font-weight: 600;
+    .profile-photo-caption {
+      font-size: 12px;
+      color: var(--sub);
+      line-height: 1.6;
     }
 
-    /* ============================================================
-       CONSULT (what you get)
-    ============================================================ */
-    .consult-cards {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    .profile-text { }
+    .profile-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 4px;
     }
-    .consult-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 10px; padding: 24px;
-      display: flex; gap: 16px; align-items: flex-start;
+    .profile-role {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 32px;
     }
-    .consult-num-circle {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--navy); color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
+    .profile-body {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.95;
+      margin-bottom: 28px;
+    }
+    .profile-quote {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.85;
+      font-weight: 500;
+      padding-left: 20px;
+      border-left: 3px solid var(--gold);
+      margin-bottom: 28px;
+    }
+    .profile-career {
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+    .profile-career li {
+      font-size: 13px;
+      color: var(--mid);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 12px;
+    }
+    .profile-career li span.yr {
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+      width: 48px;
       flex-shrink: 0;
     }
-    .consult-card p { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.6; padding-top: 4px; }
 
-    /* ============================================================
-       FAQ
-    ============================================================ */
-    .faq-list { display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    /* age note */
+    .age-note {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(184,148,42,.1);
+      border: 1px solid rgba(184,148,42,.3);
+      padding: 3px 12px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* ── CONSULT ──────────────────────────────── */
+    .consult-lead {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.95;
+      margin-bottom: 48px;
+    }
+    .consult-list {
+      list-style: none;
+      counter-reset: item;
+    }
+    .consult-list li {
+      counter-increment: item;
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: flex-start;
+    }
+    .consult-list li:first-child { border-top: 1px solid var(--line); }
+    .consult-list li::before {
+      content: counter(item, decimal-leading-zero);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      flex-shrink: 0;
+      width: 28px;
+      padding-top: 2px;
+    }
+    .consult-list li p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.65;
+    }
+
+    /* ── FAQ ──────────────────────────────────── */
+    .faq { list-style: none; }
+    .faq li {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq li:first-child { border-top: 1px solid var(--line); }
     .faq-q {
-      background: var(--white);
-      padding: 20px 24px;
-      display: flex; align-items: flex-start; gap: 14px;
-      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      padding: 24px 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
     }
-    .faq-q-badge {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 800;
-      color: var(--blue); flex-shrink: 0;
-      padding-top: 1px;
-    }
-    .faq-q-text { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+    .faq-q .q { font-weight: 900; color: var(--blue); flex-shrink: 0; }
     .faq-a {
-      background: var(--bg);
-      padding: 18px 24px 18px 52px;
-      font-size: 14px; color: var(--text-sub);
-      line-height: 1.85; border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--mid);
+      padding: 0 0 24px 30px;
+      line-height: 1.85;
     }
 
-    /* ============================================================
-       FINAL CTA
-    ============================================================ */
+    /* ── FINAL CTA ────────────────────────────── */
     .final-cta {
-      background: var(--grad-hero);
-      padding: 104px 24px;
+      background: var(--navy);
+      padding: 104px 40px;
+    }
+    .final-cta-wrap {
+      max-width: 600px;
+      margin: 0 auto;
       text-align: center;
-      position: relative; overflow: hidden;
     }
-    .final-cta::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(43,143,203,.12) 0%, transparent 65%);
-    }
-    .final-cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-    .final-divider {
-      width: 48px; height: 3px;
-      background: var(--grad-gold);
-      margin: 0 auto 32px; border-radius: 2px;
+    .final-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 40px;
     }
     .final-cta h2 {
-      font-size: clamp(24px, 4.5vw, 40px);
-      font-weight: 900; line-height: 1.4;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.5;
       margin-bottom: 16px;
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
-    .final-cta h2 .gold-text {
-      background: var(--grad-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .final-cta-body {
+      font-size: 14px;
+      color: rgba(255,255,255,.5);
+      line-height: 1.95;
+      margin-bottom: 48px;
     }
-    .final-cta-sub { font-size: 15px; color: rgba(255,255,255,.55); margin-bottom: 48px; line-height: 1.9; }
-    .final-cta-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .final-note { font-size: 12px; color: rgba(255,255,255,.25); margin-top: 32px; line-height: 1.9; }
+    .final-cta-btns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .final-note {
+      margin-top: 28px;
+      font-size: 11px;
+      color: rgba(255,255,255,.22);
+      line-height: 1.8;
+    }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
+    /* ── FOOTER ───────────────────────────────── */
     .lp-footer {
-      background: #060f1e;
+      background: #080f1a;
       border-top: 1px solid rgba(255,255,255,.06);
-      padding: 28px 24px; text-align: center;
-      font-size: 12px; color: rgba(255,255,255,.24);
+      padding: 24px 40px;
+      font-size: 12px;
+      color: rgba(255,255,255,.22);
+      text-align: center;
     }
-    .lp-footer a { color: rgba(255,255,255,.35); }
+    .lp-footer a { color: rgba(255,255,255,.32); }
 
-    /* ============================================================
-       STICKY CTA (mobile)
-    ============================================================ */
-    .sticky-cta {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(8px);
-      border-top: 1px solid var(--border);
-      padding: 10px 12px;
-      display: flex; gap: 8px;
-      z-index: 150;
-      box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+    /* ── STICKY (mobile) ─────────────────────── */
+    .sticky {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      padding: 10px 16px;
+      gap: 8px;
+      z-index: 100;
     }
-    .sticky-cta a {
-      flex: 1; text-align: center; padding: 13px 8px;
-      border-radius: 8px; font-size: 14px; font-weight: 700;
+    .sticky a {
+      flex: 1;
+      text-align: center;
+      padding: 13px 8px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 3px;
     }
-    .sticky-line { background: var(--line-green); color: #fff; }
-    .sticky-contact { background: var(--navy); color: #fff; }
-    @media (min-width: 768px) { .sticky-cta { display: none; } }
+    .sticky-lg { background: var(--lg); color: #fff; }
+    .sticky-nv { background: var(--navy); color: #fff; }
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 680px) {
-      .hero { padding: 100px 20px 80px; }
-      .hero h1 { letter-spacing: -.01em; }
-      .hero-stats { gap: 8px; }
-      .hero-stat { padding: 7px 12px; }
-      .pain-grid { grid-template-columns: 1fr; }
-      .result-feature { grid-template-columns: 1fr; gap: 24px; }
-      .result-cards { grid-template-columns: 1fr 1fr; }
-      .profile-grid { grid-template-columns: 1fr; text-align: center; }
-      .profile-photo-wrap { display: flex; justify-content: center; }
-      .profile-tags { justify-content: center; }
-      .profile-age-badge { right: auto; left: 50%; transform: translateX(40px); }
-      .consult-cards { grid-template-columns: 1fr; }
-      .faq-a { padding-left: 24px; }
-      .process-item { grid-template-columns: 44px 1fr; gap: 16px; }
-      body { padding-bottom: 70px; }
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 720px) {
+      .hero, .section, .final-cta { padding-left: 24px; padding-right: 24px; }
+      .client-strip { padding-left: 24px; padding-right: 24px; }
+      .hero h1 { font-size: 26px; }
+      .hero-strip { gap: 28px; }
+      .btn-lg { min-width: 0; width: 100%; max-width: 360px; }
+      .profile-layout { grid-template-columns: 1fr; gap: 40px; }
+      .profile-photo-placeholder { aspect-ratio: 3/2; max-width: 280px; }
+      .other-results { grid-template-columns: 1fr; }
+      .result-case { padding: 36px 28px; }
+      .pain-conclusion { padding: 28px 24px; }
+      .sticky { display: flex; }
+      body { padding-bottom: 68px; }
     }
 
     @media (max-width: 480px) {
-      .result-cards { grid-template-columns: 1fr 1fr; }
-      .proof-bar-logos { gap: 8px; }
-      .float-header-brand { display: none; }
+      .hero-strip { gap: 20px; }
+      .hero-kpi-num { font-size: 28px; }
+      .result-numbers { gap: 28px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== FLOATING HEADER ===== -->
-<div class="float-header" id="floatHeader">
-  <span class="float-header-brand">セールス航海士｜<em>営業設計コンサル</em></span>
-  <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="float-header-cta">
-    <i class="fab fa-line"></i> 無料相談する
-  </a>
-</div>
+<!-- ═══ HERO ═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-wrap">
+    <p class="hero-service">Sales Pilot — 営業コンサルティング</p>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      セールス航海士 — 無料相談受付中
-    </div>
+    <h1>
+      受注率が<mark>2倍</mark>になった会社が、<br>
+      最初に変えたのは<br>
+      営業設計だった。
+    </h1>
 
-    <p class="hero-target-tag">
-      <i class="fas fa-bullseye"></i>
-      年商3,000万〜3億円のBtoB経営者・事業責任者へ
-    </p>
-
-    <h1>受注率が<span class="highlight">2倍</span>になった会社が、<br>最初に変えたのは<br>営業設計だった。</h1>
-
-    <p class="hero-sub">
-      施策を打っても売上が安定しない、、<br>
-      その原因は現場の頑張りでも、ツールでもない。<br>
+    <p class="hero-body">
+      年商3,000万〜3億円のBtoB経営者へ。<br>
+      施策を打っても売上が安定しない原因は、現場の頑張りでもツールでもない、、<br>
       営業の「設計」が間違っているだけです。
     </p>
 
-    <div class="hero-cta-group">
-      <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-line-pill">
+    <div class="hero-cta">
+      <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-lg btn-line">
         <i class="fab fa-line"></i> LINEで無料相談する
       </a>
-      <a href="/contact/" class="btn-outline-pill">
+      <a href="/contact/" class="btn-lg btn-border">
         <i class="fas fa-envelope"></i> お問い合わせフォーム
       </a>
     </div>
-    <p class="hero-free-note">完全無料・売り込み一切なし</p>
+    <p class="hero-note">相談は無料です。売り込みは一切しません。</p>
 
-    <!-- Stat pills -->
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num">22%<i class="fas fa-arrow-right" style="font-size:12px;margin:0 6px;color:rgba(255,255,255,.3)"></i>41%</span>
-        <span class="hero-stat-label">受注率改善実績</span>
+    <div class="hero-strip">
+      <div class="hero-kpi">
+        <div class="hero-kpi-num">26<small>歳</small></div>
+        <div class="hero-kpi-label">現役で現場に入る代表</div>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">30+</span>
-        <span class="hero-stat-label">創業3ヶ月の支援社数</span>
+      <div class="hero-kpi">
+        <div class="hero-kpi-num">1<small>万回+</small></div>
+        <div class="hero-kpi-label">飛び込み営業経験</div>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">10,000+</span>
-        <span class="hero-stat-label">飛び込み営業経験</span>
+      <div class="hero-kpi">
+        <div class="hero-kpi-num">30<small>社+</small></div>
+        <div class="hero-kpi-label">創業3ヶ月の支援実績</div>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">25歳</span>
-        <span class="hero-stat-label">現役で現場に入る代表</span>
+      <div class="hero-kpi">
+        <div class="hero-kpi-num">30<small>業種+</small></div>
+        <div class="hero-kpi-label">支援業種数</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SOCIAL PROOF BAR ===== -->
-<div class="proof-bar">
-  <div class="proof-bar-inner">
-    <span class="proof-bar-label">支援企業（一部）</span>
-    <div class="proof-bar-logos">
-      <span class="proof-logo">IT系SaaS</span>
-      <span class="proof-logo">製造業</span>
-      <span class="proof-logo">人材・HR</span>
-      <span class="proof-logo">コンサル</span>
-      <span class="proof-logo">不動産</span>
-      <span class="proof-logo">物流</span>
+<!-- ═══ CLIENT STRIP ════════════════════════════════ -->
+<div class="client-strip">
+  <div class="client-strip-inner">
+    <span class="client-strip-label">支援業種（一部）</span>
+    <div class="client-names">
+      <span class="client-name">AI SaaS</span>
+      <span class="client-name">IT・システム</span>
+      <span class="client-name">製造業</span>
+      <span class="client-name">人材・HR</span>
+      <span class="client-name">コンサル</span>
+      <span class="client-name">不動産</span>
+      <span class="client-name">物流</span>
     </div>
-    <span class="proof-bar-count">30業種以上 / <strong>30社+</strong>支援</span>
   </div>
 </div>
 
-<!-- ===== PAIN ===== -->
-<section class="section section-bg">
-  <div class="container">
-    <span class="eyebrow eyebrow-blue">こんな悩みはありませんか</span>
-    <h2 class="section-title">「頑張っているのに<br>変わらない」の正体</h2>
-    <p class="pain-intro">
-      施策を打っても変わらない会社には、必ず共通点があります。<br>
-      それは「営業の設計」ではなく、「現場の努力」を変え続けていること。
+<!-- ═══ PAIN ════════════════════════════════════════ -->
+<section class="section">
+  <div class="wrap">
+    <span class="sec-label">Problem</span>
+    <h2 class="sec-title">施策を打っても変わらない会社に、<br>共通していること</h2>
+
+    <p class="pain-text">
+      ツールを入れ、外注して、研修を受けさせた。<br>
+      それでも売上の波が変わらない、、<br>
+      その理由は、現場の努力を変え続けているのに、設計を変えていないから。
     </p>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-comment-slash"></i></div>
-        <p>アポは取れる。商談もある。<br>でも受注につながらない</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-user-tie"></i></div>
-        <p>売れる営業マン1人に依存。<br>その人が抜けたら終わる</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-tools"></i></div>
-        <p>ツール・外注・研修と施策を打ったが<br>売上の波が変わらない</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-chart-bar"></i></div>
-        <p>KPIは設定しているが現場が動かない。<br>何を改善すべきか分からない</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-yen-sign"></i></div>
-        <p>受注できても小さな契約で終わる。<br>単価が上がらない</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="fas fa-search"></i></div>
-        <p>失注の理由が毎回「検討します」で終わり<br>分析も改善もできていない</p>
-      </div>
-    </div>
 
-    <div class="cause-callout">
-      <div class="cause-callout-label">根本原因</div>
-      <h3>根性論でも外注でも解決しなかったのは、<br>営業の<em>「設計」</em>から変えていないから。</h3>
-      <p>どれだけ頑張っても設計が間違っていれば結果は変わりません。逆に言えば、設計を変えれば同じメンバーで受注率が2倍近くになります。これは理論ではなく実際の支援数字です。</p>
+    <ul class="pain-list">
+      <li>アポは取れる。商談もある。でも受注につながらない。失注の理由が毎回「検討します」で終わる</li>
+      <li>売れる営業マン1人に依存していて、その人が抜けたら組織が止まる</li>
+      <li>KPIは設定しているが現場が動かない。数字を見ても何をすれば改善するかが分からない</li>
+      <li>ツール・外注・研修と施策を打ってきたが、半年後も売上の波が変わっていない</li>
+      <li>受注できても小さな契約で終わる。単価を上げる方法が分からない</li>
+    </ul>
+
+    <div class="pain-conclusion">
+      どれだけ現場が頑張っても、<strong>設計が間違っていれば結果は変わりません。</strong><br>
+      逆に言えば、同じメンバーで設計だけ変えれば受注率は2倍近くになる。<br>
+      これは机上の理論ではなく、実際の支援事例の数字です。
     </div>
   </div>
 </section>
 
-<!-- ===== WHAT ===== -->
+<!-- ═══ WHAT ═════════════════════════════════════════ -->
+<section class="section section-off">
+  <div class="wrap">
+    <span class="sec-label">What We Do</span>
+    <h2 class="sec-title">「戦略を渡して終わり」ではなく、<br>現場に入り込んで変える</h2>
+
+    <p class="what-lead">
+      コンサルティングにありがちな「資料を作って提案して終わり」はやりません。<br>
+      実際の商談に入り、失注理由を分解し、KPIを設計し、担当者が自走できるまで動きます。
+    </p>
+
+    <div class="process">
+      <div class="process-item">
+        <span class="process-count"></span>
+        <div class="process-body">
+          <h3>現状の営業設計を丸ごと診断する</h3>
+          <p>アポから受注までの全プロセスを可視化。過去の失注を分解し、どこでお客さんが離脱しているかを特定します。競合調査・差別化要素の言語化も含む。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-count"></span>
+        <div class="process-body">
+          <h3>受注につながるKPI・プロセスを再設計する</h3>
+          <p>「頑張れ」ではなく、何をすれば受注が増えるかを数字で見える仕組みに変えます。提案フローの再構築・提案書テンプレートの刷新も同時に行います。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-count"></span>
+        <div class="process-body">
+          <h3>商談に同席し、現場でトークを変える</h3>
+          <p>実際の商談に入り、リアルタイムでフィードバック。ロールプレイ・振り返りを繰り返し、再現性のある営業トークに変えていきます。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-count"></span>
+        <div class="process-body">
+          <h3>担当者が自走できる状態にして離脱する</h3>
+          <p>「コンサルがいないと動かない組織」を作ることが最も失敗。再現性のある設計を組織に定着させてから離れます。依存ではなく自立を作ります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULT ════════════════════════════════════════ -->
 <section class="section">
-  <div class="container">
-    <span class="eyebrow">セールス航海士とは</span>
-    <h2 class="section-title">「戦略を渡して終わり」ではなく、<br><em>現場に入り込んで変える</em></h2>
-    <div class="process-grid">
-      <div class="process-item">
-        <div class="process-num-wrap">
-          <span class="process-num num">01</span>
-          <div class="process-bar"></div>
+  <div class="wrap">
+    <span class="sec-label">Results</span>
+    <h2 class="sec-title">数字で語ります</h2>
+
+    <!-- セールス航海士 実績：MakotoPrime -->
+    <div class="result-case">
+      <p class="result-case-tag">セールス航海士 支援事例</p>
+      <p class="result-case-client">
+        <strong>MakotoPrime（AI SaaS）</strong>　／　課題：商談はあるが受注率が上がらない。営業設計の見直しと提案フローの改善を依頼。
+      </p>
+
+      <div class="result-numbers">
+        <div class="result-number">
+          <div class="result-number-val">
+            <!--受注率のビフォーアフター：実際の数字に要変更-->
+            <span style="color:var(--sub);text-decoration:line-through;">XX</span><span class="arrow">→</span><span class="result-number-after">XX</span><small>%</small>
+          </div>
+          <div class="result-number-label">受注率の改善</div>
         </div>
-        <div class="process-body">
-          <h4>現状の営業設計を丸ごと診断</h4>
-          <p>アポから受注までの全プロセスを可視化。過去1年分の失注を分解し、どこでお客さんが離脱しているかを特定します。</p>
-        </div>
+        <!--他に数字があれば追加-->
       </div>
-      <div class="process-item">
-        <div class="process-num-wrap">
-          <span class="process-num num">02</span>
-          <div class="process-bar"></div>
-        </div>
-        <div class="process-body">
-          <h4>受注につながるKPI・プロセスを再設計</h4>
-          <p>競合調査・差別化要素の言語化・提案フローの再構築。「頑張れ」ではなく、何をすれば受注が増えるかを数字で見える仕組みに変えます。</p>
-        </div>
+
+      <p class="result-voice">
+        <!--MakotoPrimeの声を実際のnote記事から引用してください-->
+        「（実際の感想をここに入れてください）」
+      </p>
+      <p class="result-voice-meta">MakotoPrime　／　（役職）</p>
+
+      <a href="#" class="result-note-link" target="_blank" rel="noopener">
+        <i class="fas fa-book-open"></i> インタビュー全文をnoteで読む
+      </a>
+    </div>
+
+    <!-- 他サービスの実績（参考） -->
+    <div class="other-results">
+      <div class="other-result-item">
+        <div class="other-result-service">アポヨロ！— 営業代行</div>
+        <div class="other-result-num">3.1<small>倍</small></div>
+        <div class="other-result-label">ITスタートアップ 月間アポ数（8件→25件）</div>
       </div>
-      <div class="process-item">
-        <div class="process-num-wrap">
-          <span class="process-num num">03</span>
-          <div class="process-bar"></div>
-        </div>
-        <div class="process-body">
-          <h4>商談同席・提案書・トーク改善を現場でやる</h4>
-          <p>実際の商談に入り、リアルタイムでフィードバック。提案書のリニューアルからクロージング設計まで一気通貫で対応します。</p>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-num-wrap">
-          <span class="process-num num">04</span>
-        </div>
-        <div class="process-body">
-          <h4>担当者が自走できる状態にして離脱</h4>
-          <p>「コンサルがいないと動かない組織」にするのが一番の失敗。再現性のある営業設計を組織に定着させて離れます。</p>
-        </div>
+      <div class="other-result-item">
+        <div class="other-result-service">BPO・CSOレンタル</div>
+        <div class="other-result-num">138<small>%</small></div>
+        <div class="other-result-label">製造業 四半期売上（前年比）</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== RESULT ===== -->
-<section class="section section-bg">
-  <div class="container">
-    <span class="eyebrow">実績</span>
-    <h2 class="section-title">数字で<em class="gold">語ります</em></h2>
+<!-- ═══ PROFILE ══════════════════════════════════════ -->
+<section class="section section-off">
+  <div class="wrap">
+    <span class="sec-label">About</span>
+    <h2 class="sec-title">なぜ26歳に依頼する<br>経営者がいるのか</h2>
 
-    <div class="result-feature">
-      <div style="position:relative;z-index:1">
-        <div class="result-feature-label">セールス航海士 支援事例</div>
-        <div class="result-feature-title">コンサルティング会社（従業員15名）が営業設計を変えた結果</div>
-        <div class="result-feature-client">業種：人事コンサルティング ／ 課題：提案数は多いのに受注率が低い<br>支援内容：失注分析・競合調査・提案フロー再設計・商談同席（2ヶ月）</div>
-      </div>
-      <div style="position:relative;z-index:1">
-        <div class="result-ba">
-          <div>
-            <div class="result-ba-num before num">22<span class="result-ba-unit">%</span></div>
-          </div>
-          <div class="result-ba-arrow"><i class="fas fa-arrow-right"></i></div>
-          <div>
-            <div class="result-ba-num after num">41<span class="result-ba-unit">%</span></div>
-            <div class="result-ba-badge">×1.9倍</div>
-          </div>
+    <div class="profile-layout">
+      <div class="profile-photo-block">
+        <div class="profile-photo-placeholder">
+          <i class="fas fa-user"></i>
         </div>
-      </div>
-    </div>
-
-    <div class="result-cards">
-      <div class="result-card">
-        <div class="result-card-num num">138<span class="unit">%</span></div>
-        <div class="result-card-label">製造業・支援先の<br>四半期売上（前年比）</div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-num num">3.1<span class="unit">倍</span></div>
-        <div class="result-card-label">ITスタートアップの<br>月間アポ数改善</div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-num num">30<span class="unit">社+</span></div>
-        <div class="result-card-label">創業3ヶ月での<br>累計支援社数</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== VOICE ===== -->
-<section class="section">
-  <div class="container-narrow">
-    <span class="eyebrow eyebrow-blue">お客様の声</span>
-    <h2 class="section-title">実際に変わった会社の、<br>リアルな感想</h2>
-    <div class="voice-grid">
-
-      <div class="voice-card">
-        <div class="voice-quote-mark">"</div>
-        <span class="voice-result-badge"><i class="fas fa-arrow-trend-up"></i> 受注率 22% → 41%（1.9倍）</span>
-        <p class="voice-text">
-          なぜ受注できないのかが分からないまま、ただ提案数を増やしていました。セールス航海士さんに入ってもらい、失注の理由が初めて明確になり、そこから全てが変わりました。
-        </p>
-        <div class="voice-footer">
-          <div class="voice-avatar"><i class="fas fa-user"></i></div>
-          <div>
-            <div class="voice-meta-name">営業部長</div>
-            <div class="voice-meta-co">コンサルティング会社・従業員15名</div>
-          </div>
-        </div>
+        <p class="profile-photo-caption">峠 大輝（とうげ だいき）<br>株式会社Salesaurus 代表取締役</p>
       </div>
 
-      <div class="voice-card">
-        <div class="voice-quote-mark">"</div>
-        <span class="voice-result-badge"><i class="fas fa-arrow-trend-up"></i> 四半期売上 前年比138%達成</span>
-        <p class="voice-text">
-          営業マネージャーが抜けてから、何をどう立て直せばいいか途方に暮れていました。Salesaurusさんに入ってもらい、組織が見える化され、チームが再び一体感を持って動けるようになりました。
-        </p>
-        <div class="voice-footer">
-          <div class="voice-avatar"><i class="fas fa-user"></i></div>
-          <div>
-            <div class="voice-meta-name">代表</div>
-            <div class="voice-meta-co">製造業・従業員80名</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="voice-card">
-        <div class="voice-quote-mark">"</div>
-        <span class="voice-result-badge"><i class="fas fa-arrow-trend-up"></i> 月間アポ数 8件 → 25件（3.1倍）</span>
-        <p class="voice-text">
-          新規開拓に何から手をつければいいか分からない状態でした。Salesaurusさんが全部設計してくれたので、私たちは商談に集中できるようになりました。
-        </p>
-        <div class="voice-footer">
-          <div class="voice-avatar"><i class="fas fa-user"></i></div>
-          <div>
-            <div class="voice-meta-name">代表取締役</div>
-            <div class="voice-meta-co">ITスタートアップ・従業員20名</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROFILE ===== -->
-<section class="section section-bg2">
-  <div class="container">
-    <span class="eyebrow">担当者</span>
-    <h2 class="section-title">なぜ<em class="gold">25歳</em>に依頼する<br>経営者がいるのか</h2>
-    <div class="profile-grid">
-      <div class="profile-photo-wrap">
-        <div class="profile-photo-placeholder"><i class="fas fa-user"></i></div>
-        <span class="profile-age-badge">25歳・現役代表</span>
-      </div>
-      <div>
-        <div class="profile-name">峠 大輝（とうげ だいき）</div>
+      <div class="profile-text">
+        <span class="age-note">26歳（2000年3月生まれ）</span>
+        <div class="profile-name">峠 大輝</div>
         <div class="profile-role">株式会社Salesaurus 代表取締役 / セールス航海士</div>
-        <p class="profile-copy">
-          大東建託で新卒1年目から飛び込み営業1万回以上を経験。根性論では限界があることを痛感し、「仕組みで売れる営業組織」の構築に転換。ベンチャー2社・ドイツでの海外営業を経て独立・法人化。
+
+        <p class="profile-body">
+          大東建託で新卒1年目から飛び込み営業1万回以上を経験。根性論だけでは限界があることを痛感し、「仕組みで売れる営業組織」の構築に転換。ベンチャー2社・ドイツでの海外営業を経て独立・法人化。
         </p>
-        <div class="profile-highlight">
-          「アポだけ取れても売上は安定しない」という現実を、<em>自分で200アポ提供して痛感</em>した。だから今は、設計から変えることしかやらない。今も現場に入り、商談に同席し、数字が変わるまで離れない。
-        </div>
-        <div class="profile-tags">
-          <span class="profile-tag">大東建託出身</span>
-          <span class="profile-tag">飛び込み1万回以上</span>
-          <span class="profile-tag">ドイツで海外営業</span>
-          <span class="profile-tag">設立3ヶ月で30社以上</span>
-          <span class="profile-tag">30業種以上の支援経験</span>
-        </div>
+
+        <p class="profile-quote">
+          「アポだけ取れても売上は安定しない」という現実を、自分で200アポ提供して痛感した。だから今は、設計から変えることしかやらない。
+        </p>
+
+        <p class="profile-body">
+          年齢ではなく実績で判断してください。今も現場に入り、商談に同席し、数字が変わるまで離れません。机上の空論は一切しない。
+        </p>
+
+        <ul class="profile-career">
+          <li><span class="yr">新卒</span>大東建託入社。飛び込み営業1万回以上を経験</li>
+          <li><span class="yr">その後</span>ベンチャー2社・ドイツでの海外営業</li>
+          <li><span class="yr">独立</span>テレアポ・営業代行で200件/10日のアポ提供</li>
+          <li><span class="yr">2025</span>株式会社Salesaurus設立。3ヶ月で30社以上支援</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CONSULT ===== -->
+<!-- ═══ CONSULT ══════════════════════════════════════ -->
 <section class="section">
-  <div class="container-narrow">
-    <span class="eyebrow eyebrow-blue">無料相談でわかること</span>
-    <h2 class="section-title">30分で、自社の営業の<br>どこに問題があるか分かる</h2>
-    <div class="consult-cards">
-      <div class="consult-card">
-        <div class="consult-num-circle">1</div>
-        <p>今の営業プロセスのどこで失注が起きているかが分かる</p>
-      </div>
-      <div class="consult-card">
-        <div class="consult-num-circle">2</div>
-        <p>受注率を上げるために最初に変えるべきポイントが分かる</p>
-      </div>
-      <div class="consult-card">
-        <div class="consult-num-circle">3</div>
-        <p>今のKPI設計が本当に機能しているかどうかが分かる</p>
-      </div>
-      <div class="consult-card">
-        <div class="consult-num-circle">4</div>
-        <p>セールス航海士が自社に合うかどうかが分かる（合わなければ正直に伝えます）</p>
-      </div>
-    </div>
+  <div class="wrap-sm">
+    <span class="sec-label">Free Consultation</span>
+    <h2 class="sec-title">30分の相談で、<br>何が分かるか</h2>
+
+    <p class="consult-lead">
+      売り込みは一切しません。現状を聞いて、正直な意見をお伝えします。<br>
+      合わないと判断すればそう伝えます。
+    </p>
+
+    <ul class="consult-list">
+      <li><p>今の営業プロセスのどこで失注が起きているかが分かる</p></li>
+      <li><p>受注率を上げるために、最初に変えるべきポイントが分かる</p></li>
+      <li><p>今のKPI設計が本当に機能しているかどうかが分かる</p></li>
+      <li><p>セールス航海士が自社に合うかどうかが分かる</p></li>
+    </ul>
   </div>
 </section>
 
-<!-- ===== FAQ ===== -->
-<section class="section section-bg">
-  <div class="container-narrow">
-    <span class="eyebrow">よくある質問</span>
-    <h2 class="section-title">気になること、<br>全部答えます</h2>
-    <div class="faq-list">
+<!-- ═══ FAQ ══════════════════════════════════════════ -->
+<section class="section section-off">
+  <div class="wrap-sm">
+    <span class="sec-label">FAQ</span>
+    <h2 class="sec-title">よくある質問</h2>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <span class="faq-q-badge">Q.</span>
-          <span class="faq-q-text">費用はどのくらいかかりますか？</span>
-        </div>
-        <div class="faq-a">
-          まず無料相談で現状をヒアリングし、課題に合わせてご提案します。月額・プロジェクト型など複数の形態があります。まずは気軽にご連絡ください。
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span class="faq-q-badge">Q.</span>
-          <span class="faq-q-text">どのくらいの期間で成果が出ますか？</span>
-        </div>
-        <div class="faq-a">
-          受注率改善であれば2〜3ヶ月での成果が出るケースが多いです。まず30日間で診断と初期設計を行い、その後継続するかどうかを判断いただく流れが一般的です。
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span class="faq-q-badge">Q.</span>
-          <span class="faq-q-text">どんな業種・規模が対象ですか？</span>
-        </div>
-        <div class="faq-a">
-          BtoBを主体とする企業であれば業種は問いません。年商3,000万〜3億円、従業員5〜100名程度が最も多く、IT・コンサル・製造業・人材・不動産など30業種以上の支援実績があります。
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span class="faq-q-badge">Q.</span>
-          <span class="faq-q-text">コンサルが終わったら元に戻りませんか？</span>
-        </div>
-        <div class="faq-a">
-          再現性のある仕組みを作ることを最優先にしています。担当者が自走できる状態になるまで離れません。「コンサルがいないと動かない組織」を作ることが最も失敗だと思っているので、その点は最初にすり合わせます。
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span class="faq-q-badge">Q.</span>
-          <span class="faq-q-text">25歳に任せて本当に大丈夫ですか？</span>
-        </div>
-        <div class="faq-a">
-          年齢ではなく実績で判断してください。飛び込み1万回・受注率22%→41%改善・創業3ヶ月で30社以上支援。これは机上の理論ではなく現場の数字です。不安があれば無料相談で直接確認していただくのが一番です。
-        </div>
-      </div>
-
-    </div>
+    <ul class="faq">
+      <li>
+        <div class="faq-q"><span class="q">Q.</span><span>費用はどのくらいかかりますか？</span></div>
+        <div class="faq-a">まず無料相談で現状をヒアリングし、課題に合わせてご提案します。月額・プロジェクト型など複数の形態があります。まずは気軽にご連絡ください。</div>
+      </li>
+      <li>
+        <div class="faq-q"><span class="q">Q.</span><span>どのくらいの期間で成果が出ますか？</span></div>
+        <div class="faq-a">受注率改善であれば2〜3ヶ月での成果が出るケースが多いです。まず30日間で診断と初期設計を行い、その後継続するかどうかを判断いただく流れが一般的です。</div>
+      </li>
+      <li>
+        <div class="faq-q"><span class="q">Q.</span><span>どんな業種・規模が対象ですか？</span></div>
+        <div class="faq-a">BtoBを主体とする企業であれば業種は問いません。年商3,000万〜3億円、従業員5〜100名程度が最も多く、AI SaaS・コンサル・製造業・人材など30業種以上の支援実績があります。</div>
+      </li>
+      <li>
+        <div class="faq-q"><span class="q">Q.</span><span>コンサルが終わったら元に戻りませんか？</span></div>
+        <div class="faq-a">再現性のある仕組みを作ることを最優先にしています。担当者が自走できる状態になるまで離れません。「コンサルがいないと動かない組織」を作ることが最も失敗だと思っているので、その点は最初にすり合わせます。</div>
+      </li>
+      <li>
+        <div class="faq-q"><span class="q">Q.</span><span>26歳に任せて本当に大丈夫ですか？</span></div>
+        <div class="faq-a">年齢ではなく実績で判断してください。飛び込み1万回・設立3ヶ月で30社以上支援・受注率が2倍近くになった事例。不安があれば無料相談で直接確認していただくのが一番です。</div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- ===== FINAL CTA ===== -->
+<!-- ═══ FINAL CTA ═════════════════════════════════════ -->
 <section class="final-cta">
-  <div class="final-cta-inner">
-    <div class="final-divider"></div>
-    <h2>まず、<span class="gold-text">話だけ聞いてみる</span><br>から始めてください。</h2>
-    <p class="final-cta-sub">
+  <div class="final-cta-wrap">
+    <div class="final-rule"></div>
+    <h2>まず、話だけ聞いてみる<br>から始めてください。</h2>
+    <p class="final-cta-body">
       売り込みは一切しません。<br>
       現状を聞いて、正直な意見をお伝えします。<br>
       合わないと思えばそう言います。
     </p>
     <div class="final-cta-btns">
-      <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-line-pill">
+      <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-lg btn-line">
         <i class="fab fa-line"></i> LINEで無料相談する（一番ラク）
       </a>
-      <a href="/contact/" class="btn-outline-pill">
+      <a href="/contact/" class="btn-lg btn-border">
         <i class="fas fa-envelope"></i> お問い合わせフォームはこちら
       </a>
     </div>
-    <p class="final-note">完全無料・秘密厳守<br>営業時間外のご連絡はLINEにて翌営業日に返信</p>
+    <p class="final-note">完全無料・秘密厳守<br>営業時間外はLINEにて翌営業日に返信します</p>
   </div>
 </section>
 
@@ -1081,32 +943,15 @@
   <p><a href="/">株式会社Salesaurus</a> &copy; 2025 All Rights Reserved. &nbsp;|&nbsp; <a href="/privacy-policy/">プライバシーポリシー</a></p>
 </footer>
 
-<!-- Sticky CTA (mobile) -->
-<div class="sticky-cta">
-  <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="sticky-line">
+<!-- Sticky (mobile) -->
+<div class="sticky">
+  <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="sticky-lg">
     <i class="fab fa-line"></i> LINE相談（無料）
   </a>
-  <a href="/contact/" class="sticky-contact">
+  <a href="/contact/" class="sticky-nv">
     <i class="fas fa-envelope"></i> お問い合わせ
   </a>
 </div>
-
-<!-- ===== JS: Floating header on scroll ===== -->
-<script>
-(function() {
-  var header = document.getElementById('floatHeader');
-  var hero   = document.getElementById('hero');
-  function onScroll() {
-    var bottom = hero.getBoundingClientRect().bottom;
-    if (bottom < 0) {
-      header.classList.add('visible');
-    } else {
-      header.classList.remove('visible');
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
-</script>
 
 </body>
 </html>
