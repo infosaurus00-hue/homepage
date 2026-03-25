@@ -155,20 +155,22 @@
       color: var(--sub);
       white-space: nowrap;
     }
-    .client-names {
+    .client-logos {
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: 32px;
       flex-wrap: wrap;
     }
-    .client-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--mid);
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      padding: 4px 12px;
+    .client-logo {
+      height: 28px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .55;
+      transition: opacity .2s, filter .2s;
     }
+    .client-logo:hover { opacity: .85; filter: grayscale(60%); }
 
     /* ── SECTION BASE ─────────────────────────── */
     .section { padding: 96px 40px; }
@@ -399,15 +401,12 @@
       align-items: start;
     }
     .profile-photo-block { }
-    .profile-photo-placeholder {
+    .profile-photo {
+      width: 100%;
       aspect-ratio: 4 / 5;
-      background: var(--off);
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--sub);
-      font-size: 48px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
       margin-bottom: 16px;
     }
     .profile-photo-caption {
@@ -527,14 +526,32 @@
       display: flex;
       gap: 16px;
       align-items: flex-start;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      justify-content: space-between;
     }
+    .faq-q-text { display: flex; gap: 16px; align-items: flex-start; }
     .faq-q .q { font-weight: 900; color: var(--blue); flex-shrink: 0; }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--sub);
+      flex-shrink: 0;
+      transition: transform .2s;
+      margin-top: 1px;
+    }
+    .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
     .faq-a {
       font-size: 14px;
       color: var(--mid);
       padding: 0 0 24px 30px;
       line-height: 1.85;
+      display: none;
     }
+    .faq-a.open { display: block; }
 
     /* ── FINAL CTA ────────────────────────────── */
     .final-cta {
@@ -650,8 +667,8 @@
 
     <p class="hero-body">
       年商3,000万〜3億円のBtoB経営者へ。<br>
-      施策を打っても売上が安定しない原因は、現場の頑張りでもツールでもない、、<br>
-      営業の「設計」が間違っているだけです。
+      ツールを入れても、外注しても、売上の波が変わらない理由は一つ。<br>
+      営業の「設計」が変わっていないからです。
     </p>
 
     <div class="hero-cta">
@@ -688,15 +705,13 @@
 <!-- ═══ CLIENT STRIP ════════════════════════════════ -->
 <div class="client-strip">
   <div class="client-strip-inner">
-    <span class="client-strip-label">支援業種（一部）</span>
-    <div class="client-names">
-      <span class="client-name">AI SaaS</span>
-      <span class="client-name">IT・システム</span>
-      <span class="client-name">製造業</span>
-      <span class="client-name">人材・HR</span>
-      <span class="client-name">コンサル</span>
-      <span class="client-name">不動産</span>
-      <span class="client-name">物流</span>
+    <span class="client-strip-label">支援企業（一部）</span>
+    <div class="client-logos">
+      <img src="../../images/clients/makoto-prime.png" alt="MAKOTO Prime" class="client-logo">
+      <img src="../../images/clients/accele.jpg" alt="accele" class="client-logo">
+      <img src="../../images/clients/startgear.png" alt="StartGear" class="client-logo">
+      <img src="../../images/clients/akari.png" alt="akari" class="client-logo">
+      <img src="../../images/clients/aidma-holdings.png" alt="AIDMA Holdings" class="client-logo">
     </div>
   </div>
 </div>
@@ -781,9 +796,13 @@
 
     <!-- セールス航海士 実績：MakotoPrime -->
     <div class="result-case">
-      <p class="result-case-tag">セールス航海士 支援事例</p>
+      <p class="result-case-tag">支援事例</p>
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px;flex-wrap:wrap;">
+        <img src="../../images/clients/makoto-prime.png" alt="MAKOTO Prime" style="height:32px;width:auto;object-fit:contain;">
+        <p style="font-size:13px;color:var(--sub);margin:0;">AI SaaS　／　新規営業立ち上げ支援</p>
+      </div>
       <p class="result-case-client">
-        <strong>MAKOTO Prime（AI SaaS）</strong>　／　課題：新規営業の立ち上げ。完全成果報酬・初期費用ゼロで、量と質を同時に構築する体制づくりを依頼。
+        課題：新規営業の立ち上げ。完全成果報酬・初期費用ゼロで、量と質を同時に構築する体制づくりを依頼。
       </p>
 
       <div class="result-numbers">
@@ -835,9 +854,7 @@
 
     <div class="profile-layout">
       <div class="profile-photo-block">
-        <div class="profile-photo-placeholder">
-          <i class="fas fa-user"></i>
-        </div>
+        <img src="../../images/profile-daiki.jpg" alt="峠大輝 株式会社Salesaurus代表" class="profile-photo">
         <p class="profile-photo-caption">峠 大輝（とうげ だいき）<br>株式会社Salesaurus 代表取締役</p>
       </div>
 
@@ -897,24 +914,39 @@
 
     <ul class="faq">
       <li>
-        <div class="faq-q"><span class="q">Q.</span><span>費用はどのくらいかかりますか？</span></div>
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text"><span class="q">Q.</span><span>費用はどのくらいかかりますか？</span></span>
+          <span class="faq-icon">+</span>
+        </button>
         <div class="faq-a">まず無料相談で現状をヒアリングし、課題に合わせてご提案します。月額・プロジェクト型など複数の形態があります。まずは気軽にご連絡ください。</div>
       </li>
       <li>
-        <div class="faq-q"><span class="q">Q.</span><span>どのくらいの期間で成果が出ますか？</span></div>
-        <div class="faq-a">受注率改善であれば2〜3ヶ月での成果が出るケースが多いです。まず30日間で診断と初期設計を行い、その後継続するかどうかを判断いただく流れが一般的です。</div>
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text"><span class="q">Q.</span><span>どのくらいの期間で成果が出ますか？</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">受注率改善であれば2〜3ヶ月で変化が出るケースが多いです。まず30日間で診断と初期設計を行い、その後継続するかどうかを判断いただく流れが一般的です。</div>
       </li>
       <li>
-        <div class="faq-q"><span class="q">Q.</span><span>どんな業種・規模が対象ですか？</span></div>
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text"><span class="q">Q.</span><span>どんな業種・規模が対象ですか？</span></span>
+          <span class="faq-icon">+</span>
+        </button>
         <div class="faq-a">BtoBを主体とする企業であれば業種は問いません。年商3,000万〜3億円、従業員5〜100名程度が最も多く、AI SaaS・コンサル・製造業・人材など30業種以上の支援実績があります。</div>
       </li>
       <li>
-        <div class="faq-q"><span class="q">Q.</span><span>コンサルが終わったら元に戻りませんか？</span></div>
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text"><span class="q">Q.</span><span>コンサルが終わったら元に戻りませんか？</span></span>
+          <span class="faq-icon">+</span>
+        </button>
         <div class="faq-a">再現性のある仕組みを作ることを最優先にしています。担当者が自走できる状態になるまで離れません。「コンサルがいないと動かない組織」を作ることが最も失敗だと思っているので、その点は最初にすり合わせます。</div>
       </li>
       <li>
-        <div class="faq-q"><span class="q">Q.</span><span>26歳に任せて本当に大丈夫ですか？</span></div>
-        <div class="faq-a">年齢ではなく実績で判断してください。飛び込み1万回・設立3ヶ月で30社以上支援・受注率が2倍近くになった事例。不安があれば無料相談で直接確認していただくのが一番です。</div>
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text"><span class="q">Q.</span><span>26歳に任せて本当に大丈夫ですか？</span></span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">年齢ではなく実績で判断してください。飛び込み1万回・設立3ヶ月で30社以上支援・面談実施率87%。不安があれば無料相談で直接確認していただくのが一番です。</div>
       </li>
     </ul>
   </div>
@@ -956,5 +988,16 @@
   </a>
 </div>
 
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isOpen);
+      answer.classList.toggle('open', !isOpen);
+    });
+  });
+</script>
 </body>
 </html>
