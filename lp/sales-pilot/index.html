@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>営業が変わらない本当の理由｜セールス航海士 無料相談</title>
-  <meta name="description" content="アポは取れるのに売上が安定しない。施策を打っても変わらない。その原因は現場ではなく「営業設計」にあります。セールス航海士が現場に入り込み、仕組みから変えます。">
+  <title>受注率が2倍になった会社が、最初に変えたのは営業設計だった。｜セールス航海士</title>
+  <meta name="description" content="年商3,000万〜3億円のBtoB経営者へ。施策を打っても売上が安定しない原因は現場ではなく営業設計にあります。25歳・飛び込み1万回の現役代表が現場に入り、仕組みから変えます。">
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -14,225 +14,405 @@
     :root {
       --navy: #1a3a5c;
       --navy-dark: #0f1923;
+      --navy-mid: #1e4976;
       --blue: #2b8fcb;
       --gold: #c9a84c;
+      --gold-light: #f0d88a;
       --white: #ffffff;
-      --bg: #f4f6f9;
+      --bg: #f5f7fa;
+      --bg2: #eef1f6;
       --text: #1a1a1a;
       --text-sub: #5a6a7a;
       --border: #dde4ec;
-      --line-green: #00b900;
+      --line-green: #06c755;
+      --line-dark: #00a040;
     }
+    html { scroll-behavior: smooth; }
     body { font-family: 'Noto Sans JP', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 740px; margin: 0 auto; }
+    .section { padding: 80px 24px; }
+    .section-bg { background: var(--bg); }
+    .section-bg2 { background: var(--bg2); }
+    .section-label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .14em; color: var(--blue);
+      text-transform: uppercase;
+      padding: 4px 0; border-bottom: 2px solid var(--blue);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 900; color: var(--navy);
+      line-height: 1.45; margin-bottom: 40px;
+    }
+    .section-title em { color: var(--blue); font-style: normal; }
 
     /* ===== HERO ===== */
     .hero {
       background: var(--navy-dark);
       color: var(--white);
-      padding: 80px 24px 72px;
-      text-align: center;
+      padding: 72px 24px 80px;
       position: relative;
       overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, #0f1923 0%, #1a3a5c 100%);
+      background: radial-gradient(ellipse at 70% 40%, rgba(43,143,203,.18) 0%, transparent 60%),
+                  linear-gradient(160deg, #0f1923 0%, #1a3a5c 100%);
       z-index: 0;
     }
-    .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-    .hero-label {
-      display: inline-block;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 12px;
-      letter-spacing: .1em;
-      padding: 4px 16px;
-      border-radius: 2px;
-      margin-bottom: 24px;
+    .hero-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(201,168,76,.6);
+      color: var(--gold-light);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .08em;
+      padding: 6px 16px; border-radius: 2px;
+      margin-bottom: 28px;
     }
+    .hero-badge span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; display: inline-block; }
     .hero h1 {
-      font-size: clamp(26px, 5vw, 42px);
+      font-size: clamp(24px, 5vw, 44px);
       font-weight: 900;
-      line-height: 1.4;
-      margin-bottom: 24px;
+      line-height: 1.38;
+      margin-bottom: 28px;
       letter-spacing: -.01em;
     }
     .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-target {
+      display: inline-block;
+      background: rgba(43,143,203,.2);
+      border: 1px solid rgba(43,143,203,.5);
+      color: rgba(255,255,255,.9);
+      font-size: 13px; font-weight: 700;
+      padding: 6px 16px; border-radius: 2px;
+      margin-bottom: 20px;
+      letter-spacing: .04em;
+    }
     .hero-sub {
-      font-size: clamp(14px, 2.5vw, 17px);
-      color: rgba(255,255,255,.75);
-      margin-bottom: 40px;
-      line-height: 1.8;
+      font-size: clamp(14px, 2.5vw, 16px);
+      color: rgba(255,255,255,.72);
+      margin-bottom: 44px;
+      line-height: 1.9;
     }
-    .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
     .btn-line-lg {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--line-green); color: var(--white);
-      font-size: 17px; font-weight: 700;
+      font-size: 16px; font-weight: 700;
       padding: 18px 40px; border-radius: 4px;
-      width: 100%; max-width: 360px; justify-content: center;
-      transition: opacity .2s;
+      width: 100%; max-width: 380px;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(6,199,85,.3);
     }
-    .btn-line-lg:hover { opacity: .88; }
+    .btn-line-lg:hover { background: var(--line-dark); transform: translateY(-1px); }
     .btn-contact-lg {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: transparent; color: var(--white);
-      font-size: 15px; font-weight: 500;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: transparent; color: rgba(255,255,255,.8);
+      font-size: 14px; font-weight: 500;
       padding: 14px 32px; border-radius: 4px;
-      border: 1px solid rgba(255,255,255,.4);
-      width: 100%; max-width: 360px; justify-content: center;
+      border: 1px solid rgba(255,255,255,.3);
+      width: 100%; max-width: 380px;
       transition: background .2s;
     }
     .btn-contact-lg:hover { background: rgba(255,255,255,.1); }
-    .hero-note { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 16px; }
+    .hero-note { font-size: 12px; color: rgba(255,255,255,.38); margin-top: 16px; }
 
-    /* ===== SECTION ===== */
-    .section { padding: 72px 24px; }
-    .section-bg { background: var(--bg); }
-    .container { max-width: 720px; margin: 0 auto; }
-    .section-label {
-      display: block;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: .12em; color: var(--blue);
-      text-transform: uppercase; margin-bottom: 12px;
+    /* ===== TARGET ===== */
+    .target-block {
+      background: var(--navy);
+      color: var(--white);
+      padding: 40px 32px;
+      border-radius: 8px;
+      margin-bottom: 0;
     }
-    .section-title {
-      font-size: clamp(22px, 4vw, 32px);
-      font-weight: 900; color: var(--navy);
-      line-height: 1.4; margin-bottom: 40px;
+    .target-block h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: .06em;
+      margin-bottom: 20px;
+    }
+    .target-list { display: flex; flex-direction: column; gap: 10px; }
+    .target-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: rgba(255,255,255,.88);
+    }
+    .target-item::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
     }
 
     /* ===== PAIN ===== */
-    .pain-list { display: flex; flex-direction: column; gap: 16px; }
+    .pain-list { display: flex; flex-direction: column; gap: 14px; }
     .pain-item {
       display: flex; align-items: flex-start; gap: 16px;
       background: var(--white); border: 1px solid var(--border);
       border-left: 4px solid var(--navy);
-      border-radius: 4px; padding: 20px 24px;
+      border-radius: 6px; padding: 20px 24px;
     }
-    .pain-item i { color: var(--navy); margin-top: 3px; flex-shrink: 0; font-size: 18px; }
-    .pain-item p { font-size: 15px; font-weight: 500; line-height: 1.6; }
+    .pain-item i { color: var(--navy); margin-top: 3px; flex-shrink: 0; font-size: 17px; }
+    .pain-item p { font-size: 15px; font-weight: 500; line-height: 1.65; }
+    .pain-close {
+      background: var(--navy); color: var(--white);
+      border-radius: 6px; padding: 28px 32px;
+      margin-top: 28px;
+      font-size: 15px; line-height: 1.8;
+    }
+    .pain-close strong { color: var(--gold-light); }
+
+    /* ===== ROOT CAUSE ===== */
+    .cause-box {
+      border: 2px solid var(--navy);
+      border-radius: 8px; padding: 36px 32px;
+      text-align: center; margin-bottom: 32px;
+    }
+    .cause-box h3 {
+      font-size: clamp(18px, 3.5vw, 26px);
+      font-weight: 900; color: var(--navy);
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .cause-box h3 em { color: var(--blue); font-style: normal; }
+    .cause-box p { font-size: 15px; color: var(--text-sub); line-height: 1.8; }
+    .cause-arrow {
+      text-align: center; font-size: 28px;
+      color: var(--navy); margin: 16px 0;
+    }
 
     /* ===== WHAT ===== */
-    .what-box {
-      background: var(--navy); color: var(--white);
-      border-radius: 8px; padding: 40px 32px;
-      margin-bottom: 32px;
+    .what-header {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 8px; padding: 36px 32px;
+      margin-bottom: 24px;
     }
-    .what-box h3 { font-size: 22px; font-weight: 900; margin-bottom: 16px; line-height: 1.5; }
-    .what-box h3 em { color: var(--gold); font-style: normal; }
-    .what-box p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.8; }
-    .what-steps { display: flex; flex-direction: column; gap: 16px; }
+    .what-header h3 {
+      font-size: clamp(18px, 3.5vw, 24px);
+      font-weight: 900; line-height: 1.55; margin-bottom: 14px;
+    }
+    .what-header h3 em { color: var(--gold); font-style: normal; }
+    .what-header p { font-size: 15px; color: rgba(255,255,255,.78); line-height: 1.85; }
+    .what-steps { display: flex; flex-direction: column; gap: 12px; }
     .what-step {
       display: flex; align-items: flex-start; gap: 16px;
-      padding: 20px 24px; border: 1px solid var(--border); border-radius: 4px;
+      padding: 20px 24px; border: 1px solid var(--border);
+      border-radius: 6px; background: var(--white);
     }
     .step-num {
-      width: 36px; height: 36px; border-radius: 50%;
+      width: 34px; height: 34px; border-radius: 50%;
       background: var(--navy); color: var(--white);
-      font-size: 14px; font-weight: 700;
+      font-size: 13px; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .what-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .what-step p { font-size: 14px; color: var(--text-sub); line-height: 1.6; }
-
-    /* ===== PROFILE ===== */
-    .profile-box {
-      display: flex; gap: 32px; align-items: flex-start;
-    }
-    .profile-photo {
-      width: 100px; height: 100px; border-radius: 50%;
-      object-fit: cover; flex-shrink: 0;
-      border: 3px solid var(--border);
-    }
-    .profile-photo-placeholder {
-      width: 100px; height: 100px; border-radius: 50%;
-      background: var(--navy); color: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px; flex-shrink: 0;
-    }
-    .profile-name { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
-    .profile-title { font-size: 13px; color: var(--text-sub); margin-bottom: 16px; }
-    .profile-body { font-size: 14px; line-height: 1.8; color: var(--text-sub); }
-    .profile-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .profile-tag {
-      font-size: 12px; padding: 4px 12px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 2px; color: var(--navy); font-weight: 500;
-    }
+    .what-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--navy); }
+    .what-step p { font-size: 14px; color: var(--text-sub); line-height: 1.65; }
 
     /* ===== RESULT ===== */
-    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .result-card {
-      background: var(--navy); color: var(--white);
-      border-radius: 8px; padding: 28px 24px; text-align: center;
+    .result-headline {
+      font-size: clamp(18px, 3.5vw, 24px);
+      font-weight: 900; color: var(--navy);
+      text-align: center; margin-bottom: 32px;
+      line-height: 1.5;
     }
-    .result-num {
-      font-size: clamp(32px, 6vw, 48px);
-      font-weight: 900; color: var(--gold);
+    .result-hero {
+      background: var(--navy); color: var(--white);
+      border-radius: 10px; padding: 40px 32px;
+      text-align: center; margin-bottom: 20px;
+    }
+    .result-hero-label {
+      font-size: 13px; color: rgba(255,255,255,.6);
+      margin-bottom: 16px; letter-spacing: .06em;
+    }
+    .result-before-after {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 16px;
+    }
+    .result-ba-num {
+      font-size: clamp(40px, 8vw, 64px);
+      font-weight: 900; line-height: 1;
+    }
+    .result-ba-num.before { color: rgba(255,255,255,.4); }
+    .result-ba-num.after { color: var(--gold); }
+    .result-ba-arrow { font-size: 24px; color: rgba(255,255,255,.4); }
+    .result-ba-unit { font-size: .45em; font-weight: 400; }
+    .result-hero-desc { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px 16px; text-align: center;
+    }
+    .result-card-num {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 900; color: var(--navy);
       line-height: 1; margin-bottom: 8px;
     }
-    .result-num span { font-size: .5em; font-weight: 400; }
-    .result-label { font-size: 13px; color: rgba(255,255,255,.7); }
+    .result-card-num span { font-size: .5em; font-weight: 500; }
+    .result-card-label { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+
+    /* ===== VOICE ===== */
+    .voice-list { display: flex; flex-direction: column; gap: 20px; }
+    .voice-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 28px 28px 24px;
+      position: relative;
+    }
+    .voice-card::before {
+      content: '"';
+      position: absolute; top: 16px; left: 20px;
+      font-size: 48px; color: var(--bg2);
+      font-family: Georgia, serif; line-height: 1;
+      font-weight: 900;
+    }
+    .voice-text {
+      font-size: 15px; line-height: 1.85;
+      color: var(--text); margin-bottom: 20px;
+      padding-top: 8px;
+    }
+    .voice-result {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--navy); color: var(--white);
+      font-size: 13px; font-weight: 700;
+      padding: 6px 14px; border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .voice-result i { color: var(--gold); font-size: 11px; }
+    .voice-meta {
+      font-size: 13px; color: var(--text-sub);
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .voice-meta strong { color: var(--navy); }
+
+    /* ===== PROFILE ===== */
+    .profile-wrap {
+      display: grid; grid-template-columns: 120px 1fr; gap: 32px;
+      align-items: start;
+    }
+    .profile-photo-placeholder {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px;
+    }
+    .profile-name { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .profile-role { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; }
+    .profile-story { font-size: 14px; line-height: 1.9; color: var(--text-sub); margin-bottom: 20px; }
+    .profile-highlight {
+      background: var(--bg); border-left: 4px solid var(--gold);
+      padding: 16px 20px; border-radius: 0 6px 6px 0;
+      font-size: 14px; color: var(--navy);
+      font-weight: 700; line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .profile-tag {
+      font-size: 12px; padding: 4px 12px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 2px; color: var(--navy); font-weight: 500;
+    }
 
     /* ===== CONSULT ===== */
     .consult-list { display: flex; flex-direction: column; gap: 12px; }
     .consult-item {
-      display: flex; align-items: center; gap: 14px;
+      display: flex; align-items: flex-start; gap: 14px;
       padding: 18px 20px;
-      background: var(--white); border: 1px solid var(--border); border-radius: 4px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 6px;
     }
-    .consult-item i { color: var(--blue); font-size: 18px; flex-shrink: 0; }
-    .consult-item p { font-size: 15px; font-weight: 500; }
+    .consult-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blue); color: var(--white);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .consult-item p { font-size: 15px; font-weight: 500; line-height: 1.6; padding-top: 2px; }
+
+    /* ===== FAQ ===== */
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    }
+    .faq-q {
+      background: var(--white); padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 15px; font-weight: 700; color: var(--navy);
+      cursor: default;
+    }
+    .faq-q-icon {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      font-size: 13px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .faq-a {
+      background: var(--bg); padding: 18px 24px 18px 64px;
+      font-size: 14px; color: var(--text-sub); line-height: 1.8;
+      border-top: 1px solid var(--border);
+    }
 
     /* ===== FINAL CTA ===== */
     .final-cta {
       background: var(--navy-dark); color: var(--white);
-      padding: 80px 24px; text-align: center;
+      padding: 88px 24px; text-align: center;
     }
     .final-cta h2 {
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 900; line-height: 1.4; margin-bottom: 16px;
+      font-size: clamp(22px, 4.5vw, 36px);
+      font-weight: 900; line-height: 1.45; margin-bottom: 14px;
     }
     .final-cta h2 em { color: var(--gold); font-style: normal; }
-    .final-cta p { font-size: 15px; color: rgba(255,255,255,.7); margin-bottom: 40px; }
+    .final-cta-sub { font-size: 15px; color: rgba(255,255,255,.65); margin-bottom: 44px; line-height: 1.8; }
     .final-cta-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .final-note { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 24px; }
+    .final-note { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 28px; line-height: 1.8; }
 
     /* ===== FOOTER ===== */
     .lp-footer {
-      background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,.08);
+      background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,.07);
       padding: 24px; text-align: center;
-      font-size: 12px; color: rgba(255,255,255,.3);
+      font-size: 12px; color: rgba(255,255,255,.28);
     }
-    .lp-footer a { color: rgba(255,255,255,.4); }
+    .lp-footer a { color: rgba(255,255,255,.38); }
 
-    /* ===== STICKY CTA (mobile) ===== */
+    /* ===== STICKY CTA ===== */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: var(--white); border-top: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: 10px 12px;
       display: flex; gap: 8px;
       z-index: 100;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.08);
     }
     .sticky-cta a {
-      flex: 1; text-align: center; padding: 14px 8px;
+      flex: 1; text-align: center; padding: 13px 8px;
       border-radius: 4px; font-size: 14px; font-weight: 700;
     }
     .sticky-line { background: var(--line-green); color: var(--white); }
     .sticky-contact { background: var(--navy); color: var(--white); }
     @media(min-width: 768px) { .sticky-cta { display: none; } }
 
+    /* ===== DIVIDER ===== */
+    .gold-line {
+      width: 48px; height: 3px; background: var(--gold);
+      margin: 0 auto 32px; border-radius: 2px;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media(max-width: 600px) {
       .result-grid { grid-template-columns: 1fr 1fr; }
-      .profile-box { flex-direction: column; align-items: center; text-align: center; }
+      .profile-wrap { grid-template-columns: 1fr; text-align: center; }
+      .profile-photo-placeholder { margin: 0 auto; }
       .profile-tags { justify-content: center; }
-      body { padding-bottom: 72px; }
+      .what-header, .pain-close { padding: 28px 20px; }
+      .faq-a { padding-left: 20px; }
+      body { padding-bottom: 70px; }
     }
   </style>
 </head>
@@ -241,12 +421,13 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-inner">
-    <span class="hero-label">セールス航海士 — 無料相談受付中</span>
-    <h1>施策を打っても、<br>売上が安定しない。<br>その原因は<em>現場ではなく</em><br><em>営業設計にある。</em></h1>
+    <span class="hero-badge"><span></span>セールス航海士 — 営業コンサルティング</span>
+    <p class="hero-target">年商3,000万〜3億円のBtoB経営者・事業責任者へ</p>
+    <h1>受注率が<em>2倍</em>になった会社が、<br>最初に変えたのは<br>営業設計だった。</h1>
     <p class="hero-sub">
-      アポは取れる、商談もある、でも受注につながらない、、<br>
-      根性論でも外注でも解決しなかったのは、<br>
-      営業の「仕組み」から変えていないからです。
+      施策を打っても売上が安定しない。<br>
+      その原因は現場の頑張りでも、ツールでもない、、<br>
+      営業の「設計」が間違っているだけです。
     </p>
     <div class="hero-cta-wrap">
       <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-line-lg">
@@ -256,76 +437,81 @@
         <i class="fas fa-envelope"></i> お問い合わせフォーム
       </a>
     </div>
-    <p class="hero-note">相談は無料です。売り込みは一切しません。</p>
+    <p class="hero-note">完全無料・売り込み一切なし</p>
   </div>
 </section>
 
-<!-- ===== PAIN ===== -->
+<!-- ===== TARGET ===== -->
 <section class="section section-bg">
   <div class="container">
-    <span class="section-label">こんな悩みありませんか</span>
-    <h2 class="section-title">「頑張っているのに<br>結果が出ない」の正体</h2>
-    <div class="pain-list">
-      <div class="pain-item">
-        <i class="fas fa-chart-line"></i>
-        <p>アポは取れるのに、受注につながらない。失注の理由が毎回「検討します」で終わる</p>
-      </div>
-      <div class="pain-item">
-        <i class="fas fa-user"></i>
-        <p>売れる営業マン1人に依存していて、その人が抜けたら終わる組織になっている</p>
-      </div>
-      <div class="pain-item">
-        <i class="fas fa-tools"></i>
-        <p>ツール導入・外注・研修と施策を打ってきたが、売上の波が変わらない</p>
-      </div>
-      <div class="pain-item">
-        <i class="fas fa-chart-bar"></i>
-        <p>KPIは設定しているが、現場が動かない。数字を見ても何を改善すれば良いか分からない</p>
-      </div>
-      <div class="pain-item">
-        <i class="fas fa-yen-sign"></i>
-        <p>受注できても小さな契約で終わる。単価を上げる方法が分からない</p>
+    <span class="section-label">こんな経営者・事業責任者に届けたい</span>
+    <div class="target-block">
+      <h3>あなたの会社、こんな状況ではありませんか</h3>
+      <div class="target-list">
+        <div class="target-item">アポは取れる。商談もある。でも受注につながらない</div>
+        <div class="target-item">売れる営業マン1人に依存していて、その人が抜けたら終わる</div>
+        <div class="target-item">ツール・外注・研修と施策を打ってきたが、何も変わっていない</div>
+        <div class="target-item">KPIを設定しているが、現場が動かない。何を改善すべかが分からない</div>
+        <div class="target-item">受注できても小さな契約で終わる。単価が上がらない</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== WHAT ===== -->
+<!-- ===== ROOT CAUSE ===== -->
 <section class="section">
   <div class="container">
+    <span class="section-label">なぜ変わらないのか</span>
+    <h2 class="section-title">「頑張っているのに変わらない」の<br>本当の原因</h2>
+    <div class="cause-box">
+      <h3>根性論でも外注でも解決しなかったのは、<br>営業の<em>「設計」</em>から変えていないから。</h3>
+      <p>失注の理由が毎回「検討します」で終わっている会社は、<br>商談スキルより前に、アプローチ・提案構成・クロージング設計に問題があります。</p>
+    </div>
+    <div class="cause-arrow"><i class="fas fa-chevron-down"></i></div>
+    <div class="pain-close">
+      設計が間違っていれば、<strong>どれだけ頑張っても結果は変わりません。</strong><br>
+      逆に設計を変えれば、同じメンバーで受注率が1.9倍になります。<br>
+      これは理論ではなく、実際の支援事例の数字です。
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT ===== -->
+<section class="section section-bg">
+  <div class="container">
     <span class="section-label">セールス航海士とは</span>
-    <h2 class="section-title">「戦略を渡して終わり」ではなく、<br>現場に入り込んで変える</h2>
-    <div class="what-box">
-      <h3>机上の空論ではなく、<br><em>現場で動く</em>営業コンサルタント。</h3>
-      <p>コンサルティングにありがちな「資料を作って提案して終わり」ではありません。商談に同席し、トークを修正し、KPIを設計し、営業担当者が自走できるまで伴走します。</p>
+    <h2 class="section-title">「戦略を渡して終わり」ではなく、<br>現場に入り込んで<em>変える</em></h2>
+    <div class="what-header">
+      <h3>机上の空論はやりません。<br><em>商談に入り、トークを直し、数字で証明する。</em></h3>
+      <p>コンサルティングにありがちな「資料を作って提案して終わり」ではありません。実際の商談に同席し、失注理由を特定し、KPIを設計し、担当者が自走できるまで一緒に動きます。</p>
     </div>
     <div class="what-steps">
       <div class="what-step">
         <div class="step-num">1</div>
         <div>
           <h4>現状の営業設計を丸ごと診断</h4>
-          <p>アポから受注までの全プロセスを可視化。どこでお客さんが離脱しているかを特定します。</p>
+          <p>アポから受注までの全プロセスを可視化。どこでお客さんが離脱しているかを特定。失注の理由を1件ずつ分解します。</p>
         </div>
       </div>
       <div class="what-step">
         <div class="step-num">2</div>
         <div>
           <h4>受注につながるKPI・プロセスを設計</h4>
-          <p>「頑張れ」ではなく、何をすれば受注が増えるか数字で見える仕組みを作ります。</p>
+          <p>「頑張れ」ではなく、何をすれば受注が増えるかを数字で見える仕組みに変えます。競合調査・差別化要素の言語化も含む。</p>
         </div>
       </div>
       <div class="what-step">
         <div class="step-num">3</div>
         <div>
-          <h4>商談同席・トーク改善を現場でやる</h4>
-          <p>実際の商談に入り、リアルタイムでフィードバック。再現性のある営業トークに変えます。</p>
+          <h4>商談同席・提案書・トーク改善を現場でやる</h4>
+          <p>実際の商談に入り、リアルタイムでフィードバック。提案書のリニューアルから商談後のフォロー設計まで一気通貫で対応。</p>
         </div>
       </div>
       <div class="what-step">
         <div class="step-num">4</div>
         <div>
           <h4>担当者が自走できる状態にして離脱</h4>
-          <p>依存させるのではなく、コンサル終了後に組織が自分で回せる状態を目指します。</p>
+          <p>依存を作るのではなく、コンサル終了後に組織が自分で回せる状態を目指します。再現性のある営業チームを作ります。</p>
         </div>
       </div>
     </div>
@@ -333,27 +519,76 @@
 </section>
 
 <!-- ===== RESULT ===== -->
-<section class="section section-bg">
+<section class="section">
   <div class="container">
     <span class="section-label">実績</span>
     <h2 class="section-title">数字で語ります</h2>
-    <div class="result-grid">
+
+    <div class="result-hero">
+      <div class="result-hero-label">セールス航海士 支援実績 ── コンサルティング会社（従業員15名）</div>
+      <div class="result-before-after">
+        <div class="result-ba-num before">22<span class="result-ba-unit">%</span></div>
+        <div class="result-ba-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="result-ba-num after">41<span class="result-ba-unit">%</span></div>
+      </div>
+      <div class="result-hero-desc">
+        受注率が1.9倍に改善。<br>
+        変えたのはメンバーではなく、提案フロー・失注分析・KPI設計の3つだけ。
+      </div>
+    </div>
+
+    <div class="result-grid" style="margin-top:12px">
       <div class="result-card">
-        <div class="result-num">22<span>%</span><i class="fas fa-arrow-right" style="font-size:20px;margin:0 8px;color:rgba(255,255,255,.4)"></i>41<span>%</span></div>
-        <div class="result-label">受注率の改善実績</div>
+        <div class="result-card-num">200<span>件</span></div>
+        <div class="result-card-label">10日間でテレアポ提供</div>
       </div>
       <div class="result-card">
-        <div class="result-num">200<span>件</span></div>
-        <div class="result-label">10日間でテレアポ提供</div>
+        <div class="result-card-num">138<span>%</span></div>
+        <div class="result-card-label">支援先 四半期売上（前年比）</div>
       </div>
       <div class="result-card">
-        <div class="result-num">1<span>万</span><span style="font-size:.4em">回以上</span></div>
-        <div class="result-label">飛び込み営業経験</div>
+        <div class="result-card-num">30<span>社</span>+</div>
+        <div class="result-card-label">創業3ヶ月での支援実績</div>
       </div>
       <div class="result-card">
-        <div class="result-num">25<span>歳</span></div>
-        <div class="result-label">現役で現場に入る代表</div>
+        <div class="result-card-num">1<span>万</span><span style="font-size:.45em">回+</span></div>
+        <div class="result-card-label">飛び込み営業経験</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VOICE ===== -->
+<section class="section section-bg">
+  <div class="container">
+    <span class="section-label">お客様の声</span>
+    <h2 class="section-title">実際に変わった会社の、<br>リアルな感想</h2>
+    <div class="voice-list">
+
+      <div class="voice-card">
+        <p class="voice-text">
+          なぜ受注できないのかが分からないまま、ただ提案数を増やしていました。セールス航海士さんに入ってもらい、失注の理由が初めて明確になり、そこから全てが変わりました。
+        </p>
+        <span class="voice-result"><i class="fas fa-arrow-up"></i> 受注率 22% → 41%（1.9倍）</span>
+        <div class="voice-meta"><strong>コンサルティング会社 従業員15名</strong> ／ 営業部長</div>
+      </div>
+
+      <div class="voice-card">
+        <p class="voice-text">
+          営業マネージャーが抜けてから、何をどう立て直せばいいか途方に暮れていました。Salesaurusさんに入ってもらい、組織が見える化され、チームが再び一体感を持って動けるようになりました。
+        </p>
+        <span class="voice-result"><i class="fas fa-arrow-up"></i> 四半期売上 前年比138%達成</span>
+        <div class="voice-meta"><strong>製造業 従業員80名</strong> ／ 代表</div>
+      </div>
+
+      <div class="voice-card">
+        <p class="voice-text">
+          新規開拓に何から手をつければいいか分からない状態でした。Salesaurusさんが全部設計してくれたので、私たちは商談に集中できるようになりました。
+        </p>
+        <span class="voice-result"><i class="fas fa-arrow-up"></i> 月間アポ数 8件 → 25件（3.1倍）</span>
+        <div class="voice-meta"><strong>ITスタートアップ 従業員20名</strong> ／ 代表取締役</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -362,21 +597,28 @@
 <section class="section">
   <div class="container">
     <span class="section-label">担当者</span>
-    <h2 class="section-title">峠大輝について</h2>
-    <div class="profile-box">
+    <h2 class="section-title">なぜ25歳に<br>依頼する経営者がいるのか</h2>
+    <div class="profile-wrap">
       <div class="profile-photo-placeholder"><i class="fas fa-user"></i></div>
       <div>
         <div class="profile-name">峠 大輝（とうげ だいき）</div>
-        <div class="profile-title">株式会社Salesaurus 代表取締役 / セールス航海士</div>
-        <p class="profile-body">
-          大東建託で新卒1年目から飛び込み営業1万回以上を経験。根性論だけでは限界があることを痛感し、「仕組みで売れる営業組織」を作ることに転換。ベンチャー2社、ドイツでの海外営業を経て独立・法人化。<br><br>
-          10日間でテレアポ200件のアポイントを提供した実績を持つが、「アポだけでは売上は安定しない」という現実から、現在は営業設計・KPI構築・商談改善まで一気通貫で支援するセールス航海士として活動。机上の空論は一切しない。
+        <div class="profile-role">株式会社Salesaurus 代表取締役 / セールス航海士</div>
+        <p class="profile-story">
+          大東建託で新卒1年目から飛び込み営業1万回以上を経験。根性論だけでは限界があることを痛感し、「仕組みで売れる営業組織」を作ることに転換。ベンチャー2社・ドイツでの海外営業を経て独立・法人化。
+        </p>
+        <div class="profile-highlight">
+          「アポだけ取れても売上は安定しない」という現実を、自分で200アポ提供して痛感した。<br>
+          だから今は、設計から変えることしかやらない。
+        </div>
+        <p class="profile-story">
+          机上の空論は一切しません。今も現場に入り、商談に同席し、数字が変わるまで離れません。年齢ではなく、現場の経験と結果で判断してください。
         </p>
         <div class="profile-tags">
           <span class="profile-tag">大東建託出身</span>
-          <span class="profile-tag">ドイツで営業経験</span>
           <span class="profile-tag">飛び込み1万回以上</span>
+          <span class="profile-tag">ドイツで海外営業</span>
           <span class="profile-tag">25歳・現役代表</span>
+          <span class="profile-tag">設立3ヶ月で30社以上支援</span>
         </div>
       </div>
     </div>
@@ -384,27 +626,88 @@
 </section>
 
 <!-- ===== CONSULT ===== -->
-<section class="section section-bg">
+<section class="section section-bg2">
   <div class="container">
     <span class="section-label">無料相談でわかること</span>
-    <h2 class="section-title">30分の相談で<br>何が変わるか</h2>
+    <h2 class="section-title">30分で、自社の営業の<br>どこに問題があるかが分かる</h2>
     <div class="consult-list">
       <div class="consult-item">
-        <i class="fas fa-search"></i>
-        <p>今の営業でどこが抜けているか・どこで失注しているかが分かる</p>
+        <div class="consult-num">1</div>
+        <p>今の営業プロセスのどこで失注が起きているかが分かる</p>
       </div>
       <div class="consult-item">
-        <i class="fas fa-map"></i>
-        <p>受注率を上げるために最初に変えるべきポイントが分かる</p>
+        <div class="consult-num">2</div>
+        <p>受注率を上げるために、最初に変えるべきポイントが分かる</p>
       </div>
       <div class="consult-item">
-        <i class="fas fa-chart-bar"></i>
-        <p>今の営業KPIが機能しているかどうかの判断軸が分かる</p>
+        <div class="consult-num">3</div>
+        <p>今のKPI設計が機能しているかどうかの判断軸が分かる</p>
       </div>
       <div class="consult-item">
-        <i class="fas fa-handshake"></i>
+        <div class="consult-num">4</div>
         <p>セールス航海士が自社に合うかどうかが分かる（合わなければ正直に言います）</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">よくある質問</span>
+    <h2 class="section-title">気になること、<br>全部答えます</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="faq-q-icon">Q</div>
+          <span>費用はどのくらいかかりますか？</span>
+        </div>
+        <div class="faq-a">
+          まず無料相談で現状をヒアリングし、課題に合わせてご提案します。月額・プロジェクト型など複数の契約形態があります。料金は相談後にお伝えするので、まずは気軽にご連絡ください。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="faq-q-icon">Q</div>
+          <span>期間はどのくらいかかりますか？</span>
+        </div>
+        <div class="faq-a">
+          課題によって異なりますが、受注率改善であれば2〜3ヶ月での成果が出るケースが多いです。まず30日間で診断と初期設計を行い、その後に継続支援を判断する流れが一般的です。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="faq-q-icon">Q</div>
+          <span>どんな業種・規模が対象ですか？</span>
+        </div>
+        <div class="faq-a">
+          BtoBを主体とする企業であれば業種は問いません。年商3,000万〜3億円、従業員5〜100名程度の規模感が最も多く、IT・コンサル・製造業・人材など30業種以上の支援実績があります。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="faq-q-icon">Q</div>
+          <span>コンサルが終わったら元に戻りませんか？</span>
+        </div>
+        <div class="faq-a">
+          再現性のある仕組みを作ることを最優先にしています。担当者が自走できる状態になるまで離れません。「コンサルがいないと動かない組織」にすることが一番の失敗だと思っているので、その点は最初にすり合わせます。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="faq-q-icon">Q</div>
+          <span>25歳に任せて本当に大丈夫ですか？</span>
+        </div>
+        <div class="faq-a">
+          年齢ではなく実績で判断してください。飛び込み1万回・10日間200アポ・受注率22%→41%改善。これは机上の理論ではなく現場の数字です。「若いから安心できない」という不安があれば、無料相談で直接確認していただくのが一番だと思います。
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -412,8 +715,13 @@
 <!-- ===== FINAL CTA ===== -->
 <section class="final-cta">
   <div class="container">
+    <div class="gold-line"></div>
     <h2>まず、<em>話だけ聞いてみる</em><br>から始めてください。</h2>
-    <p>売り込みは一切しません。現状を聞いて、正直な意見をお伝えします。</p>
+    <p class="final-cta-sub">
+      売り込みは一切しません。<br>
+      現状を聞いて、正直な意見をお伝えします。<br>
+      合わないと思えばそう言います。
+    </p>
     <div class="final-cta-btns">
       <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="btn-line-lg">
         <i class="fab fa-line"></i> LINEで無料相談する（一番ラク）
@@ -422,7 +730,7 @@
         <i class="fas fa-envelope"></i> お問い合わせフォームはこちら
       </a>
     </div>
-    <p class="final-note">営業時間外のご連絡はLINEにて翌営業日に返信します</p>
+    <p class="final-note">完全無料・秘密厳守<br>営業時間外のご連絡はLINEにて翌営業日に返信します</p>
   </div>
 </section>
 
@@ -433,7 +741,7 @@
 <!-- Sticky CTA (mobile) -->
 <div class="sticky-cta">
   <a href="https://lin.ee/72lTZan" target="_blank" rel="noopener" class="sticky-line">
-    <i class="fab fa-line"></i> LINE相談
+    <i class="fab fa-line"></i> LINE相談（無料）
   </a>
   <a href="/contact/" class="sticky-contact">
     <i class="fas fa-envelope"></i> お問い合わせ
