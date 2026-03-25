@@ -116,7 +116,7 @@ function renderBlogDetail() {
           <div class="detail-content">
             ${post.content}
           </div>
-          ${renderContactCTA(post.ctaText || 'まずはお気軽にご相談ください')}
+          ${post.relatedService === 'sales-pilot' ? renderSalesPilotCTA(post.ctaText || 'まずはお気軽にご相談ください') : renderContactCTA(post.ctaText || 'まずはお気軽にご相談ください')}
         </main>
         <aside class="detail-sidebar">
           ${renderServiceSidebar()}

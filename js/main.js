@@ -267,6 +267,19 @@ function renderContactCTA(ctaText = 'まずはお気軽にご相談ください'
   </div>`;
 }
 
+/* ---- セールス航海士LP CTAブロック ---- */
+function renderSalesPilotCTA(ctaText = 'まずはお気軽にご相談ください') {
+  return `
+  <div class="detail-cta">
+    <h3>${ctaText}</h3>
+    <p>初回相談は無料です。営業設計の課題を一緒に整理しましょう。</p>
+    <div class="detail-cta-buttons">
+      <a href="${SITE_BASE}/lp/sales-pilot/" class="btn btn-primary btn-lg"><i class="fas fa-ship"></i> セールス航海士について詳しく見る</a>
+      <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> LINEで相談する</a>
+    </div>
+  </div>`;
+}
+
 /* ---- 関連サービスサイドバー ---- */
 function renderServiceSidebar() {
   const links = SITE_CONFIG.services.map(s => `
