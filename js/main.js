@@ -303,6 +303,34 @@ function renderServiceSidebar() {
   </div>`;
 }
 
+/* ---- GA4イベントトラッキング ---- */
+function initGA4Tracking() {
+  if (typeof gtag !== 'function') return;
+
+  // LINEリンククリック計測
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="lin.ee"]');
+    if (link) {
+      gtag('event', 'click_line_cta', {
+        event_category: 'engagement',
+        event_label: window.location.pathname,
+        link_url: link.href
+      });
+    }
+  });
+
+  // お問い合わせリンククリック計測
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="/contact/"]');
+    if (link) {
+      gtag('event', 'click_contact_cta', {
+        event_category: 'engagement',
+        event_label: window.location.pathname
+      });
+    }
+  });
+}
+
 /* ---- 初期化 ---- */
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
@@ -310,4 +338,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initHamburger();
   initFaq();
   initCategoryFilter();
+  initGA4Tracking();
 });

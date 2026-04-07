@@ -1104,6 +1104,25 @@
       answer.classList.toggle('open', !isOpen);
     });
   });
+
+  // GA4: LPのCTAクリック計測
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="lin.ee"]');
+    if (link) {
+      gtag('event', 'click_line_cta', {
+        event_category: 'lp',
+        event_label: 'apo-yoro',
+        link_url: link.href
+      });
+    }
+    var contactLink = e.target.closest('a[href*="/contact/"]');
+    if (contactLink) {
+      gtag('event', 'click_contact_cta', {
+        event_category: 'lp',
+        event_label: 'apo-yoro'
+      });
+    }
+  });
 </script>
 </body>
 </html>
