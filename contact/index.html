@@ -44,9 +44,7 @@
             <i class="fas fa-info-circle"></i> 送信いただいた後、担当者より2営業日以内にご連絡します。急ぎの場合は公式LINEをご利用ください。
           </div>
 
-          <!-- ★ 実際の運用では、このフォームをフォームサービス（Formspree, Netlify Forms等）に接続してください -->
-          <!-- Formspree接続: action URLのxxxxxxxx部分をFormspreeのフォームIDに置き換えてください -->
-          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xxxxxxxx" method="POST" onsubmit="handleSubmit(event)">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqlvvon" method="POST" onsubmit="handleSubmit(event)">
             <div class="form-group">
               <label class="form-label">会社名<span class="form-required">*必須</span></label>
               <input type="text" class="form-input" name="company" placeholder="株式会社○○" required>
@@ -186,6 +184,9 @@ function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('contact-form');
   const formData = new FormData(form);
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = '送信中...';
 
   fetch(form.action, {
     method: 'POST',
@@ -193,7 +194,6 @@ function handleSubmit(e) {
     headers: { 'Accept': 'application/json' }
   }).then(response => {
     if (response.ok) {
-      // GA4: フォーム送信CVイベント
       gtag('event', 'generate_lead', {
         event_category: 'contact',
         event_label: formData.get('service') || 'unknown',
@@ -202,9 +202,13 @@ function handleSubmit(e) {
       form.style.display = 'none';
       document.getElementById('form-success').style.display = 'block';
     } else {
+      btn.disabled = false;
+      btn.textContent = '送信する →';
       alert('送信に失敗しました。公式LINEからご連絡ください。');
     }
   }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = '送信する →';
     alert('送信に失敗しました。公式LINEからご連絡ください。');
   });
 }
