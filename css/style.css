@@ -577,6 +577,53 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   TOP PAGE — CM VIDEO SECTION
+   ============================================================ */
+.cm-video-section {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+}
+.cm-video-wrapper {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.cm-video-wrapper video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  background: #000;
+}
+.cm-skip-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  z-index: 10;
+}
+.cm-skip-btn:hover {
+  background: rgba(255,255,255,.25);
+  transform: translateY(-1px);
+}
+.cm-skip-btn i {
+  margin-left: 6px;
+  font-size: 11px;
+}
+
+/* ============================================================
    TOP PAGE — HERO（斜め分割2カラム）
    ============================================================ */
 .hero {

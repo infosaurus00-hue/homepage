@@ -29,6 +29,18 @@
 
 <main>
 
+  <!-- CM動画セクション -->
+  <section class="cm-video-section" id="cm-video-section">
+    <div class="cm-video-wrapper">
+      <video id="cm-video" autoplay muted playsinline>
+        <source src="videos/cm-h264.mp4" type="video/mp4">
+      </video>
+      <button class="cm-skip-btn" onclick="document.getElementById('cm-video-section').style.display='none'">
+        スキップ <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+  </section>
+
   <!-- ① ファーストビュー -->
   <section class="hero">
     <div class="container">
