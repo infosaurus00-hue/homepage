@@ -32,7 +32,7 @@
   <!-- CM動画セクション -->
   <section class="cm-video-section" id="cm-video-section">
     <div class="cm-video-wrapper">
-      <video id="cm-video" autoplay muted playsinline>
+      <video id="cm-video" autoplay muted playsinline loop>
         <source src="videos/cm-h264.mp4" type="video/mp4">
       </video>
       <button class="cm-sound-btn" id="cm-sound-btn" onclick="var v=document.getElementById('cm-video');v.muted=!v.muted;this.innerHTML=v.muted?'<i class=\'fas fa-volume-mute\'></i> 音声ON':'<i class=\'fas fa-volume-up\'></i> 音声OFF'">
