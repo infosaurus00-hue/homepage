@@ -598,6 +598,26 @@ h4, h5, h6 {
   object-fit: contain;
   background: #000;
 }
+.cm-sound-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  z-index: 10;
+}
+.cm-sound-btn:hover {
+  background: rgba(255,255,255,.25);
+  transform: translateY(-1px);
+}
 .cm-skip-btn {
   position: absolute;
   bottom: 24px;
