@@ -583,24 +583,26 @@ h4, h5, h6 {
   position: relative;
   width: 100%;
   background: #000;
-  overflow: hidden;
+  padding: 40px 0;
 }
 .cm-video-wrapper {
   position: relative;
-  max-width: 100%;
+  max-width: 800px;
   margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .cm-video-wrapper video {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  background: #000;
+  height: 100%;
+  object-fit: cover;
 }
 .cm-sound-btn {
   position: absolute;
-  bottom: 24px;
-  left: 32px;
+  bottom: 12px;
+  left: 12px;
   background: rgba(255,255,255,.15);
   backdrop-filter: blur(8px);
   color: #fff;
@@ -619,8 +621,8 @@ h4, h5, h6 {
 }
 .cm-skip-btn {
   position: absolute;
-  bottom: 24px;
-  right: 32px;
+  bottom: 12px;
+  right: 12px;
   background: rgba(255,255,255,.15);
   backdrop-filter: blur(8px);
   color: #fff;
