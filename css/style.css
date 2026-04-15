@@ -593,7 +593,7 @@ h4, h5, h6 {
 .cm-video-wrapper video {
   display: block;
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   object-fit: cover;
 }
 .cm-sound-btn {
