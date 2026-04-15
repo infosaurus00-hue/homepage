@@ -593,10 +593,8 @@ h4, h5, h6 {
 .cm-video-wrapper video {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: contain;
-  background: #000;
+  height: 100vh;
+  object-fit: cover;
 }
 .cm-sound-btn {
   position: absolute;
