@@ -792,6 +792,21 @@ h4, h5, h6 {
 }
 /* 黒背景白文字ロゴを反転表示 */
 .client-item-invert img { filter: invert(1); }
+/* ロゴ掲載許可申請中プレースホルダー */
+.client-item-pending {
+  border: 1.5px dashed var(--color-border, #d0d3da);
+  border-radius: 8px;
+  background: #fafbfc;
+  min-height: 70px;
+  max-width: 160px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-sub);
+  letter-spacing: 0.02em;
+}
 @media (max-width: 768px) {
   .clients-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
