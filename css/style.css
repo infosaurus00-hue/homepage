@@ -146,6 +146,7 @@ h4, h5, h6 {
 .section-title.left-align { text-align: left; }
 
 /* 数字・英字ラベルはMontserrat（Sales Marker参考の"デザインされた数字"） */
+.section-label,
 .stats-bar-value,
 .clients-stat-value,
 .rf-to, .rf-from,
