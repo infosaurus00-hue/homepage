@@ -1653,19 +1653,16 @@ h4, h5, h6 {
    - 均一グリッドに意図的なアクセントを足す
    ============================================================ */
 .reasons-section .reason-icon { display: none; }
-.reasons-section .reason-card { padding-top: 40px; }
-.reasons-section .reason-card::before {
-  content: ''; position: absolute; top: 0; left: 28px; width: 32px; height: 3px;
-  background: var(--color-accent); border-radius: 2px;
-}
+/* 番号の作法をSTEPと統一：「POINT 01」ラベル式 */
 .reasons-section .reason-number {
-  font-family: var(--font-serif);
-  font-size: 2.4rem;
-  color: var(--color-primary);
-  opacity: .28;
-  margin-bottom: 10px;
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--font-base); font-size: 1.3rem; font-weight: 700;
+  color: var(--color-accent); line-height: 1; margin-bottom: 14px;
 }
-.reasons-section .reason-card:hover .reason-number { opacity: .5; }
+.reasons-section .reason-number::before {
+  content: 'POINT'; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--color-text-light);
+}
 
 /* ============================================================
    課題提示セクション（Sales Marker等を参考：問題→解決の導線）
@@ -1684,8 +1681,9 @@ h4, h5, h6 {
 }
 .problem-item:nth-child(1), .problem-item:nth-child(2) { border-top: none; }
 .problem-mark {
-  font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
-  color: var(--color-accent); opacity: .5; line-height: 1.2; flex-shrink: 0;
+  font-family: var(--font-base); font-size: 1.15rem; font-weight: 700;
+  color: var(--color-accent); line-height: 1.35; flex-shrink: 0;
+  letter-spacing: 0.02em; min-width: 24px;
 }
 .problem-item p { font-size: 14.5px; line-height: 1.85; color: var(--color-text-mid); margin: 0; }
 .problem-item b { color: var(--color-primary); font-weight: 700; }
