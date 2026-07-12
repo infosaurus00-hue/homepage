@@ -1696,6 +1696,41 @@ h4, h5, h6 {
   .problem-item:nth-child(2) { border-top: 1px solid var(--color-border); }
 }
 
+/* ============================================================
+   ロゴ横スクロール（マーキー）
+   JSで要素を複製し、-50%移動でシームレスにループ
+   ============================================================ */
+.logo-marquee {
+  position: relative; overflow: hidden; width: 100%;
+  padding: 10px 0;
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.logo-track {
+  display: flex; align-items: center; gap: 72px;
+  width: max-content;
+  animation: logo-scroll 45s linear infinite;
+}
+.logo-marquee:hover .logo-track { animation-play-state: paused; }
+@keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.lm-item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; height: 52px; }
+.lm-item img {
+  height: 30px; width: auto; max-width: 160px; object-fit: contain;
+  opacity: .82; filter: grayscale(35%);
+  transition: opacity var(--transition), filter var(--transition);
+}
+.lm-item:hover img { opacity: 1; filter: grayscale(0%); }
+.lm-invert img { filter: grayscale(35%) invert(1); }
+.lm-invert:hover img { filter: invert(1); }
+.lm-pending span {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 1px dashed var(--color-border); border-radius: var(--radius-md);
+  padding: 9px 20px; white-space: nowrap; background: var(--color-white);
+}
+.lm-pending .lm-cat { font-size: 13px; font-weight: 700; color: var(--color-text-mid); }
+.lm-pending small { font-size: 10px; font-weight: 500; color: var(--color-text-light); letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) { .logo-track { animation: none; } }
+
 /* トップFAQ：白パネル＋ヘアラインで定義 */
 .faq-list { background: var(--color-white); border: var(--hairline); border-radius: var(--radius-lg); overflow: hidden; }
 

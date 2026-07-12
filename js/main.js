@@ -326,6 +326,20 @@ function initActionLinks() {
   });
 }
 
+/* ---- ロゴ横スクロール（マーキー）：シームレスループのため要素を複製 ---- */
+function initLogoMarquee() {
+  document.querySelectorAll('[data-marquee]').forEach(track => {
+    if (track.dataset.cloned) return;
+    const items = Array.from(track.children);
+    items.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+    track.dataset.cloned = '1';
+  });
+}
+
 /* ---- GA4イベントトラッキング ---- */
 function initGA4Tracking() {
   if (typeof gtag !== 'function') return;
@@ -365,5 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initCategoryFilter();
   initActionLinks();
+  initLogoMarquee();
   initGA4Tracking();
 });
