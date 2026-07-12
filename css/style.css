@@ -1666,6 +1666,40 @@ h4, h5, h6 {
 .reasons-section .reason-card:hover .reason-number { opacity: .5; }
 
 /* ============================================================
+   課題提示セクション（Sales Marker等を参考：問題→解決の導線）
+   枠で囲わず、ヘアライン＋余白＋編集的な番号で構成
+   ============================================================ */
+.problem-section { background: var(--color-bg-light); }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  column-gap: 56px; row-gap: 0;
+  max-width: 960px; margin: 0 auto;
+}
+.problem-item {
+  display: flex; align-items: flex-start; gap: 18px;
+  padding: 24px 4px;
+  border-top: 1px solid var(--color-border);
+}
+.problem-item:nth-child(1), .problem-item:nth-child(2) { border-top: none; }
+.problem-mark {
+  font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+  color: var(--color-accent); opacity: .5; line-height: 1.2; flex-shrink: 0;
+}
+.problem-item p { font-size: 14.5px; line-height: 1.85; color: var(--color-text-mid); margin: 0; }
+.problem-item b { color: var(--color-primary); font-weight: 700; }
+.problem-bridge { text-align: center; margin-top: 48px; }
+.problem-bridge p { font-size: clamp(15px, 2vw, 18px); color: var(--color-primary); font-weight: 500; }
+.problem-bridge b { font-weight: 700; }
+.problem-bridge-arrow { display: inline-block; margin-top: 14px; color: var(--color-accent); font-size: 14px; }
+@media (max-width: 768px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .problem-item:nth-child(2) { border-top: 1px solid var(--color-border); }
+}
+
+/* トップFAQ：白パネル＋ヘアラインで定義 */
+.faq-list { background: var(--color-white); border: var(--hairline); border-radius: var(--radius-lg); overflow: hidden; }
+
+/* ============================================================
    LOADING / EMPTY STATE
    ============================================================ */
 .loading-spinner { text-align: center; padding: 48px; color: var(--color-text-light); font-size: 13px; }
