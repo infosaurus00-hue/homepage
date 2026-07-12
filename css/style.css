@@ -1751,25 +1751,26 @@ h4, h5, h6 {
 }
 
 /* ============================================================
-   成果ハイライト（実数字）
+   成果ハイライト（実数字：KPIラベル＋before→after＋文脈）
    ============================================================ */
-.results-highlight { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: var(--hairline); border-bottom: var(--hairline); }
-.result-hl { padding: 36px 28px; text-align: center; border-right: var(--hairline); }
-.result-hl:last-child { border-right: none; }
-.result-hl-num { font-family: var(--font-base); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1; letter-spacing: -0.02em; }
-.result-hl-num span { font-size: 1.1rem; font-weight: 600; color: var(--color-accent); margin-left: 3px; }
-.result-hl-label { font-size: 12.5px; color: var(--color-text-sub); line-height: 1.7; margin-top: 12px; }
-.result-hl-label b { color: var(--color-text); font-weight: 700; }
-.results-note { text-align: center; font-size: 12px; color: var(--color-text-light); margin-top: 24px; }
-@media (max-width: 768px) {
-  .results-highlight { grid-template-columns: 1fr 1fr; }
-  .result-hl { border-bottom: var(--hairline); }
-  .result-hl:nth-child(even) { border-right: none; }
-  .result-hl:nth-last-child(-n+2) { border-bottom: none; }
+.results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
+.result-card {
+  background: var(--color-white); border: var(--hairline); border-radius: var(--radius-lg);
+  padding: 28px 26px; box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), border-color var(--transition);
 }
-@media (max-width: 480px) {
-  .result-hl-num { font-size: 2.4rem; }
-}
+.result-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-accent); }
+.result-kpi { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-accent); margin-bottom: 16px; }
+.result-figure { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.rf-from { font-size: 1.35rem; font-weight: 700; color: var(--color-text-light); }
+.rf-arrow { color: var(--color-accent); font-weight: 700; font-size: 1.1rem; }
+.rf-to { font-size: 2.6rem; font-weight: 700; color: var(--color-primary); line-height: 1; letter-spacing: -0.02em; }
+.rf-to small { font-size: 1.05rem; font-weight: 600; color: var(--color-text-sub); margin-left: 2px; }
+.result-badge { display: inline-block; font-size: 12px; font-weight: 700; color: var(--color-accent); background: var(--color-accent-light); padding: 4px 12px; border-radius: var(--radius-full); }
+.result-ctx { font-size: 12px; color: var(--color-text-sub); margin-top: 16px; padding-top: 14px; border-top: var(--hairline-soft); }
+.results-note { text-align: center; font-size: 12px; color: var(--color-text-light); margin-top: 28px; }
+@media (max-width: 768px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .results-grid { grid-template-columns: 1fr; } .rf-to { font-size: 2.2rem; } }
 
 /* ============================================================
    中間CTAバナー
