@@ -61,6 +61,8 @@
     }
     .client-logo-item.logo-pending span {
       display: inline-flex;
+      flex-direction: column;
+      gap: 6px;
       align-items: center;
       justify-content: center;
       border: 1.5px dashed #d0d3da;
@@ -70,12 +72,11 @@
       height: 110px;
       padding: 16px 20px;
       text-align: center;
-      font-size: 14px;
-      font-weight: 600;
       line-height: 1.5;
-      color: #6b7280;
       letter-spacing: 0.02em;
     }
+    .client-logo-item.logo-pending b { font-size: 15px; font-weight: 700; color: #45525f; font-style: normal; }
+    .client-logo-item.logo-pending i { font-size: 11.5px; font-weight: 500; color: #9aa6b2; font-style: normal; letter-spacing: 0.06em; }
 
     /* ---- 実績カウンター ---- */
     .clients-stats {
@@ -344,14 +345,20 @@
           <img src="images/clients/makoto-prime.png" alt="MAKOTO Prime">
         </div>
 
-        <!-- ロゴ掲載許可申請中 -->
-        <div class="client-logo-item logo-pending">
-          <span>ロゴ掲載<br>許可申請中</span>
-        </div>
-
         <!-- StartGear：黒背景白文字 → invert -->
         <div class="client-logo-item logo-invert">
           <img src="images/clients/startgear.png" alt="StartGear">
+        </div>
+
+        <!-- 掲載許可申請中（社名は業種で表記） -->
+        <div class="client-logo-item logo-pending">
+          <span><b>大手建設向けSaaS</b><i>掲載許可申請中</i></span>
+        </div>
+        <div class="client-logo-item logo-pending">
+          <span><b>大手電子署名SaaS</b><i>掲載許可申請中</i></span>
+        </div>
+        <div class="client-logo-item logo-pending">
+          <span><b>大手AI研修</b><i>掲載許可申請中</i></span>
         </div>
 
       </div>

@@ -383,11 +383,11 @@ function renderJobDetail() {
           </div>
           <div class="detail-content">${job.content}</div>
           <div class="detail-cta" style="margin-top:48px;">
-            <h3>この求人に応募する</h3>
-            <p>まずはお気軽にお問い合わせください。カジュアル面談も歓迎しています。</p>
+            <h3>この求人に応募・相談する</h3>
+            <p>採用専用LINEなら、応募も「まず話を聞きたい」もそのままやり取りできます。フォームからのご応募も歓迎です。</p>
             <div class="detail-cta-buttons">
-              <a href="${SITE_BASE}/contact/?type=recruit&job=${job.slug}" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> 応募する</a>
-              <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> LINEで質問する</a>
+              <a href="${SITE_CONFIG.lineUrlRecruit}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> 採用LINEで応募・相談</a>
+              <a href="${SITE_BASE}/contact/?type=recruit&job=${job.slug}" class="btn btn-secondary btn-lg"><i class="fas fa-envelope"></i> フォームで応募</a>
             </div>
           </div>
         </main>
@@ -397,14 +397,17 @@ function renderJobDetail() {
             <div style="font-size:13px;">
               <div style="padding:10px 0;border-bottom:1px solid #eef1f6;"><strong>職種：</strong>${job.title}</div>
               <div style="padding:10px 0;border-bottom:1px solid #eef1f6;"><strong>雇用形態：</strong>${job.type}</div>
+              ${job.reward ? `<div style="padding:10px 0;border-bottom:1px solid #eef1f6;"><strong>報酬：</strong>${job.reward}</div>` : ''}
+              ${job.location ? `<div style="padding:10px 0;border-bottom:1px solid #eef1f6;"><strong>勤務地：</strong>${job.location}</div>` : ''}
+              ${job.workStyle ? `<div style="padding:10px 0;border-bottom:1px solid #eef1f6;"><strong>働き方：</strong>${job.workStyle}</div>` : ''}
               <div style="padding:10px 0;"><strong>募集タグ：</strong>${job.tags.join('・')}</div>
             </div>
           </div>
           <div class="sidebar-card">
             <div class="sidebar-card-title">採用に関するお問い合わせ</div>
-            <p style="font-size:13px;color:#666;margin-bottom:16px;">ご不明点はお気軽にどうぞ</p>
-            <a href="${SITE_BASE}/contact/?type=recruit" class="btn btn-primary btn-block" style="margin-bottom:10px;"><i class="fas fa-envelope"></i> 問い合わせる</a>
-            <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-block"><i class="fab fa-line"></i> LINEで聞く</a>
+            <p style="font-size:13px;color:#666;margin-bottom:16px;">応募・働き方の相談は採用LINEへ。ご不明点だけでもお気軽にどうぞ。</p>
+            <a href="${SITE_CONFIG.lineUrlRecruit}" target="_blank" rel="noopener" class="btn btn-line btn-block" style="margin-bottom:10px;"><i class="fab fa-line"></i> 採用LINEで相談</a>
+            <a href="${SITE_BASE}/contact/?type=recruit" class="btn btn-secondary btn-block"><i class="fas fa-envelope"></i> フォームで問い合わせ</a>
           </div>
         </aside>
       </div>
@@ -506,13 +509,45 @@ function renderRecruitList() {
     container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-briefcase"></i></div><p>現在募集中のポジションはありません。</p></div>';
     return;
   }
-  container.innerHTML = `<div class="jobs-grid">
-    ${jobs.map(job => `
+
+  const jobCard = job => `
     <a href="${SITE_BASE}/recruit/detail/?slug=${job.slug}" class="job-card">
       <div class="job-type">${job.type}</div>
       <div class="job-title">${job.title}</div>
       <div class="job-tags">${job.tags.map(t => `<span class="job-tag">${t}</span>`).join('')}</div>
       <div class="job-desc">${job.shortDesc}</div>
-    </a>`).join('')}
-  </div>`;
+      <div class="job-meta">
+        ${job.reward ? `<div class="job-meta-row"><i class="fas fa-yen-sign"></i> ${job.reward}</div>` : ''}
+        ${job.location ? `<div class="job-meta-row"><i class="fas fa-map-marker-alt"></i> ${job.location}</div>` : ''}
+      </div>
+      <span class="job-card-more">募集要項を見る →</span>
+    </a>`;
+
+  const groups = [
+    {
+      key: 'fulltime',
+      label: '正社員',
+      lead: '営業・コンサル・マネジメントをまたいでキャリアを積みたい方へ。研修と評価制度を整えています。',
+      lineKind: 'recruit',
+    },
+    {
+      key: 'contract',
+      label: '業務委託',
+      lead: 'フルリモート・稼働自由。営業経験を活かして、成果に応じた報酬で働きたい方へ。',
+      lineKind: 'recruit',
+    },
+  ];
+
+  container.innerHTML = groups.map(g => {
+    const list = jobs.filter(j => (j.category || 'fulltime') === g.key);
+    if (list.length === 0) return '';
+    return `
+    <div class="job-group">
+      <div class="job-group-head">
+        <span class="job-group-badge job-group-badge-${g.key}">${g.label}</span>
+        <p class="job-group-lead">${g.lead}</p>
+      </div>
+      <div class="jobs-grid">${list.map(jobCard).join('')}</div>
+    </div>`;
+  }).join('');
 }

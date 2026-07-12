@@ -303,17 +303,43 @@ function renderServiceSidebar() {
   </div>`;
 }
 
+/* ---- 用途別LINE・予約リンクの一括設定 ----
+   HTML側に data-line="corporate|recruit" / data-timerex を付けるだけで
+   config.js の該当URLが差し込まれる（リンク直書きを避ける） */
+function initActionLinks() {
+  const cfg = SITE_CONFIG;
+  const lineMap = {
+    corporate: cfg.lineUrlCorporate || cfg.lineUrl,
+    recruit:   cfg.lineUrlRecruit  || cfg.lineUrl,
+  };
+  document.querySelectorAll('[data-line]').forEach(a => {
+    const url = lineMap[a.dataset.line] || cfg.lineUrl;
+    a.setAttribute('href', url);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
+  });
+  document.querySelectorAll('[data-timerex]').forEach(a => {
+    if (!cfg.timerexUrl) return;
+    a.setAttribute('href', cfg.timerexUrl);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
+  });
+}
+
 /* ---- GA4イベントトラッキング ---- */
 function initGA4Tracking() {
   if (typeof gtag !== 'function') return;
 
-  // LINEリンククリック計測
+  // LINEリンククリック計測（lin.ee / line.me 両方 ＋ 用途を判定）
   document.addEventListener('click', function(e) {
-    const link = e.target.closest('a[href*="lin.ee"]');
+    const link = e.target.closest('a[href*="lin.ee"], a[href*="line.me"]');
     if (link) {
+      const kind = link.dataset.line
+        || (link.href.indexOf(SITE_CONFIG.lineUrlRecruit) === 0 ? 'recruit' : 'corporate');
       gtag('event', 'click_line_cta', {
         event_category: 'engagement',
         event_label: window.location.pathname,
+        line_kind: kind,
         link_url: link.href
       });
     }
@@ -338,5 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHamburger();
   initFaq();
   initCategoryFilter();
+  initActionLinks();
   initGA4Tracking();
 });

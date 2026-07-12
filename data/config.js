@@ -23,10 +23,15 @@ const SITE_CONFIG = {
     { name: '信頼を渡し続ける', desc: '一回の取引ではなく、続く関係で返し続ける。' },
   ],
 
-  // 問い合わせ先 ★要変更
+  // 問い合わせ先
   contactFormUrl: '/contact/',
-  lineUrl: 'https://lin.ee/72lTZan',    // ← 公式LINEのURLに変更してください
+  // LINEは用途で分岐（HTMLからは data-line="corporate" / data-line="recruit" で参照）
+  lineUrlCorporate: 'https://line.me/ti/p/qj_-Ej2wIF', // 法人向け：営業代行の相談・問い合わせ・商談
+  lineUrlRecruit:   'https://lin.ee/G8gXxYq',           // 求人向け：採用応募・働き方相談
+  lineUrl: 'https://line.me/ti/p/qj_-Ej2wIF',           // 既定（法人）。後方互換のため保持
   lineLabel: '公式LINEで相談',
+  // 日程調整（無料相談の予約）
+  timerexUrl: 'https://timerex.net/s/info_d325_4c72/779fe452',
 
   // SNS（使用しない場合は空文字にしてください）
   twitter: '',
