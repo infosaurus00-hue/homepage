@@ -3,7 +3,7 @@
    ============================================================ */
 
 /* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 
 /* ---- Font Awesome ---- */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
@@ -36,6 +36,8 @@
   /* ---- Typography ---- */
   --font-base:  'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
   --font-serif: 'Noto Serif JP', Georgia, serif;
+  /* 数字・英字ラベル用（Sales Marker参考：Montserrat。日本語は自動でNoto Sansにフォールバック） */
+  --font-num:   'Montserrat', 'Noto Sans JP', sans-serif;
   --font-size-base: 16px;
   --line-height-base: 1.85;
 
@@ -142,6 +144,21 @@ h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 .section-title.left-align { text-align: left; }
+
+/* 数字・英字ラベルはMontserrat（Sales Marker参考の"デザインされた数字"） */
+.stats-bar-value,
+.clients-stat-value,
+.rf-to, .rf-from,
+.result-badge,
+.result-kpi,
+.recruit-figure b,
+.hero-proof-label,
+.step-num, .step-num::before,
+.reasons-section .reason-number, .reasons-section .reason-number::before,
+.problem-mark,
+.result-hl-num {
+  font-family: var(--font-num);
+}
 
 /* 説明文 */
 .section-desc {

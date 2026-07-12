@@ -428,7 +428,7 @@ function renderTopBlog() {
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     return `
     <a href="${href}" ${targetAttr} class="blog-teaser-card">
-      <div class="blog-teaser-thumb">${post.eyecatchEmoji || '<i class="fas fa-file-alt"></i>'}${isExternal ? '<span class="teaser-external-badge">note</span>' : ''}</div>
+      <div class="blog-teaser-thumb">${post.eyecatch ? `<img src="${post.eyecatch}" alt="${post.title}" loading="lazy">` : '<i class="fas fa-newspaper"></i>'}${isExternal ? '<span class="teaser-external-badge">note</span>' : ''}</div>
       <div class="blog-teaser-body">
         <div class="blog-teaser-meta">
           <span class="blog-teaser-cat">${post.category}</span>
