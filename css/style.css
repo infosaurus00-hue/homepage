@@ -130,15 +130,16 @@ h4, h5, h6 {
   padding: 0;
 }
 
-/* セクション大見出し */
+/* セクション大見出し：モダンで芯のある太ゴシック（Sales Marker参考） */
 .section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-family: var(--font-base);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
   font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   text-align: center;
-  line-height: 1.35;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
 }
 .section-title.left-align { text-align: left; }
 
@@ -1765,6 +1766,10 @@ h4, h5, h6 {
 .rf-to small { font-size: 1.05rem; font-weight: 600; color: var(--color-text-sub); margin-left: 2px; }
 .result-badge { display: inline-block; font-size: 12px; font-weight: 700; color: var(--color-accent); background: var(--color-accent-light); padding: 4px 12px; border-radius: var(--radius-full); }
 .result-ctx { font-size: 12px; color: var(--color-text-sub); margin-top: 16px; padding-top: 14px; border-top: var(--hairline-soft); }
+.result-ctx b { color: var(--color-accent); font-weight: 700; }
+.result-card-wide { grid-column: 1 / -1; }
+.result-industries { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 16px; }
+.result-industries span { font-size: 14px; font-weight: 700; color: var(--color-primary); background: var(--color-bg-light); border: var(--hairline); border-radius: var(--radius-md); padding: 9px 18px; }
 .results-note { text-align: center; font-size: 12px; color: var(--color-text-light); margin-top: 28px; }
 @media (max-width: 768px) { .results-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .results-grid { grid-template-columns: 1fr; } .rf-to { font-size: 2.2rem; } }
@@ -1816,10 +1821,10 @@ h4, h5, h6 {
 /* ============================================================
    中間CTAバナー
    ============================================================ */
-.mid-cta { background: var(--color-primary); padding: 52px 0; }
+.mid-cta { background: var(--color-accent-light); padding: 48px 0; border-top: var(--hairline); border-bottom: var(--hairline); }
 .mid-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-.mid-cta-text h3 { color: #fff; font-size: clamp(18px, 2.4vw, 24px); margin-bottom: 8px; }
-.mid-cta-text p { color: rgba(255,255,255,.72); font-size: 14px; }
+.mid-cta-text h3 { color: var(--color-primary); font-size: clamp(18px, 2.4vw, 24px); margin-bottom: 8px; }
+.mid-cta-text p { color: var(--color-text-sub); font-size: 14px; }
 .mid-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
 @media (max-width: 768px) {
   .mid-cta-inner { flex-direction: column; align-items: flex-start; }

@@ -1,1 +1,18 @@
 .DS_Store
+
+# Environment variables / secrets
+.env
+.env.*
+*.env
+secrets.json
+credentials.json
+
+# API keys / tokens
+*token*.txt
+*api_key*
+*.pem
+*.key
+
+# Session / cookie files
+*_session.json
+*_chat_id.json
