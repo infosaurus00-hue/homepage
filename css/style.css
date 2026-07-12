@@ -1087,21 +1087,20 @@ h4, h5, h6 {
 }
 .recruit-teaser-content .section-label { color: rgba(255,255,255,.65); }
 .recruit-teaser-content p { color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.9; margin-bottom: 28px; margin-top: 16px; }
-.recruit-points { display: flex; flex-direction: column; gap: 20px; }
+.recruit-points { display: flex; flex-direction: column; }
 .recruit-point {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.1);
+  position: relative; padding: 18px 0 18px 20px;
+  border-top: 1px solid rgba(255,255,255,.14);
 }
-.recruit-point:last-child { border-bottom: none; padding-bottom: 0; }
-.recruit-point-icon {
-  font-size: 16px; color: rgba(255,255,255,.8);
-  flex-shrink: 0;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: var(--radius-md);
-  display: flex; align-items: center; justify-content: center;
-  margin-top: 2px;
+.recruit-point:first-child { border-top: none; padding-top: 0; }
+.recruit-point::before {
+  content: ''; position: absolute; left: 0; top: 22px;
+  width: 8px; height: 8px; border-radius: 2px;
+  background: var(--color-accent-on-dark);
 }
+.recruit-point:first-child::before { top: 4px; }
+.recruit-point h4 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+.recruit-point p { color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.75; margin: 0; }
 .recruit-point-text h4 { font-size: 14px; font-weight: 700; color: var(--color-white); margin-bottom: 3px; }
 .recruit-point-text p { font-size: 13px; color: rgba(255,255,255,.6); margin-bottom: 0; }
 
