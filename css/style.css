@@ -1700,6 +1700,56 @@ h4, h5, h6 {
 .faq-list { background: var(--color-white); border: var(--hairline); border-radius: var(--radius-lg); overflow: hidden; }
 
 /* ============================================================
+   ご支援の流れ（3ステップ）
+   ============================================================ */
+.steps-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: start; gap: 0; max-width: 980px; margin: 0 auto; }
+.step-col { text-align: center; padding: 0 24px; }
+.step-num { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 700; color: var(--color-accent); opacity: .45; line-height: 1; margin-bottom: 16px; }
+.step-title { font-size: 17px; color: var(--color-primary); margin-bottom: 12px; }
+.step-desc { font-size: 13.5px; color: var(--color-text-sub); line-height: 1.9; }
+.step-arrow { align-self: center; color: var(--color-border); font-size: 24px; padding: 0 4px; }
+@media (max-width: 768px) {
+  .steps-row { grid-template-columns: 1fr; gap: 28px; }
+  .step-arrow { transform: rotate(90deg); }
+  .step-col { padding: 0; }
+}
+
+/* ============================================================
+   成果ハイライト（実数字）
+   ============================================================ */
+.results-highlight { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: var(--hairline); border-bottom: var(--hairline); }
+.result-hl { padding: 36px 28px; text-align: center; border-right: var(--hairline); }
+.result-hl:last-child { border-right: none; }
+.result-hl-num { font-family: var(--font-base); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1; letter-spacing: -0.02em; }
+.result-hl-num span { font-size: 1.1rem; font-weight: 600; color: var(--color-accent); margin-left: 3px; }
+.result-hl-label { font-size: 12.5px; color: var(--color-text-sub); line-height: 1.7; margin-top: 12px; }
+.result-hl-label b { color: var(--color-text); font-weight: 700; }
+.results-note { text-align: center; font-size: 12px; color: var(--color-text-light); margin-top: 24px; }
+@media (max-width: 768px) {
+  .results-highlight { grid-template-columns: 1fr 1fr; }
+  .result-hl { border-bottom: var(--hairline); }
+  .result-hl:nth-child(even) { border-right: none; }
+  .result-hl:nth-last-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 480px) {
+  .result-hl-num { font-size: 2.4rem; }
+}
+
+/* ============================================================
+   中間CTAバナー
+   ============================================================ */
+.mid-cta { background: var(--color-primary); padding: 52px 0; }
+.mid-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.mid-cta-text h3 { color: #fff; font-size: clamp(18px, 2.4vw, 24px); margin-bottom: 8px; }
+.mid-cta-text p { color: rgba(255,255,255,.72); font-size: 14px; }
+.mid-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 768px) {
+  .mid-cta-inner { flex-direction: column; align-items: flex-start; }
+  .mid-cta-buttons { width: 100%; }
+  .mid-cta-buttons .btn { flex: 1; justify-content: center; }
+}
+
+/* ============================================================
    LOADING / EMPTY STATE
    ============================================================ */
 .loading-spinner { text-align: center; padding: 48px; color: var(--color-text-light); font-size: 13px; }
