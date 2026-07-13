@@ -278,6 +278,7 @@ const BLOG_POSTS = [
   {
     id: 67,
     slug: 'sales-winning-pattern-verbalization',
+    popular: 3,
     title: '「なんとなく売れている」は最大のリスク｜勝ちパターン言語化で売上を仕組み化する5ステップ',
     category: '営業設計 / KPI',
     date: '2026-06-14',
@@ -368,6 +369,7 @@ const BLOG_POSTS = [
   {
     id: 62,
     slug: 'closing-preparation-5-steps',
+    popular: 2,
     title: '商談はあるのに受注が増えない会社の共通点｜クロージング前の5つの準備',
     category: '営業ノウハウ',
     date: '2026-06-09',
@@ -530,6 +532,7 @@ const BLOG_POSTS = [
   {
     id: 53,
     slug: 'teleapo-reception-breakthrough',
+    popular: 1,
     title: 'テレアポ受付突破率を3倍にする6つの実践テクニック',
     category: '営業ノウハウ',
     date: '2026-05-20',

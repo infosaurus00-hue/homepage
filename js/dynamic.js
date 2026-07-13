@@ -421,7 +421,11 @@ function renderJobDetail() {
 function renderTopBlog() {
   const container = document.getElementById('top-blog-container');
   if (!container) return;
-  const posts = BLOG_POSTS.filter(p => p.status === 'published').slice(0, 3);
+  // 人気記事（popular: 数値）を優先表示し、足りなければ最新で補完してTOP3
+  const published = BLOG_POSTS.filter(p => p.status === 'published');
+  const ranked = published.filter(p => typeof p.popular === 'number').sort((a, b) => a.popular - b.popular);
+  const rest = published.filter(p => typeof p.popular !== 'number');
+  const posts = [...ranked, ...rest].slice(0, 3);
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
     const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/detail/?slug=${post.slug}`;
