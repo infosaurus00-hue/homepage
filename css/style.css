@@ -1768,6 +1768,30 @@ h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================
+   プロセスフロー図解（サービスページ共通）
+   ============================================================ */
+.proc-flow { display: flex; align-items: stretch; flex-wrap: wrap; justify-content: center; max-width: 1080px; margin: 0 auto; }
+.proc-step {
+  flex: 1 1 0; min-width: 156px;
+  background: var(--color-white); border: var(--hairline); border-radius: var(--radius-lg);
+  padding: 24px 20px; box-shadow: var(--shadow-sm);
+}
+.proc-num {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--font-num); font-size: 1.4rem; font-weight: 700;
+  color: var(--color-accent); line-height: 1; margin-bottom: 12px;
+}
+.proc-num::before { content: 'STEP'; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; color: var(--color-text-light); }
+.proc-step h4 { font-size: 15px; color: var(--color-primary); margin-bottom: 8px; }
+.proc-step p { font-size: 12.5px; color: var(--color-text-sub); line-height: 1.75; margin: 0; }
+.proc-conn { flex: 0 0 auto; align-self: center; color: var(--color-border); font-size: 22px; padding: 0 6px; }
+.proc-note { text-align: center; font-size: 13px; color: var(--color-text-sub); margin-top: 28px; }
+@media (max-width: 768px) {
+  .proc-flow { flex-direction: column; }
+  .proc-conn { transform: rotate(90deg); padding: 6px 0; }
+}
+
+/* ============================================================
    成果ハイライト（実数字：KPIラベル＋before→after＋文脈）
    ============================================================ */
 .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
