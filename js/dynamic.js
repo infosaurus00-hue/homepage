@@ -43,7 +43,7 @@ function renderBlogList() {
 
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
-    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/detail/?slug=${post.slug}`;
+    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/${post.slug}/`;
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     const externalBadge = isExternal ? '<span class="badge-external">note</span>' : '';
     return `
@@ -428,7 +428,7 @@ function renderTopBlog() {
   const posts = [...ranked, ...rest].slice(0, 3);
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
-    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/detail/?slug=${post.slug}`;
+    const href = isExternal ? post.externalUrl : `${SITE_BASE}/blog/${post.slug}/`;
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     return `
     <a href="${href}" ${targetAttr} class="blog-teaser-card">

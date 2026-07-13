@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<meta charset="UTF-8">
+<!-- 旧URL(/blog/detail/?slug=)は新しい静的URL(/blog/{slug}/)へ恒久リダイレクト -->
+<script>(function(){var s=new URLSearchParams(location.search).get('slug');location.replace(s?('/blog/'+encodeURIComponent(s)+'/'):'/blog/');})();</script>
+<link rel="canonical" href="https://sales-saurus.com/blog/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQVRG5NZHJ"></script>
 <script>
