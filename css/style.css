@@ -84,18 +84,20 @@ ul, ol { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 input, textarea, select { font-family: inherit; }
 
-/* ---- Headings ---- */
-h1, h2, h3 {
+/* ---- Headings ----
+   h1のみ明朝ディスプレイ、h2以下は芯のある太ゴシックで統一（Sales Marker系のモダンな階層） */
+h1 {
   font-family: var(--font-serif);
   line-height: 1.4;
   font-weight: 700;
   color: var(--color-primary);
 }
-h4, h5, h6 {
+h2, h3, h4, h5, h6 {
   font-family: var(--font-base);
   line-height: 1.4;
   font-weight: 700;
   color: var(--color-primary);
+  letter-spacing: -0.01em;
 }
 
 /* ============================================================
