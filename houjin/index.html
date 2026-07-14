@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>営業代行・営業コンサル・BPO｜株式会社Salesaurus</title>
+<meta name="description" content="株式会社Salesaurusは、営業代行（アポヨロ！）・営業コンサル（セールス航海士）・BPO/CSOレンタルで、リスト作成から受注までの営業を戦略から実行まで支援します。最短5日で稼働、相談は無料です。">
+<meta property="og:title" content="営業の成果を、実行までつくる会社です｜株式会社Salesaurus">
+<meta property="og:description" content="営業代行・営業コンサル・BPOで、御社の営業課題を戦略から実行まで引き受けます。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2c5c;--navy-deep:#0a1e3f;--navy-ink:#0a1523;
+    --accent:#1f5fd6;--accent-hover:#1a4fb5;--accent-light:#eaf1fd;--accent-on-dark:#7aa6ff;
+    --line-green:#00b900;
+    --bg:#ffffff;--surface:#f7f9fc;--surface-2:#eef2f7;
+    --ink:#16202c;--mid:#44515e;--sub:#68757f;
+    --hair:hsl(214 28% 87%);--hair-strong:hsl(214 26% 80%);
+    --t-hero:clamp(24px,4.6vw,44px);--t-h2:clamp(23px,3.1vw,31px);--t-h3:20px;--t-body:16px;--t-cap:12.5px;--t-stat:clamp(34px,4.8vw,46px);
+    --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:40px;--s6:48px;--s8:64px;
+    --sec:clamp(56px,8vw,112px);
+    --sh-sm:0 1px 2px hsl(214 45% 22% / .06),0 2px 4px hsl(214 45% 22% / .05);
+    --sh-md:0 1px 2px hsl(214 45% 22% / .05),0 4px 8px hsl(214 45% 22% / .06),0 12px 22px hsl(214 45% 22% / .07);
+    --sh-lg:0 2px 6px hsl(214 45% 22% / .05),0 10px 22px hsl(214 45% 22% / .08),0 26px 50px hsl(214 45% 22% / .10);
+    --r:8px;--r-sm:6px;--r-lg:12px;
+    --serif:'Noto Serif JP',Georgia,serif;
+    --sans:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+    --num:'Montserrat','Noto Sans JP',sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  img{max-width:100%;height:auto;display:block;}
+  a{color:var(--accent);text-decoration:none;transition:color .2s var(--ease);}
+  a:hover{color:var(--accent-hover);}
+  .wrap{max-width:1080px;margin:0 auto;overflow:hidden;}
+  .pad{padding-left:24px;padding-right:24px;}
+  .narrow{max-width:820px;margin:0 auto;}
+  .center{text-align:center;}
+  .mini{display:block;font-size:var(--t-cap);font-weight:700;letter-spacing:.16em;color:var(--accent);margin-bottom:var(--s2);}
+  .mini.on-dark{color:var(--accent-on-dark);}
+
+  .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line-green);color:#fff;font-weight:900;font-size:16.5px;padding:17px 32px;border-radius:var(--r);box-shadow:0 2px 4px hsl(120 100% 20% / .18),0 10px 22px hsl(120 90% 24% / .24);letter-spacing:.02em;transition:transform .2s var(--ease),box-shadow .2s var(--ease);line-height:1.5;}
+  .cta svg{flex:0 0 auto;}
+  .cta:hover{transform:translateY(-2px);color:#fff;box-shadow:0 4px 8px hsl(120 100% 20% / .2),0 16px 30px hsl(120 90% 24% / .3);}
+  .cta:active{transform:translateY(0);}
+  .cta-wide{display:flex;width:100%;max-width:460px;}
+  .cta-note{font-size:var(--t-cap);color:var(--sub);margin-top:var(--s2);line-height:1.7;}
+
+  /* FV */
+  .fv{background:linear-gradient(180deg,var(--surface) 0%,#fff 88%);border-bottom:1px solid var(--hair);}
+  .fv-inner{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:var(--s8);padding:var(--s8) 40px calc(var(--s8) + 8px);}
+  .fv-brand{display:flex;align-items:center;gap:9px;font-weight:900;color:var(--navy);letter-spacing:.02em;margin-bottom:var(--s5);font-size:15px;}
+  .fv-brand img{height:26px;width:auto;}
+  .fv-tag{display:inline-block;align-self:flex-start;font-size:var(--t-cap);font-weight:700;color:var(--accent);background:var(--accent-light);border-radius:100px;padding:6px 15px;margin-bottom:var(--s3);letter-spacing:.04em;}
+  .fv h1{font-family:var(--serif);font-weight:900;color:var(--navy);font-size:var(--t-hero);line-height:1.42;letter-spacing:.005em;margin-bottom:var(--s3);}
+  .fv h1 .nb{display:inline-block;}
+  .fv h1 .hl{color:var(--accent);}
+  .fv-sub{font-size:15.5px;color:var(--mid);line-height:1.95;margin-bottom:var(--s5);}
+  .fv-sub b{color:var(--navy);font-weight:700;}
+  .fv-actions{display:flex;flex-direction:column;align-items:flex-start;}
+  .point-card{background:#fff;border:1px solid var(--hair);border-radius:var(--r-lg);box-shadow:var(--sh-lg);padding:var(--s5) 26px;position:relative;}
+  .point-card::before{content:"";position:absolute;left:0;top:24px;bottom:24px;width:3px;border-radius:3px;background:var(--accent);}
+  .point-card .pc-label{font-size:var(--t-cap);font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:var(--s3);display:block;padding-left:14px;}
+  .point-card ul{list-style:none;}
+  .point-card li{padding:15px 0 15px 14px;border-bottom:1px solid var(--hair);}
+  .point-card li:last-child{border-bottom:none;padding-bottom:0;}
+  .point-card li:first-child{padding-top:0;}
+  .point-card b{display:block;font-size:15.5px;color:var(--navy);font-weight:700;margin-bottom:3px;letter-spacing:.01em;}
+  .point-card span{font-size:13px;color:var(--sub);line-height:1.7;}
+
+  /* 実績数字 */
+  .stats{background:var(--navy);color:#fff;padding-block:clamp(52px,7vw,84px);}
+  .stats .cap{text-align:center;font-size:var(--t-cap);color:var(--accent-on-dark);font-weight:700;letter-spacing:.1em;margin-bottom:var(--s6);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:940px;margin:0 auto;}
+  .stat{text-align:center;padding:6px 10px;position:relative;}
+  .stat + .stat::before{content:"";position:absolute;left:0;top:12%;height:76%;width:1px;background:rgba(255,255,255,.14);}
+  .stat .v{font-family:var(--num);font-weight:800;font-size:var(--t-stat);color:#fff;line-height:1;white-space:nowrap;}
+  .stat .v small{font-size:.42em;font-weight:700;margin-left:3px;color:#c6d3e4;}
+  .stat .l{font-size:12.5px;color:#9fb0c4;margin-top:12px;line-height:1.6;}
+
+  section{padding-top:var(--sec);padding-bottom:var(--sec);}
+  .sec-head{font-family:var(--serif);font-weight:900;color:var(--navy);font-size:var(--t-h2);line-height:1.45;margin-bottom:var(--s5);letter-spacing:.01em;}
+  .sec-desc{font-size:15px;color:var(--mid);line-height:1.9;margin-bottom:var(--s6);}
+  p.body{font-size:var(--t-body);color:var(--mid);line-height:1.95;}
+
+  /* 課題 */
+  .problem{background:var(--surface);}
+  .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:900px;margin:0 auto;}
+  .problem-item{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:18px 20px;}
+  .problem-item .pn{font-family:var(--num);font-weight:800;color:var(--accent);font-size:17px;flex:0 0 auto;line-height:1.6;}
+  .problem-item p{font-size:14.5px;color:var(--ink);line-height:1.7;}
+  .problem-item b{color:var(--navy);font-weight:700;}
+  .problem-bridge{max-width:900px;margin:var(--s6) auto 0;text-align:center;font-family:var(--serif);font-size:clamp(17px,2.2vw,20px);color:var(--navy);font-weight:700;}
+
+  /* サービス */
+  .svc{max-width:900px;margin:0 auto;}
+  .svc-item{background:#fff;border:1px solid var(--hair);border-radius:var(--r-lg);box-shadow:var(--sh-md);padding:28px;margin-bottom:16px;position:relative;overflow:hidden;}
+  .svc-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);}
+  .svc-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .svc-name{font-family:var(--serif);font-size:22px;font-weight:900;color:var(--navy);}
+  .svc-type{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-light);border-radius:100px;padding:4px 12px;}
+  .svc-cover{font-size:13px;color:var(--sub);margin-bottom:14px;}
+  .svc-cover b{color:var(--navy);font-weight:700;}
+  .svc-desc{font-size:15px;color:var(--mid);line-height:1.9;margin-bottom:16px;}
+  .svc-features{display:flex;flex-wrap:wrap;gap:8px;}
+  .svc-features span{font-size:13px;color:var(--navy);background:var(--surface);border:1px solid var(--hair);border-radius:6px;padding:7px 12px;font-weight:500;}
+
+  /* フロー */
+  .steps{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .step{background:var(--surface);border:1px solid var(--hair);border-radius:var(--r);padding:26px 22px;}
+  .step .n{font-family:var(--num);font-weight:800;font-size:14px;color:#fff;background:var(--accent);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:var(--s2);box-shadow:0 3px 8px hsl(220 80% 45% / .35);}
+  .step h3{font-family:var(--serif);font-size:17px;color:var(--navy);font-weight:700;margin-bottom:8px;line-height:1.5;}
+  .step p{font-size:13.5px;color:var(--mid);line-height:1.8;}
+
+  /* 選ばれる理由 */
+  .reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto;}
+  .reason{background:var(--surface);border:1px solid var(--hair);border-radius:var(--r);padding:22px 24px;}
+  .reason .rn{font-family:var(--num);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:.06em;margin-bottom:8px;}
+  .reason h3{font-family:var(--serif);font-size:17px;color:var(--navy);font-weight:700;margin-bottom:7px;line-height:1.5;}
+  .reason p{font-size:13.5px;color:var(--mid);line-height:1.8;}
+
+  /* 成果 */
+  .results{background:var(--navy);color:#fff;}
+  .results .sec-head{color:#fff;text-align:center;}
+  .stages{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;max-width:860px;margin:var(--s6) auto var(--s5);}
+  .stage-c{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-lg);padding:26px 24px;}
+  .stage-c .st{font-size:12.5px;color:var(--accent-on-dark);font-weight:700;letter-spacing:.04em;margin-bottom:12px;}
+  .stage-c .sbig{font-family:var(--num);font-weight:800;font-size:clamp(34px,5vw,44px);color:#fff;line-height:1;}
+  .stage-c .sbig small{font-size:.4em;font-weight:700;margin-left:3px;color:#c6d3e4;}
+  .stage-c p{font-size:13.5px;color:#c6d3e4;line-height:1.85;margin-top:14px;}
+  .stage-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent-on-dark);font-size:26px;font-weight:800;}
+  .disclaimer{max-width:860px;margin:0 auto;text-align:center;font-size:12px;color:#9fb0c4;line-height:1.75;}
+
+  /* 取引実績 */
+  .clients{background:var(--surface);}
+  .logo-marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);}
+  .logo-track{display:flex;gap:14px;width:max-content;align-items:center;animation:marquee 38s linear infinite;}
+  .logo-marquee:hover .logo-track{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .chip{flex:0 0 auto;background:#fff;border:1px solid var(--hair);border-radius:var(--r);height:66px;display:flex;align-items:center;justify-content:center;padding:0 28px;}
+  .chip img{max-height:34px;width:auto;}
+  .pending{flex:0 0 auto;background:#fff;border:1px dashed var(--hair-strong);border-radius:var(--r);height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 22px;text-align:center;}
+  .pending b{font-size:13px;color:var(--navy);font-weight:700;white-space:nowrap;}
+  .pending small{font-size:10.5px;color:var(--sub);letter-spacing:.02em;}
+  .clients .note{text-align:center;margin-top:var(--s5);font-size:13px;color:var(--sub);}
+
+  /* CTA帯 */
+  .cta-band{background:linear-gradient(145deg,var(--accent) 0%,var(--accent-hover) 100%);color:#fff;text-align:center;position:relative;overflow:hidden;}
+  .cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 15% -10%,rgba(255,255,255,.16),transparent 55%);pointer-events:none;}
+  .cta-band .in{position:relative;}
+  .cta-band h2{font-family:var(--serif);font-weight:900;font-size:var(--t-h2);line-height:1.5;margin-bottom:var(--s2);color:#fff;}
+  .cta-band p{color:rgba(255,255,255,.92);font-size:15px;line-height:1.9;margin-bottom:var(--s5);}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:0 auto;}
+  .faq details{border-bottom:1px solid var(--hair);padding:var(--s3) 0;}
+  .faq summary{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--navy);cursor:pointer;list-style:none;position:relative;padding-right:36px;line-height:1.6;transition:color .2s var(--ease);}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary:hover{color:var(--accent);}
+  .faq summary::after{content:"";position:absolute;right:6px;top:50%;width:13px;height:13px;margin-top:-7px;background:linear-gradient(var(--accent),var(--accent)) center/13px 2px no-repeat,linear-gradient(var(--accent),var(--accent)) center/2px 13px no-repeat;transition:transform .25s var(--ease);}
+  .faq details[open] summary::after{transform:rotate(90deg);background:linear-gradient(var(--accent),var(--accent)) center/13px 2px no-repeat;}
+  .faq p{margin-top:var(--s2);font-size:14.5px;color:var(--mid);line-height:1.95;}
+
+  /* 最終CTA */
+  .final{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;text-align:center;}
+  .final h2{font-family:var(--serif);font-weight:900;font-size:var(--t-h2);line-height:1.5;margin-bottom:var(--s3);color:#fff;}
+  .final p{color:#bccbd9;margin-bottom:var(--s6);font-size:15px;line-height:1.9;}
+  .final .cta-note{color:#8ea3b4;}
+
+  footer{background:var(--navy-deep);color:#9fb0c4;text-align:center;padding:var(--s6) 24px;font-size:var(--t-cap);line-height:2;border-top:1px solid rgba(255,255,255,.08);}
+  footer img{height:24px;margin:0 auto 14px;filter:brightness(0) invert(1);opacity:.92;}
+  footer a{color:#9fb0c4;}
+
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--hair);box-shadow:0 -6px 22px hsl(214 45% 22% / .1);padding:10px 16px;display:none;}
+  .sticky .cta{width:100%;padding:14px;font-size:15.5px;}
+
+  @media(max-width:860px){
+    .fv-inner{grid-template-columns:1fr;gap:var(--s5);padding:var(--s6) 22px var(--s8);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:var(--s5) 0;}
+    .stat:nth-child(2)::before,.stat:nth-child(3)::before{content:none;}
+    .steps{grid-template-columns:1fr;}
+    .stages{grid-template-columns:1fr;}
+    .stage-arrow{transform:rotate(90deg);}
+  }
+  @media(max-width:600px){
+    .problem-grid{grid-template-columns:1fr;}
+    .reasons{grid-template-columns:1fr;}
+    .sticky{display:block;}
+    body{padding-bottom:76px;}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}.logo-track{animation:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- FV -->
+  <header class="fv">
+    <div class="fv-inner">
+      <div class="fv-copy">
+        <div class="fv-brand"><img src="https://sales-saurus.com/images/logo.png" alt="">株式会社Salesaurus</div>
+        <span class="fv-tag">営業代行 ／ 営業コンサル ／ BPO・CSOレンタル</span>
+        <h1><span class="nb">営業の成果を、</span><span class="nb"><span class="hl">実行まで</span>つくる会社です。</span></h1>
+        <p class="fv-sub">リスト作成から受注まで。株式会社Salesaurusは、<b>営業代行・営業コンサル・BPO</b>で、御社の営業課題を戦略から実行まで引き受けます。<br><b>最短5日で稼働</b>、ご相談は無料です。</p>
+        <div class="fv-actions">
+          <a class="cta" data-line href="#">LINEで無料相談する</a>
+          <p class="cta-note">いただいた内容をもとに、御社に合う進め方をご提案します。</p>
+        </div>
+      </div>
+      <aside class="point-card">
+        <span class="pc-label">3つのサービス</span>
+        <ul>
+          <li><b>アポヨロ！（営業代行）</b><span>リスト作成から架電・アポ獲得までを一貫代行。</span></li>
+          <li><b>セールス航海士（営業コンサル）</b><span>戦略設計・KPIから、商談・受注率の改善まで。</span></li>
+          <li><b>BPO・CSOレンタル</b><span>営業組織をまるごと構築・運営。責任者機能も提供。</span></li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <!-- 実績数字 -->
+  <section class="stats">
+    <div class="pad">
+      <p class="cap">設立1年での、営業支援の実績</p>
+      <div class="stats-grid">
+        <div class="stat"><div class="v">50<small>社+</small></div><div class="l">取引実績</div></div>
+        <div class="stat"><div class="v">200<small>件</small></div><div class="l">10日間でのアポ獲得</div></div>
+        <div class="stat"><div class="v">30<small>業種+</small></div><div class="l">支援した業種</div></div>
+        <div class="stat"><div class="v">最短5<small>日</small></div><div class="l">稼働開始まで</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 課題 -->
+  <section class="problem pad">
+    <div class="narrow center">
+      <span class="mini" style="display:inline-block;">こんな課題、ありませんか？</span>
+      <h2 class="sec-head">「売上をつくる」の手前で、止まっていませんか。</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-item"><span class="pn">01</span><p>リストはあるのに、<b>架電・アプローチに手が回らない</b>。新規開拓が後回しになっている。</p></div>
+      <div class="problem-item"><span class="pn">02</span><p>アポは取れても、<b>商談化・受注につながらない</b>。何が原因か分からない。</p></div>
+      <div class="problem-item"><span class="pn">03</span><p>営業のやり方が<b>属人化</b>していて、仕組み・型になっていない。</p></div>
+      <div class="problem-item"><span class="pn">04</span><p><b>営業責任者が不在</b>。戦略もKPIも曖昧なまま走っている。</p></div>
+      <div class="problem-item"><span class="pn">05</span><p>営業を採用しても<b>すぐ辞める・育たない</b>。教える時間もない。</p></div>
+      <div class="problem-item"><span class="pn">06</span><p>そもそも<b>何から手をつければいいか分からない</b>。</p></div>
+    </div>
+    <p class="problem-bridge">ひとつでも当てはまるなら、戦略から実行まで引き受けます。</p>
+  </section>
+
+  <!-- サービス -->
+  <section class="pad">
+    <div class="narrow center">
+      <span class="mini" style="display:inline-block;">3つのサービス</span>
+      <h2 class="sec-head">営業プロセスの、どこからでも任せられます。</h2>
+      <p class="sec-desc">リスト作成から受注まで。御社の弱点を狙って、必要なところだけ補強できます。</p>
+    </div>
+    <div class="svc">
+      <div class="svc-item">
+        <div class="svc-top"><span class="svc-name">アポヨロ！</span><span class="svc-type">営業代行</span></div>
+        <div class="svc-cover">カバー範囲：<b>リスト作成 〜 アプローチ 〜 アポ獲得</b></div>
+        <p class="svc-desc">ターゲットリストの選定から架電・アポイント獲得まで、専任チームが一貫して対応します。御社の営業担当者は、商談に集中できます。</p>
+        <div class="svc-features"><span>アポ獲得数の最大化</span><span>スクリプト設計・継続改善</span><span>週次レポートと改善提案</span><span>最短5日で稼働開始</span></div>
+      </div>
+      <div class="svc-item">
+        <div class="svc-top"><span class="svc-name">セールス航海士</span><span class="svc-type">営業コンサル</span></div>
+        <div class="svc-cover">カバー範囲：<b>戦略設計 〜 商談・受注率の改善</b></div>
+        <p class="svc-desc">営業戦略の設計からKPI設定・改善のPDCAまで、専任コンサルタントが戦略から実行まで伴走します。「アポは取れるのに受注につながらない」を解きほぐします。</p>
+        <div class="svc-features"><span>営業プロセスの可視化・設計</span><span>KPI設計・達成支援</span><span>商談同席・ロールプレイ</span><span>受注率・単価の改善</span></div>
+      </div>
+      <div class="svc-item">
+        <div class="svc-top"><span class="svc-name">BPO・CSOレンタル</span><span class="svc-type">営業支援</span></div>
+        <div class="svc-cover">カバー範囲：<b>営業組織をまるごと構築・運営</b></div>
+        <p class="svc-desc">営業組織の構築・運営をまるごとアウトソーシング。CSO（営業責任者）機能を提供し、即戦力の営業体制をつくります。最終的には、御社が自走できる状態を目指します。</p>
+        <div class="svc-features"><span>営業組織の立ち上げ支援</span><span>CSO（営業責任者）機能提供</span><span>チームマネジメント代行</span><span>内製化支援</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ご支援の流れ -->
+  <section class="pad" style="background:var(--surface);">
+    <div class="narrow center">
+      <span class="mini" style="display:inline-block;">ご支援の流れ</span>
+      <h2 class="sec-head">相談から成果まで、3ステップで動き出します。</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>ヒアリング・課題整理</h3><p>現状と目標をお聞きし、「何が成果の障害になっているか」を一緒に整理します。相談は無料です。</p></div>
+      <div class="step"><div class="n">2</div><h3>戦略・KPI設計</h3><p>ターゲット・トークスクリプト・KPIを設計。最短5日で稼働できる準備を整えます。</p></div>
+      <div class="step"><div class="n">3</div><h3>実行・改善</h3><p>専任チームが実行を担当。週次レポートで数字を透明化し、改善を回して成果を伸ばします。</p></div>
+    </div>
+  </section>
+
+  <!-- 選ばれる理由 -->
+  <section class="pad">
+    <div class="narrow center">
+      <span class="mini" style="display:inline-block;">選ばれる理由</span>
+      <h2 class="sec-head">一回の取引ではなく、<br>「もう一度頼みたい」と言われるために。</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason"><div class="rn">01</div><h3>課題整理から一緒に始める</h3><p>「何から始めればいいか分からない」という状態から伴走します。現状分析・課題整理・戦略設計をセットで提供。</p></div>
+      <div class="reason"><div class="rn">02</div><h3>結果にコミットする姿勢</h3><p>KPIを明確に設定し、達成に向けた改善を繰り返します。週次・月次レポートで進捗を透明化します。</p></div>
+      <div class="reason"><div class="rn">03</div><h3>内製化を見据えた支援</h3><p>依存を生む支援ではなく、御社が自走できる営業組織に育てることを最終ゴールに設定します。</p></div>
+      <div class="reason"><div class="rn">04</div><h3>最短5日で稼働開始</h3><p>スピーディーなオンボーディングで、早期に成果へのアクションを開始。機会損失を最小化します。</p></div>
+      <div class="reason"><div class="rn">05</div><h3>業種・フェーズを問わない実績</h3><p>IT・製造・コンサル・サービス業など、多様な業種・フェーズの企業への支援実績があります。</p></div>
+      <div class="reason"><div class="rn">06</div><h3>密なコミュニケーション</h3><p>担当者が直接対応。チャットツールでの日常的なやり取りで、状況をリアルタイムに共有します。</p></div>
+    </div>
+  </section>
+
+  <!-- 成果イメージ -->
+  <section class="results pad">
+    <div class="narrow center">
+      <span class="mini on-dark" style="display:inline-block;">成果イメージ</span>
+      <h2 class="sec-head">導入後、こう成果が伸びていきます。</h2>
+    </div>
+    <div class="stages">
+      <div class="stage-c">
+        <div class="st">トライアル期（稼働開始〜）</div>
+        <div class="sbig">最短5<small>日</small></div>
+        <p>スピーディーに稼働し、まず営業の"型"をつくります。稼働10日で約200件のアポを獲得した事例もあります（AI SaaS）。</p>
+      </div>
+      <div class="stage-arrow" aria-hidden="true">→</div>
+      <div class="stage-c">
+        <div class="st">定着期</div>
+        <div class="sbig">約500<small>件/月</small></div>
+        <p>アポを安定して供給します。アポからの商談化率も改善しています（7%→20%の事例）。</p>
+      </div>
+    </div>
+    <p class="disclaimer">※ 記載の数値は実際の支援事例に基づく一例です。成果は商材・ターゲット・条件設定によって変動します。</p>
+  </section>
+
+  <!-- 取引実績 -->
+  <section class="clients pad">
+    <div class="narrow center">
+      <span class="mini" style="display:inline-block;">取引実績</span>
+      <h2 class="sec-head">多様な業種・規模の企業を支援しています。</h2>
+    </div>
+    <div class="logo-marquee" aria-label="取引先ロゴ">
+      <div class="logo-track">
+        <div class="chip"><img src="https://sales-saurus.com/images/clients/aidma-holdings.png" alt="Aidma Holdings"></div>
+        <div class="chip"><img src="https://sales-saurus.com/images/clients/accele.jpg" alt="accele"></div>
+        <div class="chip"><img src="https://sales-saurus.com/images/clients/makoto-prime.png" alt="MAKOTO Prime"></div>
+        <div class="pending"><b>大手AI SaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>大手電子署名SaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>大手コンサルティング会社</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>大手AI研修</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>製造業向けSaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>建設業向けSaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending"><b>小売業向けSaaS</b><small>掲載許可申請中</small></div>
+        <div class="chip" aria-hidden="true"><img src="https://sales-saurus.com/images/clients/aidma-holdings.png" alt=""></div>
+        <div class="chip" aria-hidden="true"><img src="https://sales-saurus.com/images/clients/accele.jpg" alt=""></div>
+        <div class="chip" aria-hidden="true"><img src="https://sales-saurus.com/images/clients/makoto-prime.png" alt=""></div>
+        <div class="pending" aria-hidden="true"><b>大手AI SaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>大手電子署名SaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>大手コンサルティング会社</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>大手AI研修</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>製造業向けSaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>建設業向けSaaS</b><small>掲載許可申請中</small></div>
+        <div class="pending" aria-hidden="true"><b>小売業向けSaaS</b><small>掲載許可申請中</small></div>
+      </div>
+    </div>
+    <p class="note">AI SaaS・電子署名・コンサル・製造・建設・小売など、業種を問わず他多数。</p>
+  </section>
+
+  <!-- 中盤CTA帯 -->
+  <section class="cta-band pad">
+    <div class="narrow center in">
+      <h2>営業の課題、まずは無料でご相談ください。</h2>
+      <p>「何から手をつけるべきか」の整理からお手伝いします。<br>現状を伺い、御社に合う進め方を一緒に考えます。</p>
+      <a class="cta cta-wide" data-line href="#" style="margin:0 auto;">LINEで無料相談する</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pad" style="background:var(--surface);">
+    <div class="narrow center" style="margin-bottom:var(--s3);">
+      <span class="mini" style="display:inline-block;">よくある質問</span>
+      <h2 class="sec-head" style="font-size:clamp(21px,2.6vw,25px);margin-bottom:0;">よくある質問</h2>
+    </div>
+    <div class="faq">
+      <details><summary>相談だけでも大丈夫ですか？費用はかかりますか？</summary><p>ご相談は無料です。まずは現状の課題を伺い、どのサービスが合うか、そもそも外注すべきかどうかも含めて、率直にお伝えします。</p></details>
+      <details><summary>どのサービスを選べばいいか分かりません。</summary><p>選んでいただく必要はありません。ヒアリングで課題を整理し、アポ獲得が必要なのか、戦略設計が必要なのか、組織づくりが必要なのかを一緒に見極めて、最適な進め方をご提案します。</p></details>
+      <details><summary>どれくらいで稼働できますか？</summary><p>最短5日で稼働開始が可能です。ターゲット・スクリプト・KPIの設計を整えたうえで、スピーディーに動き出します。</p></details>
+      <details><summary>対応できる業種は決まっていますか？</summary><p>IT・SaaS・製造・建設・小売・コンサルなど、これまで30業種以上を支援してきました。業種やフェーズを問わずご相談いただけます。</p></details>
+      <details><summary>成果はどのように共有されますか？</summary><p>週次・月次のレポートで、活動量・アポ数・商談状況などの数字を透明化します。担当者が直接、チャットで日常的に状況を共有します。</p></details>
+      <details><summary>最終的に自社で営業できるようになりたいのですが。</summary><p>むしろそれを最終ゴールに設定しています。依存を生む支援ではなく、御社が自走できる営業組織に育てる「内製化」を見据えて支援します。</p></details>
+    </div>
+  </section>
+
+  <!-- 最終CTA -->
+  <section class="final pad">
+    <h2>営業の「売上をつくる」を、一緒に。</h2>
+    <p>課題の整理から、実行・改善まで。<br>まずはLINEで、御社の状況をお聞かせください。</p>
+    <a class="cta cta-wide" data-line href="#" style="margin:0 auto;">LINEで無料相談する</a>
+    <p class="cta-note">いただいた内容をもとに、御社に合う進め方をご提案します。</p>
+  </section>
+
+  <footer>
+    <img src="https://sales-saurus.com/images/logo.png" alt="Salesaurus"><br>
+    株式会社Salesaurus ／ 代表 峠大輝<br>
+    <a href="https://sales-saurus.com/">https://sales-saurus.com/</a>
+  </footer>
+
+</div>
+
+<div class="sticky"><a class="cta" data-line href="#">LINEで無料相談する</a></div>
+
+<script>
+  (function () {
+    var LINE_URL = 'https://lin.ee/72lTZan';
+    var ICON = '<svg viewBox="0 0 24 24" width="21" height="21" fill="#fff" aria-hidden="true"><path d="M12 3.2c-5.05 0-9.15 3.33-9.15 7.43 0 3.67 3.25 6.75 7.64 7.33.3.06.7.2.8.45.09.24.06.6.03.85l-.13.78c-.04.23-.18.9.79.49.97-.41 5.24-3.09 7.15-5.29 1.32-1.45 1.96-2.92 1.96-4.61 0-4.1-4.1-7.43-9.09-7.43z"/></svg>';
+    var links = document.querySelectorAll('a[data-line]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', LINE_URL);
+      links[i].setAttribute('rel', 'noopener');
+      links[i].insertAdjacentHTML('afterbegin', ICON);
+    }
+  })();
+</script>
+
+</body>
+</html>
