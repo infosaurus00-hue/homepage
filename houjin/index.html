@@ -429,11 +429,21 @@
   })();
 </script>
 
-<!-- 離脱分析：セクション到達・CTAクリック計測 -->
+<!-- 離脱分析：セクション到達・CTAクリック計測（GA4＋Supabase） -->
 <script>
   (function(){
+    var SB_URL='https://vlciputhinetwwzbmecq.supabase.co';
+    var SB_KEY='sb_publishable_hyCCHnzpFMcBc-TE0aBF-w_dCZPGhrb';
     function g(){ if(window.gtag) gtag.apply(null, arguments); }
     var lp = location.pathname.indexOf('houjin')>-1 ? 'houjin' : (location.pathname.indexOf('saiyo')>-1 ? 'saiyo' : 'lp');
+    var sid = (function(){ try{ var k='lp_sid', v=sessionStorage.getItem(k); if(!v){ v=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now()+'_'+Math.random().toString(16).slice(2)); sessionStorage.setItem(k,v);} return v; }catch(e){ return 'na'; } })();
+    function sb(event, section){
+      try{
+        fetch(SB_URL+'/rest/v1/lp_events', {method:'POST', keepalive:true,
+          headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'},
+          body: JSON.stringify({lp:lp, section:section||null, event:event, sid:sid})}).catch(function(){});
+      }catch(e){}
+    }
     document.addEventListener('DOMContentLoaded', function(){
       var blocks = document.querySelectorAll('header.fv, .wrap > section');
       var seen = {};
@@ -446,13 +456,13 @@
         var io = new IntersectionObserver(function(es){
           es.forEach(function(e){
             var n = e.target.dataset.sec;
-            if(e.isIntersecting && !seen[n]){ seen[n]=1; g('event','section_view',{lp_name:lp, section:n}); }
+            if(e.isIntersecting && !seen[n]){ seen[n]=1; g('event','section_view',{lp_name:lp, section:n}); sb('section_view', n); }
           });
         }, {threshold:0.2});
         blocks.forEach(function(el){ io.observe(el); });
       }
       document.querySelectorAll('a[data-line]').forEach(function(a){
-        a.addEventListener('click', function(){ g('event','cta_click', {lp_name:lp}); });
+        a.addEventListener('click', function(){ g('event','cta_click', {lp_name:lp}); sb('cta_click', null); });
       });
     });
   })();
