@@ -9,6 +9,12 @@
 <meta property="og:title" content="営業メンバー募集（業務委託）｜株式会社Salesaurus">
 <meta property="og:description" content="営業代行の現場で、企業への架電から商談・提案までを担う業務委託の営業メンバーを募集しています。">
 <meta property="og:type" content="website">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MQVRG5NZHJ"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-MQVRG5NZHJ');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
@@ -549,6 +555,35 @@
       links[i].setAttribute('rel', 'noopener');
       links[i].insertAdjacentHTML('afterbegin', ICON);
     }
+  })();
+</script>
+
+<!-- 離脱分析：セクション到達・CTAクリック計測 -->
+<script>
+  (function(){
+    function g(){ if(window.gtag) gtag.apply(null, arguments); }
+    var lp = location.pathname.indexOf('houjin')>-1 ? 'houjin' : (location.pathname.indexOf('saiyo')>-1 ? 'saiyo' : 'lp');
+    document.addEventListener('DOMContentLoaded', function(){
+      var blocks = document.querySelectorAll('header.fv, .wrap > section');
+      var seen = {};
+      blocks.forEach(function(el,i){
+        var lab = el.querySelector('.mini, .pc-label, h1, h2');
+        var t = lab ? lab.textContent.trim().replace(/\s+/g,'').slice(0,16) : (el.className.split(' ')[0]||'sec');
+        el.dataset.sec = ('0'+(i+1)).slice(-2)+'_'+t;
+      });
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            var n = e.target.dataset.sec;
+            if(e.isIntersecting && !seen[n]){ seen[n]=1; g('event','section_view',{lp_name:lp, section:n}); }
+          });
+        }, {threshold:0.2});
+        blocks.forEach(function(el){ io.observe(el); });
+      }
+      document.querySelectorAll('a[data-line]').forEach(function(a){
+        a.addEventListener('click', function(){ g('event','cta_click', {lp_name:lp}); });
+      });
+    });
   })();
 </script>
 
