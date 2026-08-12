@@ -141,7 +141,7 @@ ${sidebar(relService)}
 </main>
 <div id="footer-placeholder"></div>
 <script src="/data/config.js"></script>
-<script src="/data/blogs.js"></script>
+<script src="/data/blogs-index.js"></script>
 <script src="/data/cases.js"></script>
 <script src="/data/news.js"></script>
 <script src="/data/jobs.js"></script>
@@ -175,3 +175,16 @@ writeFileSync(ROOT + 'sitemap.xml', sitemap);
 writeFileSync(ROOT + 'robots.txt', `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${ORIGIN}/sitemap.xml\n`);
 
 console.log(`✅ 記事静的化: ${n}本 / sitemap: ${urls.length} URL / robots.txt 生成`);
+
+/* ---- 一覧用の軽量インデックス（本文抜き）も併せて生成 ---- */
+{
+  const idx = POSTS.map(({ content, ...rest }) => rest);
+  writeFileSync(ROOT + 'data/blogs-index.js',
+    '/* ============================================================\n' +
+    '   自動生成ファイル — data/blogs.js から本文(content)を除いて生成\n' +
+    '   直接編集しないこと（tools/build_blog_index.mjs と同じ出力）\n' +
+    '   ============================================================ */\n' +
+    'const BLOG_POSTS = ' + JSON.stringify(idx) + ';\n' +
+    'const BLOG_CATEGORIES = ' + JSON.stringify(CATS) + ';\n');
+  console.log(`✅ data/blogs-index.js も更新: ${idx.length}本`);
+}

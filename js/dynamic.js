@@ -9,6 +9,19 @@ function getParam(key) {
   return params.get(key);
 }
 
+/* ---- サムネイル ----
+   アイキャッチ画像が未作成・読み込み失敗でも「壊れた画像アイコン」を出さない。
+   常に下地としてデザイン済みの代替面（カテゴリ＋ロゴタイプ）を敷き、
+   画像が読めたときだけその上に重ねる。 */
+function thumbFallback(category) {
+  const cat = category ? String(category) : 'Salesaurus';
+  return `<span class="thumb-fallback" aria-hidden="true"><span class="tf-cat">${cat}</span><span class="tf-mark">Salesaurus</span></span>`;
+}
+function thumbImage(src, alt) {
+  if (!src) return '';
+  return `<img src="${src}" alt="${alt || ''}" loading="lazy" onerror="this.style.display='none'">`;
+}
+
 /* ============================================================
    ブログ一覧ページ
    ============================================================ */
@@ -50,7 +63,7 @@ function renderBlogList() {
     <div class="post-card-wrap" data-cat-item="${post.category}">
       <a href="${href}" ${targetAttr} class="post-card">
         <div class="post-card-thumb">
-          ${post.eyecatch ? `<img src="${post.eyecatch}" alt="${post.title}" loading="lazy">` : `<span class="thumb-icon">${post.eyecatchEmoji || '<i class="fas fa-file-alt"></i>'}</span>`}
+          ${thumbFallback(post.category)}${thumbImage(post.eyecatch, post.title)}
           ${externalBadge}
         </div>
         <div class="post-card-body">
@@ -168,7 +181,7 @@ function renderCaseList() {
     <div class="case-card-wrap" data-service-item="${c.service}">
       <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="post-card">
         <div class="post-card-thumb">
-          ${c.eyecatch ? `<img src="${c.eyecatch}" alt="${c.title}" loading="lazy">` : `<span class="thumb-icon">${c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>'}</span>`}
+          ${thumbFallback(c.issueCategory)}${thumbImage(c.eyecatch, c.title)}
         </div>
         <div class="post-card-body">
           <div class="post-card-meta">
@@ -432,7 +445,7 @@ function renderTopBlog() {
     const targetAttr = isExternal ? 'target="_blank" rel="noopener"' : '';
     return `
     <a href="${href}" ${targetAttr} class="blog-teaser-card">
-      <div class="blog-teaser-thumb">${post.eyecatch ? `<img src="${post.eyecatch}" alt="${post.title}" loading="lazy">` : '<i class="fas fa-newspaper"></i>'}${isExternal ? '<span class="teaser-external-badge">note</span>' : ''}</div>
+      <div class="blog-teaser-thumb">${thumbFallback(post.category)}${thumbImage(post.eyecatch, post.title)}${isExternal ? '<span class="teaser-external-badge">note</span>' : ''}</div>
       <div class="blog-teaser-body">
         <div class="blog-teaser-meta">
           <span class="blog-teaser-cat">${post.category}</span>
@@ -454,7 +467,7 @@ function renderTopCase() {
     const service = SITE_CONFIG.services.find(s => s.id === c.service);
     return `
     <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="case-teaser-card">
-      <div class="case-teaser-thumb">${c.eyecatch ? `<img src="${c.eyecatch}" alt="${c.title}" style="width:100%;height:100%;object-fit:cover;">` : (c.eyecatchEmoji || '<i class="fas fa-clipboard-list"></i>')}</div>
+      <div class="case-teaser-thumb">${thumbFallback(c.issueCategory)}${thumbImage(c.eyecatch, c.title)}</div>
       <div class="case-teaser-body">
         <div class="case-teaser-meta">
           <span class="badge ${service?.badgeClass || 'badge-primary'}">${service?.name || ''}</span>

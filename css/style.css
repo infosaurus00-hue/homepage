@@ -13,25 +13,30 @@
    ============================================================ */
 :root {
   /* ---- Colors ----
-     Sales Marker参考：くすんだ水色→意図的な深いネイビー＋彩度の高いロイヤルブルー */
-  --color-primary:       #0f2c5c;
-  --color-primary-light: #21518f;
-  --color-accent:        #1f5fd6;
-  --color-accent-hover:  #1a4fb5;
-  --color-accent-light:  #eaf1fd;
-  --color-accent-on-dark:#6f9dff; /* 濃紺の上に置くラベル用の明るいアクセント */
+     2026-08 Sales Marker実測ベースに刷新。
+     「紺・白・彩度の高い青・ニュートラルグレー」の4色だけで組む。
+     - 文字も濃紺（#00235D）で統一。青みがかったグレー文字を使わない
+     - 面のグレーはニュートラル（#F6F6F6）。青みグレーは"AIっぽさ"の元凶
+     実測値: 見出し/本文/濃紺面 #00235D ／ ヒーロー青 #06398D ／ CTA青 #0553CA ／ 面 #F6F6F6 */
+  --color-primary:       #00235d;
+  --color-primary-light: #06398d;
+  --color-accent:        #0553ca;
+  --color-accent-hover:  #0446a8;
+  --color-accent-light:  #eef3fe;
+  --color-accent-on-dark:#7fa8ff; /* 濃紺の上に置くラベル用の明るいアクセント */
   --color-white:         #ffffff;
-  --color-bg:            #f4f6f9;
-  --color-bg-light:      #f7f9fc;
-  --color-bg-dark:       #0f1923;
-  --color-text:          #1a1a1a;
-  --color-text-mid:      #45525f;
-  --color-text-sub:      #5a6a7a;
-  --color-text-light:    #8a9bb0;
-  --color-border:        #dde4ec;
-  --color-border-light:  #edf2f7;
+  --color-bg:            #f6f6f6;
+  --color-bg-light:      #fafafa;
+  --color-bg-dark:       #00235d;
+  --color-text:          #00235d;
+  --color-text-mid:      #23407c;
+  --color-text-sub:      #23477f;
+  --color-text-light:    #767676;
+  --color-border:        #e6e6e6;
+  --color-border-light:  #f0f0f0;
   --color-success:       #2d7a46;
   --color-line:          #00b900;
+  --color-gold:          #c19a3d; /* 実績まわりの月桂樹・章など */
 
   /* ---- Typography ---- */
   --font-base:  'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
@@ -1069,7 +1074,7 @@ h2, h3, h4, h5, h6 {
 }
 .company-intro-image img { width: 100%; display: block; }
 .founder-figure { position: relative; margin: 0; }
-.founder-figure img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.founder-figure img { width: 100%; aspect-ratio: 5/4; object-fit: cover; object-position: center 6%; display: block; }
 .founder-figure figcaption {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 32px 24px 18px;
@@ -1976,4 +1981,467 @@ h2, h3, h4, h5, h6 {
   .hero-numbers { flex-direction: column; gap: 16px; }
   .hero-number-item { padding: 0; border: none; }
   .stats-bar-value { font-size: 2.2rem; }
+}
+
+/* ============================================================
+   2026-08 リファイン第2弾（脱・AIっぽさ）— 参考: Sales Marker
+   方針:
+   - 同じ白カードのグリッドを繰り返さない。セクションごとに「型」を変える
+   - 課題＝左見出し＋チェックリスト（非対称）／理由＝罫線の編集レイアウト
+   - 成果＝1枚のデータパネル（縦罫）／サムネ欠落はデザイン済みの代替面で受ける
+   ============================================================ */
+
+/* ---- 1. 課題提示：左に見出し、右にチェックリスト ---- */
+.problem-section { background: var(--color-bg-light); }
+.problem-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 410px) 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.problem-head { position: sticky; top: calc(var(--header-height) + 40px); }
+.problem-head .section-title {
+  text-align: left;
+  font-size: clamp(1.5rem, 2.3vw, 1.95rem);
+  margin-bottom: 20px;
+}
+.problem-lead { font-size: 13.5px; line-height: 2; color: var(--color-text-sub); margin: 0; }
+
+.problem-list { border-top: 1px solid var(--color-border); }
+.problem-list li {
+  position: relative;
+  padding: 22px 0 22px 46px;
+  border-bottom: 1px solid var(--color-border);
+}
+.problem-list li::before {
+  content: '';
+  position: absolute; left: 0; top: 24px;
+  width: 22px; height: 22px;
+  border: 1.5px solid #c6d2e2; border-radius: 3px;
+  background: var(--color-white);
+}
+.problem-list li::after {
+  content: '';
+  position: absolute; left: 6px; top: 30px;
+  width: 10px; height: 5px;
+  border-left: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  transform: rotate(-45deg);
+}
+.problem-list p { font-size: 15px; line-height: 1.85; color: var(--color-text-mid); margin: 0; }
+.problem-list b { color: var(--color-primary); font-weight: 700; }
+
+.problem-bridge {
+  margin-top: 40px; text-align: left;
+  border-left: 3px solid var(--color-accent);
+  padding: 2px 0 2px 20px;
+}
+.problem-bridge p {
+  font-size: clamp(15px, 1.9vw, 18px); line-height: 1.8;
+  color: var(--color-primary); font-weight: 500; margin: 0;
+}
+
+/* ---- 2. 選ばれる理由：カードをやめ、罫線＋大きな番号の編集レイアウト ---- */
+.reasons-section { background: var(--color-white); }
+.reasons-section .reasons-grid {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 72px; row-gap: 0;
+  max-width: 1000px; margin: 0 auto;
+}
+.reasons-section .reason-card {
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+  padding: 30px 0;
+  border-top: 1px solid var(--color-border);
+  display: grid; grid-template-columns: 54px 1fr; column-gap: 20px;
+  align-items: start; transition: none;
+}
+.reasons-section .reason-card:hover { box-shadow: none; border-color: var(--color-border); }
+.reasons-section .reason-card:nth-child(1),
+.reasons-section .reason-card:nth-child(2) { border-top: 0; padding-top: 0; }
+.reasons-section .reason-number {
+  grid-column: 1; grid-row: 1 / span 2;
+  display: block; margin: 0;
+  font-family: var(--font-num); font-size: 2.5rem; font-weight: 700;
+  color: #c3d2e6; line-height: .92; letter-spacing: -0.03em;
+}
+.reasons-section .reason-number::before { content: none; }
+.reasons-section .reason-title { grid-column: 2; font-size: 17px; margin-bottom: 8px; }
+.reasons-section .reason-desc  { grid-column: 2; font-size: 13.5px; line-height: 1.9; }
+
+/* ---- 3. 成果ハイライト：カード3枚 → 1枚のデータパネル ---- */
+.results-section { background: var(--color-bg-light); }
+.results-panel {
+  max-width: 1000px; margin: 0 auto;
+  background: var(--color-white);
+  border: var(--hairline); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.results-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+.result-col { padding: 36px 34px 32px; border-left: 1px solid var(--color-border-light); }
+.result-col:first-child { border-left: 0; }
+.result-kpi {
+  display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em;
+  color: var(--color-text-sub); margin-bottom: 18px;
+}
+.result-figure { margin-bottom: 14px; }
+.result-col .rf-to { font-size: 2.9rem; }
+.result-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: none; padding: 0; border-radius: 0;
+  font-size: 12px; font-weight: 700; color: var(--color-accent); letter-spacing: .02em;
+}
+.result-badge::before { content: ''; width: 16px; height: 2px; background: var(--color-accent); }
+.result-ctx { margin-top: 18px; padding-top: 16px; font-size: 12.5px; }
+.results-foot {
+  display: flex; align-items: center; gap: 20px 28px; flex-wrap: wrap;
+  padding: 22px 34px;
+  background: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+}
+.rfoot-lead { font-size: 13.5px; color: var(--color-text-mid); }
+.rfoot-lead b { color: var(--color-primary); font-weight: 700; }
+.rfoot-items { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-left: auto; }
+.rfoot-items span {
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 700; color: var(--color-primary);
+}
+.rfoot-items span + span::before {
+  content: ''; width: 1px; height: 12px; background: var(--color-border); margin-right: 14px;
+}
+
+/* ---- 4. サムネイル欠落時の代替面（記事OGPと同じ作法の面で受ける） ---- */
+.blog-teaser-thumb, .case-teaser-thumb, .post-card-thumb { position: relative; background: var(--color-primary); }
+.blog-teaser-thumb > img, .case-teaser-thumb > img, .post-card-thumb > img { position: relative; z-index: 1; }
+.thumb-fallback {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+  padding: 16px 18px;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px),
+    linear-gradient(140deg, #163a76 0%, #0f2c5c 58%, #0a1f45 100%);
+}
+.thumb-fallback .tf-cat {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  color: #14315e; background: #d9b356; padding: 4px 10px; border-radius: 2px;
+}
+.thumb-fallback .tf-mark {
+  font-family: var(--font-num); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.45);
+}
+.blog-teaser-card:nth-child(2) .thumb-fallback,
+.case-teaser-card:nth-child(2) .thumb-fallback {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px),
+    linear-gradient(200deg, #12336a 0%, #0d2751 60%, #0a1f45 100%);
+}
+.blog-teaser-card:nth-child(3) .thumb-fallback,
+.case-teaser-card:nth-child(3) .thumb-fallback {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 1px, transparent 1px 14px),
+    linear-gradient(160deg, #0d2751 0%, #14356c 100%);
+}
+
+/* ---- 5. 採用ポイント：四角ドット → 細いアクセント罫 ---- */
+.recruit-point { padding: 20px 0 20px 40px; }
+.recruit-point::before {
+  width: 24px; height: 2px; border-radius: 0; top: 30px;
+  background: var(--color-accent-on-dark);
+}
+.recruit-point:first-child::before { top: 12px; }
+.recruit-point h4 { font-size: 16px; margin-bottom: 6px; }
+.recruit-point p { font-size: 13.5px; color: rgba(255,255,255,.72); }
+
+/* ---- 6. ヒーローの約束カード：アクセント帯と強い影をやめる ---- */
+.hero-proof {
+  border-top: 0;
+  border: 1px solid rgba(15,44,92,.10);
+  border-radius: 14px;
+  box-shadow: 0 16px 44px rgba(9,26,52,.26);
+  padding: 32px 34px 28px;
+}
+.hero-promise li::before {
+  content: ''; top: 26px; left: 0;
+  width: 14px; height: 2px; background: var(--color-accent);
+}
+.hero-promise li:first-child::before { top: 17px; }
+.hero-promise li { padding-left: 30px; }
+
+/* ---- レスポンシブ（本リファイン分） ---- */
+@media (max-width: 960px) {
+  .problem-layout { grid-template-columns: 1fr; gap: 40px; }
+  .problem-head { position: static; }
+  .results-cols { grid-template-columns: 1fr; }
+  .result-col { border-left: 0; border-top: 1px solid var(--color-border-light); }
+  .result-col:first-child { border-top: 0; }
+  .results-foot { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .rfoot-items { margin-left: 0; }
+}
+@media (max-width: 768px) {
+  .reasons-section .reasons-grid { column-gap: 40px; }
+}
+@media (max-width: 600px) {
+  .reasons-section .reasons-grid { grid-template-columns: 1fr; }
+  .reasons-section .reason-card:nth-child(2) { border-top: 1px solid var(--color-border); padding-top: 30px; }
+  .reasons-section .reason-number { font-size: 2.1rem; }
+  .result-col { padding: 28px 22px; }
+  .results-foot { padding: 20px 22px; }
+}
+
+/* ============================================================
+   2026-08-10 リファイン第3弾：色と線の設計を入れ替える
+   Sales Marker(sales-marker.jp)の実測に合わせる。
+   採取値: 見出し/本文/濃紺面 #00235D ／ ヒーロー青 #06398D ／
+           CTA青 #0553CA ／ 面グレー #F6F6F6（青みゼロのニュートラル）
+   要点:
+   - 文字色を4種類の青グレーから濃紺1色に統一（AI量産テンプレの最大の特徴を消す）
+   - 1pxのグレー枠を極力使わない。面（余白＋ニュートラルグレー）と影で階層を作る
+   - 角丸は「小物8px／カード16px／大きな面24px」に整理（全部同じ角丸をやめる）
+   - 実績数字は月桂樹（受賞・実績の作法）で見せる
+   ============================================================ */
+
+/* ---- タイポ：詰めすぎをやめ、日本語が呼吸する字送りに ---- */
+body { letter-spacing: .01em; }
+h2, h3, h4, h5, h6 { letter-spacing: .005em; }
+.section-title { letter-spacing: .005em; line-height: 1.46; }
+.hero h1 { letter-spacing: .01em; }
+
+/* ---- セクションラベル：色付き文字だけ → 短い罫＋ラベル ---- */
+.section-label {
+  display: block;
+  font-size: 12.5px; font-weight: 700; letter-spacing: .12em;
+  color: var(--color-primary); text-transform: none;
+  margin-bottom: 18px;
+}
+/* 罫はinline-blockで置く（displayをblockに保つことで、
+   中央寄せの見出しブロックでは罫ごと中央に、左寄せでは左に自動で揃う） */
+.section-label::before {
+  content: ''; display: inline-block;
+  width: 32px; height: 2px; margin-right: 12px; margin-bottom: 4px;
+  vertical-align: middle; background: var(--color-accent);
+}
+.recruit-teaser-content .section-label,
+.final-cta .section-label { color: rgba(255,255,255,.9); }
+.recruit-teaser-content .section-label::before,
+.final-cta .section-label::before { background: var(--color-accent-on-dark); }
+.clients-section .section-label { display: block; }
+
+/* ---- ボタン：角丸を落ち着かせ、文字を締める ---- */
+.btn { border-radius: 8px; font-weight: 700; letter-spacing: .04em; }
+.btn-lg { padding: 17px 38px; }
+
+/* ---- 枠線カードを廃止：面＋やわらかい影 ---- */
+.service-card,
+.blog-teaser-card,
+.case-teaser-card,
+.post-card,
+.card {
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 28px rgba(0,0,0,.06);
+}
+.service-card:hover,
+.blog-teaser-card:hover,
+.case-teaser-card:hover,
+.post-card:hover {
+  border-color: transparent;
+  box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 18px 44px rgba(0,0,0,.10);
+  transform: translateY(-2px);
+}
+.blog-teaser-thumb, .case-teaser-thumb, .post-card-thumb { border-bottom: 0; }
+.faq-list { border: 0; border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 28px rgba(0,0,0,.06); }
+
+/* ---- ヒーロー：濃紺を彩度のある青のグラデーションに ---- */
+.hero::before {
+  background: linear-gradient(160deg, #06398d 0%, #00235d 72%);
+}
+.hero-proof {
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,20,60,.30);
+}
+
+/* ---- 数字バー：縦罫を外して余白で切る ---- */
+.stats-bar { background: var(--color-primary); padding: 56px 0; }
+.stats-bar-item { border-right: 0; padding: 0 24px; }
+.stats-bar-value { font-size: 3.7rem; letter-spacing: -.02em; }
+.stats-bar-label { font-size: .82rem; letter-spacing: .1em; color: rgba(255,255,255,.66); margin-top: 10px; }
+
+/* ---- 課題チェックリスト：線を薄いニュートラルに ---- */
+.problem-list li::before { border-color: #dcdcdc; }
+.problem-list li, .problem-list { border-color: var(--color-border); }
+
+/* ---- 選ばれる理由：番号を青みグレー → 濃紺の淡いトーンに ---- */
+.reasons-section .reason-number { color: rgba(0,35,93,.20); }
+
+/* ---- 成果：月桂樹のKPI（受賞・実績の作法） ---- */
+.results-section { background: var(--color-white); }
+.kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  max-width: 1120px; margin: 0 auto;
+}
+.kpi { text-align: center; }
+.kpi-figure {
+  position: relative; width: 250px; max-width: 100%;
+  aspect-ratio: 250 / 150; margin: 0 auto;
+}
+.kpi-figure svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--color-gold); }
+.kpi-body {
+  position: absolute; inset: 0; padding: 0 26px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+}
+.kpi-label { font-size: 16px; font-weight: 700; color: var(--color-primary); letter-spacing: .01em; }
+.kpi-value {
+  font-family: var(--font-num); font-weight: 800; line-height: 1;
+  font-size: clamp(2.2rem, 3.4vw, 3.1rem); color: var(--color-primary); letter-spacing: -.03em;
+  display: inline-flex; align-items: baseline; gap: 6px;
+}
+.kpi-value small { font-size: .36em; font-weight: 700; letter-spacing: 0; }
+.kv-from { font-size: .38em; font-weight: 700; color: #8a8a8a; }
+.kv-arrow { font-size: .32em; color: var(--color-accent); margin: 0 -2px; }
+.kpi-note { font-size: 12px; line-height: 1.8; color: #5c5c5c; margin-top: 10px; }
+.kpi-industries {
+  text-align: center; margin: 44px auto 0; max-width: 760px;
+  font-size: 14px; color: var(--color-text-sub); line-height: 1.9;
+}
+.kpi-industries b { color: var(--color-primary); font-weight: 700; }
+.results-note { color: var(--color-text-light); margin-top: 24px; }
+@media (max-width: 1040px) { .kpi-row { grid-template-columns: 1fr 1fr; gap: 32px 12px; } }
+@media (max-width: 560px) { .kpi-row { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ---- 中間CTA：淡い水色帯 → 彩度のある青帯 ---- */
+.mid-cta {
+  background: linear-gradient(105deg, #00235d 0%, #0553ca 100%);
+  border-top: 0; border-bottom: 0; padding: 56px 0;
+}
+.mid-cta-text h3 { color: var(--color-white); }
+.mid-cta-text p { color: rgba(255,255,255,.78); }
+.mid-cta .btn-primary { background: var(--color-white); color: var(--color-primary); border-color: var(--color-white); }
+.mid-cta .btn-primary:hover { background: #eef3fe; color: var(--color-primary); border-color: #eef3fe; }
+
+/* ---- 採用：濃紺面の上端をゆるいアーチで抜く ---- */
+.recruit-teaser {
+  border-top-left-radius: 50% 64px;
+  border-top-right-radius: 50% 64px;
+  margin-top: 40px;
+}
+
+/* ---- サムネ代替面：新しい濃紺に合わせる ---- */
+.thumb-fallback {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px),
+    linear-gradient(140deg, #06398d 0%, #00235d 62%, #001a45 100%);
+}
+.blog-teaser-card:nth-child(2) .thumb-fallback,
+.case-teaser-card:nth-child(2) .thumb-fallback {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px),
+    linear-gradient(200deg, #04347f 0%, #00235d 60%, #001a45 100%);
+}
+.blog-teaser-card:nth-child(3) .thumb-fallback,
+.case-teaser-card:nth-child(3) .thumb-fallback {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 1px, transparent 1px 14px),
+    linear-gradient(160deg, #00235d 0%, #06398d 100%);
+}
+
+/* ---- フッター：青みグレーの文字を排除 ---- */
+.footer-bottom { color: rgba(255,255,255,.55); }
+.footer-bottom-links a { color: rgba(255,255,255,.55); }
+.footer-bottom-links a:hover { color: var(--color-white); }
+
+/* ---- 図解のサブカラーも新しい青に ---- */
+.pm-dot-b { background: #2f7ae8; }
+.cov-b { background: #2f7ae8; }
+
+/* ---- 記事詳細のアイキャッチ未設定：灰色の空箱 → 記事OGPと同じ紺の面 ---- */
+.detail-thumb-placeholder {
+  border: 0;
+  border-radius: 16px;
+  color: rgba(255,255,255,.5);
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10px),
+    linear-gradient(140deg, #06398d 0%, #00235d 62%, #001a45 100%);
+}
+.detail-thumb-placeholder i, .detail-thumb-placeholder svg { display: none; }
+.detail-thumb-placeholder::after {
+  content: 'SALESAURUS';
+  font-family: var(--font-num); font-size: 13px; font-weight: 700; letter-spacing: .26em;
+}
+
+/* ---- 実績の補足ファクト（数字にしづらい実績を並べる） ---- */
+.kpi-facts {
+  max-width: 760px; margin: 48px auto 0;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.kpi-facts li {
+  position: relative; padding-left: 22px;
+  font-size: 14.5px; line-height: 1.85; color: var(--color-text-sub);
+}
+.kpi-facts li::before {
+  content: ''; position: absolute; left: 0; top: 11px;
+  width: 8px; height: 8px; border-radius: 1px;
+  background: var(--color-gold);
+}
+.kpi-facts b { color: var(--color-primary); font-weight: 700; }
+
+/* ---- 読み込み中の見え方：文字ではなくスケルトン ----
+   一覧はJS描画のため、データ到着まで一瞬プレースホルダが出る。
+   「読み込み中...」の文字は壊れて見えるので、面のスケルトンに置き換える。 */
+.loading-spinner {
+  font-size: 0; color: transparent; grid-column: 1 / -1;
+  padding: 0; margin: 0;
+}
+.loading-spinner::before {
+  content: ''; display: block; width: 100%; height: 220px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f2f2f2 0%, #ebebeb 50%, #f2f2f2 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .loading-spinner::before { animation: none; } }
+
+/* 説明文の折り返しで最終行に1〜2文字だけ残る（泣き別れ）のを防ぐ */
+.section-desc { max-width: 720px; }
+
+/* ---- 取引実績：ロゴを出せない企業を「テキストの実績」として置く場所 ---- */
+.client-notes {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 36px;
+  max-width: 900px; margin: 36px auto 0;
+}
+.client-notes li {
+  position: relative; padding-left: 20px;
+  font-size: 14px; line-height: 1.8; color: var(--color-text-sub);
+}
+.client-notes li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 8px; height: 8px; border-radius: 1px; background: var(--color-gold);
+}
+.client-notes b { color: var(--color-primary); font-weight: 700; }
+
+/* ---- 成果の裏づけ：クライアント本人のインタビューへ ---- */
+.proof-voice { max-width: 760px; margin: 46px auto 0; text-align: center; }
+.pv-lead { font-size: 15.5px; line-height: 1.9; color: var(--color-text-sub); margin-bottom: 18px; }
+.pv-lead b { color: var(--color-primary); font-weight: 700; }
+.pv-link {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 14px 22px; border-radius: 12px;
+  background: var(--color-bg);
+  color: var(--color-primary); text-align: left;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.pv-link:hover {
+  background: var(--color-white); color: var(--color-primary);
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 28px rgba(0,0,0,.08);
+}
+.pv-tag {
+  flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  color: #14315e; background: var(--color-gold); padding: 5px 10px; border-radius: 3px;
+}
+.pv-title { font-size: 14px; font-weight: 700; line-height: 1.6; }
+.pv-arrow { color: var(--color-accent); font-weight: 700; }
+@media (max-width: 560px) {
+  .pv-link { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .pv-title { font-size: 13.5px; }
 }
