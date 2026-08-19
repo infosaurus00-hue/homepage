@@ -29,13 +29,42 @@ const stripTags = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/
 const abs = p => !p ? '' : (p.startsWith('http') ? p : ORIGIN + '/' + p.replace(/^\//, ''));
 const fmtDate = d => { const t = new Date(d); return `${t.getFullYear()}年${t.getMonth() + 1}月${t.getDate()}日`; };
 
-/* ---- FAQ抽出（<h3>Q. …</h3><p>A. …</p> パターン） → FAQPage schema ---- */
+/* ---- FAQ抽出 → FAQPage schema ----
+   「よくある質問 / FAQ」のH2セクション内だけを走査し、その中の <h3>質問</h3><p>回答</p> を拾う。
+   「Q.」「A.」の接頭辞は付いていても付いていなくてもよい（記事ごとに表記ゆれがあるため）。
+   セクションを限定しているので、本文中の普通のh3+pを誤ってFAQ扱いすることはない。 ---- */
 function extractFaq(html) {
-  const re = /<h3>\s*Q[0-9]*[\.．。:：]?\s*(.*?)<\/h3>\s*<p>\s*A[0-9]*[\.．。:：]?\s*(.*?)<\/p>/gis;
+  const s = String(html || '');
+  const sec = s.match(/<h2[^>]*>(?:(?!<\/h2>)[\s\S])*?(?:よくある質問|FAQ)(?:(?!<\/h2>)[\s\S])*?<\/h2>([\s\S]*?)(?=<h2|$)/i);
+  if (!sec) return [];
+  // 記事によって <h3>/<p> 形式と <dl><dt>/<dd> 形式の2通りがあるので両方拾う
+  const pats = [
+    /<h3[^>]*>\s*(?:Q\s*[0-9]*\s*[\.．。:：]?)?\s*([\s\S]*?)<\/h3>\s*<p[^>]*>\s*(?:A\s*[0-9]*\s*[\.．。:：]?)?\s*([\s\S]*?)<\/p>/gi,
+    /<dt[^>]*>\s*(?:Q\s*[0-9]*\s*[\.．。:：]?)?\s*([\s\S]*?)<\/dt>\s*<dd[^>]*>\s*(?:A\s*[0-9]*\s*[\.．。:：]?)?\s*([\s\S]*?)<\/dd>/gi,
+    /<p[^>]*>\s*<(?:b|strong)>\s*Q\s*[0-9]*\s*[\.．。:：]\s*([\s\S]*?)<\/(?:b|strong)>\s*<\/p>\s*<p[^>]*>\s*A\s*[0-9]*\s*[\.．。:：]?\s*([\s\S]*?)<\/p>/gi,
+  ];
+  const out = [];
+  for (const re of pats) {
+    let m;
+    while ((m = re.exec(sec[1])) !== null) {
+      const q = stripTags(m[1]), a = stripTags(m[2]);
+      if (q && a) out.push({ q, a });
+    }
+    if (out.length) break;
+  }
+  return out;
+}
+
+/* ---- 手順抽出 → HowTo schema ----
+   <h3>ステップ1：…</h3><p>…</p> のような連番手順が3つ以上ある記事だけ HowTo を付ける。
+   AIが手順として抽出しやすくなる（「〜のやり方」系クエリへの引用対策）。 ---- */
+function extractSteps(html) {
+  const s = String(html || '');
+  const re = /<h3[^>]*>\s*(?:ステップ|STEP|Step|手順)\s*[0-9０-９]+\s*[：:．\.、]?\s*([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
   const out = []; let m;
-  while ((m = re.exec(html)) !== null) {
-    const q = stripTags(m[1]), a = stripTags(m[2]);
-    if (q && a) out.push({ q, a });
+  while ((m = re.exec(s)) !== null) {
+    const name = stripTags(m[1]), text = stripTags(m[2]);
+    if (name && text) out.push({ name, text });
   }
   return out;
 }
@@ -72,8 +101,12 @@ function pageHtml(post) {
     {
       '@context': 'https://schema.org', '@type': 'BlogPosting',
       headline: post.title, description: stripTags(desc),
-      image: [img], datePublished: post.date, dateModified: post.date,
-      author: { '@type': 'Organization', name: '株式会社Salesaurus', url: ORIGIN + '/' },
+      image: [img], datePublished: post.date, dateModified: post.updated || post.date,
+      author: {
+        '@type': 'Person', name: '峠大輝', jobTitle: '代表取締役',
+        url: ORIGIN + '/message/', sameAs: ['https://note.com/daiki_toge'],
+        worksFor: { '@type': 'Organization', name: '株式会社Salesaurus', url: ORIGIN + '/' },
+      },
       publisher: { '@type': 'Organization', name: '株式会社Salesaurus', logo: { '@type': 'ImageObject', url: ORIGIN + '/images/logo.png' } },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       articleSection: post.category || undefined,
@@ -91,6 +124,13 @@ function pageHtml(post) {
   if (faq.length >= 2) ld.push({
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+
+  const steps = extractSteps(post.content || '');
+  if (steps.length >= 3) ld.push({
+    '@context': 'https://schema.org', '@type': 'HowTo',
+    name: post.title, description: stripTags(desc),
+    step: steps.map((st, k) => ({ '@type': 'HowToStep', position: k + 1, name: st.name, text: st.text, url: `${url}#step${k + 1}` })),
   });
 
   const eyecatchHtml = eyecatchOk
