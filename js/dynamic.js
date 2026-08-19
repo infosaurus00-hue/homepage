@@ -350,7 +350,7 @@ function renderNewsDetail() {
       </div>
       <div class="detail-content">
         ${item.content}
-        ${item.link ? `<div style="margin-top:20px;"><a href="${item.link}" class="btn btn-primary">詳しくはこちら</a></div>` : ''}
+        ${item.link ? `<div style="margin-top:20px;"><a href="${item.link}" class="btn btn-primary"${/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : ''}>詳しくはこちら</a></div>` : ''}
       </div>
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--color-border);text-align:center;">
         <a href="${SITE_BASE}/news/" class="btn btn-secondary">← お知らせ一覧へ戻る</a>
@@ -463,22 +463,25 @@ function renderTopCase() {
   const container = document.getElementById('top-case-container');
   if (!container) return;
   const cases = CASE_STUDIES.filter(c => c.status === 'published').slice(0, 3);
-  container.innerHTML = cases.map(c => {
+  // トップは「カード3枚」を3セクション連続で使わないため、事例は罫線のリストで見せる
+  container.innerHTML = cases.map((c, i) => {
     const service = SITE_CONFIG.services.find(s => s.id === c.service);
     return `
-    <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="case-teaser-card">
-      <div class="case-teaser-thumb">${thumbFallback(c.issueCategory)}${thumbImage(c.eyecatch, c.title)}</div>
-      <div class="case-teaser-body">
-        <div class="case-teaser-meta">
+    <a href="${SITE_BASE}/case/detail/?slug=${c.slug}" class="case-row">
+      <span class="case-row-no">CASE <b>${String(i + 1).padStart(2, '0')}</b></span>
+      <span class="case-row-main">
+        <span class="case-row-meta">
           <span class="badge ${service?.badgeClass || 'badge-primary'}">${service?.name || ''}</span>
-          <span class="badge badge-outline">${c.issueCategory}</span>
-        </div>
-        <div class="case-teaser-title">${c.title}</div>
-        <div class="case-teaser-result"><i class="fas fa-chart-bar"></i> ${c.resultSummary}</div>
-      </div>
+          <span class="case-row-issue">${c.issueCategory}</span>
+        </span>
+        <span class="case-row-title">${c.title}</span>
+      </span>
+      <span class="case-row-result">${c.resultSummary}</span>
+      <span class="case-row-arrow" aria-hidden="true">→</span>
     </a>`;
   }).join('');
 }
+
 
 function renderTopNews() {
   const container = document.getElementById('top-news-container');
