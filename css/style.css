@@ -2508,3 +2508,23 @@ h2, h3, h4, h5, h6 { letter-spacing: .005em; }
   .media-link { flex-wrap: wrap; }
   .media-link-arrow { margin-left: 0; }
 }
+
+/* ---- 記事下の関連記事（内部リンク） ---- */
+.detail-related { margin: 56px 0 40px; }
+.detail-related h2 {
+  font-size: 20px; font-weight: 700; color: var(--color-primary);
+  margin: 0 0 18px; padding-bottom: 10px; border-bottom: 2px solid var(--color-border);
+}
+.detail-related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.detail-related li { margin: 0; }
+.detail-related a {
+  display: block; padding: 14px 16px; border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md); text-decoration: none; transition: border-color .2s, background-color .2s;
+}
+.detail-related a:hover { border-color: var(--color-accent); background: var(--color-bg-light); }
+.detail-related .related-cat {
+  display: block; font-size: 11px; letter-spacing: .04em; color: var(--color-accent); margin-bottom: 4px;
+}
+.detail-related .related-title {
+  display: block; font-size: 14px; font-weight: 600; color: var(--color-primary); line-height: 1.6;
+}

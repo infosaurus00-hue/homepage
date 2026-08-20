@@ -81,6 +81,41 @@ function sidebar(relService) {
   </aside>`;
 }
 
+/* ---- 関連記事（内部リンク） ----
+   記事同士がリンクで繋がっていないと、クローラは一覧とsitemapからしか記事に辿り着けず、
+   トピックのまとまり（クラスタ）もGoogleに伝わらない。
+   slugの単語一致（idf重み付け）＋同カテゴリ加点で近い記事を4本選び、本文末に静的リンクを置く。 ---- */
+const STOP = new Set(['guide', 'no', 'to', 'vs', 'de', 'wo', 'ga', 'ni']);
+const slugTokens = p => String(p.slug || '').split('-').filter(w => w.length > 1 && !STOP.has(w));
+
+// 全記事でのトークン出現数（よく出る単語ほど関連の証拠として弱いので重みを下げる）
+const DF = new Map();
+function buildDf(posts) {
+  for (const p of posts) for (const w of new Set(slugTokens(p))) DF.set(w, (DF.get(w) || 0) + 1);
+}
+
+function relatedPosts(post, posts, n = 4) {
+  const mine = new Set(slugTokens(post));
+  const scored = posts
+    .filter(p => p.slug !== post.slug && !p.externalUrl && p.status === 'published')
+    .map(p => {
+      let score = post.category && p.category === post.category ? 1.5 : 0;
+      for (const w of new Set(slugTokens(p))) if (mine.has(w)) score += 1 / Math.log2((DF.get(w) || 1) + 2);
+      return { p, score };
+    })
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score || String(b.p.date).localeCompare(String(a.p.date)));
+  return scored.slice(0, n).map(x => x.p);
+}
+
+function relatedHtml(post, posts) {
+  const rel = relatedPosts(post, posts);
+  if (!rel.length) return '';
+  const items = rel.map(r =>
+    `<li><a href="/blog/${r.slug}/"><span class="related-cat">${esc(r.category || '')}</span><span class="related-title">${esc(r.title)}</span></a></li>`).join('');
+  return `<section class="detail-related"><h2>あわせて読みたい</h2><ul>${items}</ul></section>`;
+}
+
 /* ---- CTA（静的） ---- */
 function cta(post) {
   const t = esc(post.ctaText || 'まずはお気軽にご相談ください');
@@ -174,6 +209,7 @@ ${post.lead ? `<div class="detail-lead">${post.lead}</div>` : ''}
 </div>
 ${eyecatchHtml}
 <div class="detail-content">${post.content || ''}</div>
+${relatedHtml(post, POSTS)}
 ${cta(post)}
 </article>
 ${sidebar(relService)}
@@ -193,6 +229,7 @@ ${sidebar(relService)}
 
 /* ---- 生成 ---- */
 const published = POSTS.filter(p => p.status === 'published');
+buildDf(published.filter(p => !p.externalUrl));
 const internal = published.filter(p => !p.externalUrl);
 let n = 0;
 for (const post of internal) {
