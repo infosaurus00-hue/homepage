@@ -29,7 +29,10 @@ function renderBlogList() {
   const container = document.getElementById('blog-list-container');
   if (!container) return;
 
-  const posts = BLOG_POSTS.filter(p => p.status === 'published');
+  // 公開日の新しい順に並べる（blogs.js の配列順は公開した順なので日付が前後するため）
+  const posts = BLOG_POSTS.filter(p => p.status === 'published')
+    .slice()
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
   // カテゴリフィルターボタン
   const filterWrap = document.getElementById('blog-filter');
@@ -437,7 +440,8 @@ function renderTopBlog() {
   // 人気記事（popular: 数値）を優先表示し、足りなければ最新で補完してTOP3
   const published = BLOG_POSTS.filter(p => p.status === 'published');
   const ranked = published.filter(p => typeof p.popular === 'number').sort((a, b) => a.popular - b.popular);
-  const rest = published.filter(p => typeof p.popular !== 'number');
+  const rest = published.filter(p => typeof p.popular !== 'number')
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
   const posts = [...ranked, ...rest].slice(0, 3);
   container.innerHTML = posts.map(post => {
     const isExternal = !!post.externalUrl;
