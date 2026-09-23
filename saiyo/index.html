@@ -244,6 +244,24 @@
   .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--hair);box-shadow:0 -6px 22px hsl(214 45% 22% / .1);padding:10px 16px;display:none;}
   .sticky .cta{width:100%;padding:14px;font-size:15.5px;flex-direction:row;}
 
+  /* ===== 写真ブロック ===== */
+  .photo{margin:var(--s6) auto 0;border-radius:14px;overflow:hidden;border:1px solid var(--hair);box-shadow:var(--sh-sm);background:#fff;}
+  .photo.portrait{max-width:440px;}
+  .photo img{display:block;width:100%;height:auto;}
+  .photo figcaption{font-size:12.5px;color:var(--sub);padding:11px 16px 12px;background:var(--surface);border-top:1px solid var(--hair);line-height:1.65;}
+
+  /* ===== 画像プレースホルダ（読み込み中／未反映のとき）===== */
+  .imgload{position:relative;width:100%;border-radius:14px;border:1px solid var(--hair);
+    background:#eef1f5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;overflow:hidden;}
+  .imgload.portrait{max-width:320px;aspect-ratio:3/4;margin-inline:auto;}
+  .imgload.wide{aspect-ratio:16/9;}
+  .imgload .spin{width:26px;height:26px;border-radius:50%;border:3px solid #cfd8e2;border-top-color:#94a2b2;animation:imgspin .9s linear infinite;}
+  .imgload span{font-family:var(--num);font-size:12.5px;letter-spacing:.1em;color:#93a1b1;}
+  .imgload.on-dark{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);}
+  .imgload.on-dark .spin{border-color:rgba(255,255,255,.18);border-top-color:#9fb2c9;}
+  .imgload.on-dark span{color:#9fb2c9;}
+  @keyframes imgspin{to{transform:rotate(360deg);}}
+
   /* ===== レスポンシブ ===== */
   @media(max-width:860px){
     .fv-inner{grid-template-columns:1fr;gap:var(--s5);padding:var(--s6) 22px var(--s8);}
@@ -326,6 +344,10 @@
       <span class="mini">仕事内容</span>
       <h2 class="sec-head">企業に営業をかけ、商談をつくり、提案する仕事です。</h2>
       <p class="body">業務委託として、当社の営業代行の案件を担当していただきます。担当する案件によって業務の範囲は変わり、<b style="color:var(--navy);">架電からアポイント取得までのインサイドセールスが中心の案件</b>もあれば、<b style="color:var(--navy);">商談・提案まで一貫して担当する案件</b>もあります。主な業務は次のとおりです。</p>
+      <figure class="photo portrait">
+        <img src="https://sales-saurus.com/images/recruit-office.jpg" alt="架電チームの営業現場の様子" loading="lazy">
+        <figcaption>実際の営業現場。架電から商談まで、チームで声をかけ合いながら改善して進めます。</figcaption>
+      </figure>
       <ul class="tasks">
         <li><b>1</b><span>企業への架電（リストをもとにアプローチ）</span></li>
         <li><b>2</b><span>担当者へのヒアリング</span></li>
@@ -441,6 +463,8 @@
       <span class="mini">勤務地・出社について</span>
       <h2 class="sec-head">出社先は、担当する案件によって変わります。</h2>
       <p class="body">特定のオフィスに毎日出社する働き方ではありません。担当する案件によって、当社が指定する場所や、クライアント先など、稼働する場所が変わります（東京都内が中心です）。</p>
+      <!-- 写真が用意でき次第、この div を <figure class="photo"><img ...></figure> に差し替える -->
+      <div class="imgload wide" style="margin-top:var(--s5);" role="img" aria-label="オフィスの様子（読み込み中）"><span class="spin"></span><span>Loading…</span></div>
       <div class="caution" style="margin-top:var(--s3);background:#fff;">
         <p>稼働を始めた直後は、出社をお願いする場合があります。目的は、担当する案件の理解、営業トークの共有、業務の進め方をそろえるためです。</p>
         <p>案件によっては継続的な出社が必要なものもあれば、リモートで進められるものもあります。リモートに移行できる時期は人によって異なり、最初から完全リモートになるとは限りません。この点は面談で正直にお伝えします。</p>
@@ -452,6 +476,8 @@
   <section class="rep pad">
     <div class="rep-inner">
       <span class="mini on-dark">代表について</span>
+      <!-- 代表写真が用意でき次第、この div を <figure class="photo"><img ...></figure> に差し替える -->
+      <div class="imgload portrait on-dark" style="margin:var(--s5) 0;" role="img" aria-label="代表 峠大輝（読み込み中）"><span class="spin"></span><span>Loading…</span></div>
       <div class="quote">
         <blockquote>いきなり一人でリモートで結果を出し続けるのは、正直かんたんではありません。だからこそ、最初は一緒に案件を理解するところから始めたいと思っています。</blockquote>
         <p class="qname">株式会社Salesaurus 代表 ／ 峠 大輝</p>
