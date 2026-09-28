@@ -46,28 +46,28 @@
 
           <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqlvvon" method="POST" onsubmit="handleSubmit(event)">
             <div class="form-group">
-              <label class="form-label">会社名<span class="form-required">*必須</span></label>
-              <input type="text" class="form-input" name="company" placeholder="株式会社○○" required>
+              <label class="form-label" for="f-company">会社名<span class="form-required">*必須</span></label>
+              <input type="text" id="f-company" class="form-input" name="company" placeholder="株式会社○○" autocomplete="organization" required>
             </div>
             <div class="form-group">
-              <label class="form-label">お名前<span class="form-required">*必須</span></label>
-              <input type="text" class="form-input" name="name" placeholder="山田 太郎" required>
+              <label class="form-label" for="f-name">お名前<span class="form-required">*必須</span></label>
+              <input type="text" id="f-name" class="form-input" name="name" placeholder="山田 太郎" autocomplete="name" required>
             </div>
             <div class="form-group">
-              <label class="form-label">メールアドレス<span class="form-required">*必須</span></label>
-              <input type="email" class="form-input" name="email" placeholder="info@example.com" required>
+              <label class="form-label" for="f-email">メールアドレス<span class="form-required">*必須</span></label>
+              <input type="email" id="f-email" class="form-input" name="email" placeholder="info@example.com" autocomplete="email" required>
             </div>
             <div class="form-group">
-              <label class="form-label">電話番号</label>
-              <input type="tel" class="form-input" name="tel" placeholder="03-XXXX-XXXX">
+              <label class="form-label" for="f-tel">電話番号</label>
+              <input type="tel" id="f-tel" class="form-input" name="tel" placeholder="03-XXXX-XXXX" autocomplete="tel">
             </div>
             <div class="form-group">
-              <label class="form-label">役職</label>
-              <input type="text" class="form-input" name="position" placeholder="代表取締役・営業部長など">
+              <label class="form-label" for="f-position">役職</label>
+              <input type="text" id="f-position" class="form-input" name="position" placeholder="代表取締役・営業部長など" autocomplete="organization-title">
             </div>
             <div class="form-group">
-              <label class="form-label">従業員数</label>
-              <select class="form-select" name="employees">
+              <label class="form-label" for="f-employees">従業員数</label>
+              <select id="f-employees" class="form-select" name="employees">
                 <option value="">選択してください</option>
                 <option>1〜5名</option>
                 <option>6〜20名</option>
@@ -77,8 +77,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">ご興味のあるサービス<span class="form-required">*必須</span></label>
-              <select class="form-select" name="service" required>
+              <label class="form-label" for="f-service">ご興味のあるサービス<span class="form-required">*必須</span></label>
+              <select id="f-service" class="form-select" name="service" required>
                 <option value="">選択してください</option>
                 <option>アポヨロ！｜営業代行サービス</option>
                 <option>セールス航海士｜営業コンサルサービス</option>
@@ -90,14 +90,14 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">お問い合わせ内容<span class="form-required">*必須</span></label>
-              <textarea class="form-textarea" name="message" rows="6" placeholder="現在の課題・ご要望・ご質問などをご記入ください" required></textarea>
+              <label class="form-label" for="f-message">お問い合わせ内容<span class="form-required">*必須</span></label>
+              <textarea id="f-message" class="form-textarea" name="message" rows="6" placeholder="現在の課題・ご要望・ご質問などをご記入ください" required></textarea>
             </div>
             <div class="form-group">
               <label class="form-checkbox">
                 <input type="checkbox" required>
                 <span class="form-checkbox-text">
-                  <a href="privacy-policy/" style="color:var(--color-accent);" target="_blank">プライバシーポリシー</a>に同意します
+                  <a href="privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー<span class="visually-hidden">（新しいタブで開きます）</span></a>に同意します
                 </span>
               </label>
             </div>

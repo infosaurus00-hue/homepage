@@ -36,13 +36,14 @@ function renderHeader() {
     <a href="${SITE_BASE}${c.url}">${c.name}</a>`).join('');
 
   const html = `
+  <a href="#main-content" class="skip-link">本文へスキップ</a>
   <header id="site-header">
     <div class="container">
       <div class="header-inner">
         <a href="${SITE_BASE}/" class="header-logo">
           <img src="${SITE_BASE}/images/logo.png" alt="Salesaurus" class="header-logo-img">
         </a>
-        <nav class="header-nav">
+        <nav class="header-nav" aria-label="メインナビゲーション">
           <div class="nav-item">
             <a href="${SITE_BASE}/services/" class="nav-link ${currentPath.startsWith('/services') ? 'active' : ''}">
               サービス <span class="nav-arrow">▼</span>
@@ -77,13 +78,13 @@ function renderHeader() {
           <a href="${cfg.lineUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-line">LINE相談</a>
           <a href="${SITE_BASE}${cfg.contactFormUrl}" class="btn btn-sm btn-primary">お問い合わせ</a>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <button class="hamburger" id="hamburger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
-  <div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav" id="mobile-nav" aria-label="メニュー">
     <div class="mobile-nav-section">
       <div class="mobile-nav-label">サービス</div>
       ${cfg.nav.services.map(s => `<a href="${SITE_BASE}${s.url}">${navIconMap[s.url] || ''} ${s.name} ｜ ${s.type}</a>`).join('')}
@@ -192,6 +193,19 @@ function renderBreadcrumb(items) {
   if (placeholder) placeholder.outerHTML = html;
 }
 
+/* ---- アクセシビリティの下ごしらえ（デジタル庁DS準拠） ----
+   スキップリンクの着地点 <main id="main-content"> を全ページで保証する。
+   tabindex="-1" を付けないと、スキップしてもフォーカスが本文に移らない。 */
+function initA11yLandmarks() {
+  const main = document.querySelector('main');
+  if (main) {
+    if (!main.id) main.id = 'main-content';
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+  }
+  // 画像のalt欠落は「装飾」として扱い、読み上げのノイズにしない
+  document.querySelectorAll('img:not([alt])').forEach(img => img.setAttribute('alt', ''));
+}
+
 /* ---- ハンバーガーメニュー ---- */
 function initHamburger() {
   const btn = document.getElementById('hamburger');
@@ -200,13 +214,29 @@ function initHamburger() {
   btn.addEventListener('click', () => {
     btn.classList.toggle('open');
     nav.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+    const open = nav.classList.contains('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  // Escapeで閉じる（キーボード操作で閉じ込められないように）
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      btn.classList.remove('open');
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'メニューを開く');
+      document.body.style.overflow = '';
+      btn.focus();
+    }
   });
   // 外側クリックで閉じる
   nav.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       btn.classList.remove('open');
       nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'メニューを開く');
       document.body.style.overflow = '';
     });
   });
@@ -375,6 +405,7 @@ function initGA4Tracking() {
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
+  initA11yLandmarks();
   initHamburger();
   initFaq();
   initCategoryFilter();
