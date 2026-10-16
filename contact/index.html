@@ -19,6 +19,8 @@
   <title>お問い合わせ｜株式会社Salesaurus</title>
   <meta name="description" content="Salesaurusへのお問い合わせ。サービスに関するご相談・資料請求は無料です。フォームまたは公式LINEからお気軽にどうぞ。">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>/* モーション有効化：動きを減らす設定の人には付けない／motion.jsが来なければ3.5秒で解除して静的表示に戻す */(function(d){if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');setTimeout(function(){if(!window.__moReady)d.classList.remove('mo')},3500)})(document.documentElement)</script>
 </head>
 <body>
 <div id="header-placeholder"></div>
@@ -44,7 +46,8 @@
             <i class="fas fa-info-circle"></i> 送信いただいた後、担当者より2営業日以内にご連絡します。急ぎの場合は公式LINEをご利用ください。
           </div>
 
-          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqlvvon" method="POST" onsubmit="handleSubmit(event)">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqlvvon" method="POST" onsubmit="handleSubmit(event)" novalidate>
+            <div class="form-error-summary" id="form-error-summary" tabindex="-1" role="alert" hidden></div>
             <div class="form-group">
               <label class="form-label" for="f-company">会社名<span class="form-required">*必須</span></label>
               <input type="text" id="f-company" class="form-input" name="company" placeholder="株式会社○○" autocomplete="organization" required>
@@ -95,18 +98,20 @@
             </div>
             <div class="form-group">
               <label class="form-checkbox">
-                <input type="checkbox" required>
+                <input type="checkbox" id="f-privacy" name="privacy_agree" value="同意する" required>
                 <span class="form-checkbox-text">
                   <a href="privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー<span class="visually-hidden">（新しいタブで開きます）</span></a>に同意します
                 </span>
               </label>
             </div>
+            <div class="form-progress" aria-hidden="true"><span class="form-progress-bar"><i></i></span><span class="form-progress-text"></span></div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">送信する →</button>
+            <div class="form-send-error" id="form-send-error" role="alert" hidden>送信に失敗しました。時間をおいてもう一度お試しいただくか、<a data-line="corporate">公式LINE</a>からご連絡ください。</div>
           </form>
 
           <!-- 送信完了メッセージ（非表示） -->
-          <div id="form-success" style="display:none;text-align:center;padding:48px;background:var(--color-bg-light);border-radius:16px;margin-top:24px;">
-            <div style="font-size:48px;margin-bottom:16px;color:var(--color-accent);"><i class="fas fa-check-circle"></i></div>
+          <div id="form-success" tabindex="-1" style="display:none;text-align:center;padding:48px;background:var(--color-bg-light);border-radius:16px;margin-top:24px;">
+            <svg class="form-success-check" viewBox="0 0 52 52" width="64" height="64" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none"/><path fill="none" d="M15 27l7 7 15-16"/></svg>
             <h3 style="font-size:22px;font-weight:700;color:var(--color-primary);margin-bottom:12px;">送信完了しました</h3>
             <p style="color:var(--color-text-mid);">2営業日以内に担当者よりご連絡します。<br>お急ぎの方は公式LINEをご利用ください。</p>
           </div>
@@ -181,38 +186,120 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/* ---- フォーム：エラーはフォーム上部の一覧＋各項目の下に出す（デジタル庁DSの作法） ---- */
+const contactForm = document.getElementById('contact-form');
+const fieldsToCheck = Array.from(contactForm.querySelectorAll('[required]'));
+let triedSubmit = false;
+
+function fieldLabel(el) {
+  if (el.type === 'checkbox') return 'プライバシーポリシーへの同意';
+  const label = contactForm.querySelector('label[for="' + el.id + '"]');
+  return label ? label.childNodes[0].textContent.trim() : el.name;
+}
+function fieldError(el) {
+  if (el.type === 'checkbox') return el.checked ? '' : 'プライバシーポリシーへの同意が必要です';
+  const v = el.value.trim();
+  if (!v) return el.tagName === 'SELECT' ? fieldLabel(el) + 'を選択してください' : fieldLabel(el) + 'を入力してください';
+  if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'メールアドレスの形式で入力してください（例：info@example.com）';
+  return '';
+}
+function showFieldState(el, show) {
+  const group = el.closest('.form-group');
+  const msg = fieldError(el);
+  let box = document.getElementById(el.id + '-err');
+  if (!box) {
+    box = document.createElement('p');
+    box.className = 'form-error-msg';
+    box.id = el.id + '-err';
+    box.hidden = true;
+    (el.type === 'checkbox' ? el.closest('.form-checkbox') : el).insertAdjacentElement('afterend', box);
+  }
+  if (msg && show) {
+    box.textContent = msg; box.hidden = false;
+    el.setAttribute('aria-invalid', 'true');
+    el.setAttribute('aria-describedby', box.id);
+    group.classList.add('has-error'); group.classList.remove('is-valid');
+  } else {
+    box.hidden = true;
+    el.removeAttribute('aria-invalid');
+    el.removeAttribute('aria-describedby');
+    group.classList.remove('has-error');
+    group.classList.toggle('is-valid', !msg && el.type !== 'checkbox');
+  }
+  return msg;
+}
+function updateProgress() {
+  const done = fieldsToCheck.filter(el => !fieldError(el)).length;
+  contactForm.querySelector('.form-progress-bar i').style.transform = 'scaleX(' + done / fieldsToCheck.length + ')';
+  contactForm.querySelector('.form-progress-text').textContent =
+    done === fieldsToCheck.length ? '必須項目はすべて入力済みです' : '必須項目 ' + done + ' / ' + fieldsToCheck.length + ' 入力済み';
+  contactForm.classList.toggle('is-complete', done === fieldsToCheck.length);
+}
+fieldsToCheck.forEach(el => {
+  // 入力途中では責めない：離れたとき（送信を試した後は入力のたび）に判定する
+  el.addEventListener('blur', () => { if (el.value.trim() || triedSubmit) showFieldState(el, true); });
+  el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', () => {
+    showFieldState(el, triedSubmit || el.closest('.form-group').classList.contains('has-error'));
+    updateProgress();
+  });
+});
+updateProgress();
+
 function handleSubmit(e) {
   e.preventDefault();
-  const form = document.getElementById('contact-form');
-  const formData = new FormData(form);
-  const btn = form.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = '送信中...';
+  triedSubmit = true;
+  const summary = document.getElementById('form-error-summary');
+  const errors = fieldsToCheck.map(el => ({ el, msg: showFieldState(el, true) })).filter(x => x.msg);
+  if (errors.length) {
+    summary.innerHTML = '<p class="form-error-summary-title">入力内容をご確認ください（' + errors.length + '件）</p><ul>' +
+      errors.map(x => '<li><a href="#' + x.el.id + '">' + x.msg + '</a></li>').join('') + '</ul>';
+    summary.hidden = false;
+    summary.querySelectorAll('a').forEach(a => a.addEventListener('click', ev => {
+      ev.preventDefault();
+      const t = document.getElementById(a.getAttribute('href').slice(1));
+      t.focus(); t.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }));
+    summary.focus();
+    summary.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    return;
+  }
+  summary.hidden = true;
 
-  fetch(form.action, {
+  const formData = new FormData(contactForm);
+  const btn = contactForm.querySelector('button[type="submit"]');
+  const sendError = document.getElementById('form-send-error');
+  sendError.hidden = true;
+  btn.disabled = true;
+  btn.classList.add('is-loading');
+  btn.textContent = '送信中';
+  const fail = () => {
+    btn.disabled = false;
+    btn.classList.remove('is-loading');
+    btn.textContent = '送信する →';
+    sendError.hidden = false;
+  };
+  fetch(contactForm.action, {
     method: 'POST',
     body: formData,
     headers: { 'Accept': 'application/json' }
   }).then(response => {
-    if (response.ok) {
+    if (!response.ok) return fail();
+    if (typeof gtag === 'function') {
       gtag('event', 'generate_lead', {
         event_category: 'contact',
         event_label: formData.get('service') || 'unknown',
         value: 1
       });
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    } else {
-      btn.disabled = false;
-      btn.textContent = '送信する →';
-      alert('送信に失敗しました。公式LINEからご連絡ください。');
     }
-  }).catch(() => {
-    btn.disabled = false;
-    btn.textContent = '送信する →';
-    alert('送信に失敗しました。公式LINEからご連絡ください。');
-  });
+    contactForm.style.display = 'none';
+    const done = document.getElementById('form-success');
+    done.style.display = 'block';
+    done.classList.add('is-shown');
+    done.focus();
+    done.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }).catch(fail);
 }
 </script>
+<script src="js/motion.js"></script>
 </body>
 </html>

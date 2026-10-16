@@ -19,6 +19,8 @@
   <title>導入の流れ｜株式会社Salesaurus</title>
   <meta name="description" content="Salesaurusのサービス導入フロー。無料相談から稼働開始まで最短5日。各サービスの導入ステップを分かりやすく解説します。">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>/* モーション有効化：動きを減らす設定の人には付けない／motion.jsが来なければ3.5秒で解除して静的表示に戻す */(function(d){if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');setTimeout(function(){if(!window.__moReady)d.classList.remove('mo')},3500)})(document.documentElement)</script>
 </head>
 <body>
 <div id="header-placeholder"></div>
@@ -162,5 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBreadcrumb([{ label: '導入の流れ' }]);
 });
 </script>
+<script src="js/motion.js"></script>
 </body>
 </html>

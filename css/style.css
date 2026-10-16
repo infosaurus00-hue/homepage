@@ -2647,3 +2647,141 @@ p > a:not(.btn):hover, li > a:not(.btn):hover {
   margin: -1px; padding: 0; overflow: hidden;
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
 }
+
+/* ============================================================
+   2026-10 UI/UXモーション（全ページ共通分）
+   ============================================================ */
+
+/* ---- ページ移動をなめらかに（対応ブラウザのみ・非対応は通常の切り替え） ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: vt-out .22s ease both; }
+  ::view-transition-new(root) { animation: vt-in .32s cubic-bezier(.22,.8,.24,1) both; }
+  #site-header { view-transition-name: site-header; }
+}
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in  { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---- スマホの追従相談バー（main.js の initStickyCta） ---- */
+.sticky-cta { display: none; }
+@media (max-width: 768px) {
+  .sticky-cta {
+    display: flex; gap: 8px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 990;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.94);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    backdrop-filter: saturate(1.4) blur(10px);
+    box-shadow: 0 -6px 24px rgba(0,35,93,.10);
+    transform: translateY(110%); visibility: hidden;
+    transition: transform .45s cubic-bezier(.22,.8,.24,1), visibility 0s linear .45s;
+  }
+  .sticky-cta.is-shown {
+    transform: none; visibility: visible;
+    transition: transform .45s cubic-bezier(.22,.8,.24,1), visibility 0s;
+  }
+  .sticky-cta .btn { min-height: 48px; padding: 10px 14px; font-size: 15px; }
+  .sticky-cta .btn-primary { flex: 1; }
+  .sticky-cta .btn-line { flex: 0 0 auto; }
+}
+
+/* ---- スマホのメニュー：一瞬で切り替わる → 上からすっと開く ---- */
+.mobile-nav {
+  display: block;
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.22,.8,.24,1), visibility 0s linear .35s;
+}
+.mobile-nav.open {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity .25s ease, transform .35s cubic-bezier(.22,.8,.24,1), visibility 0s;
+}
+.mobile-nav-section, .mobile-nav-cta {
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .3s ease, transform .4s cubic-bezier(.22,.8,.24,1);
+}
+.mobile-nav.open .mobile-nav-section, .mobile-nav.open .mobile-nav-cta { opacity: 1; transform: none; }
+.mobile-nav.open .mobile-nav-section:nth-child(1) { transition-delay: .05s; }
+.mobile-nav.open .mobile-nav-section:nth-child(2) { transition-delay: .1s; }
+.mobile-nav.open .mobile-nav-section:nth-child(3) { transition-delay: .15s; }
+.mobile-nav.open .mobile-nav-cta { transition-delay: .2s; }
+@media (min-width: 769px) { .mobile-nav { display: none; } }
+
+/* ---- PCのドロップダウン：項目が順に出る＋キーボード操作でも開く ---- */
+.nav-item:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-item:focus-within .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown a { opacity: 0; transform: translateY(-4px); }
+.nav-item:hover .nav-dropdown a, .nav-item:focus-within .nav-dropdown a { opacity: 1; transform: none; }
+.nav-item:hover .nav-dropdown a:nth-child(2), .nav-item:focus-within .nav-dropdown a:nth-child(2) { transition-delay: .03s; }
+.nav-item:hover .nav-dropdown a:nth-child(3), .nav-item:focus-within .nav-dropdown a:nth-child(3) { transition-delay: .06s; }
+.nav-item:hover .nav-dropdown a:nth-child(4), .nav-item:focus-within .nav-dropdown a:nth-child(4) { transition-delay: .09s; }
+.nav-item:hover .nav-dropdown a:nth-child(5), .nav-item:focus-within .nav-dropdown a:nth-child(5) { transition-delay: .12s; }
+/* ナビの下線が伸びる */
+.header-nav .nav-link { position: relative; }
+.header-nav .nav-link::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px;
+  background: var(--color-accent); border-radius: 2px;
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform .3s cubic-bezier(.22,.8,.24,1);
+}
+.header-nav .nav-link:hover::after, .header-nav .nav-link.active::after { transform: scaleX(1); }
+
+/* ---- お問い合わせフォーム：エラー一覧・項目ごとのエラー・入力状況・送信の動き ---- */
+.form-error-summary {
+  border: 2px solid #c8102e; border-radius: 12px; background: #fdf2f4;
+  padding: 18px 22px; margin-bottom: 28px; outline-offset: 4px;
+  animation: form-pop .35s cubic-bezier(.22,.8,.24,1);
+}
+.form-error-summary-title { font-weight: 700; color: #a50e26; margin-bottom: 8px; }
+.form-error-summary ul { padding-left: 1.2em; list-style: disc; color: #a50e26; }
+.form-error-summary a { color: #a50e26; text-decoration: underline; }
+.form-error-msg {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 8px; font-size: 14px; font-weight: 700; color: #a50e26;
+  animation: form-pop .3s cubic-bezier(.22,.8,.24,1);
+}
+.form-error-msg::before { content: '!'; flex: 0 0 18px; height: 18px; border-radius: 50%; background: #c8102e; color: #fff; font-size: 12px; display: grid; place-items: center; }
+.form-group.has-error .form-input, .form-group.has-error .form-select, .form-group.has-error .form-textarea { border-color: #c8102e; background: #fffafb; }
+.form-group.has-error .form-input, .form-group.has-error .form-select, .form-group.has-error .form-textarea { animation: form-shake .35s ease; }
+@keyframes form-pop { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes form-shake { 25% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+.form-input, .form-select, .form-textarea { transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { box-shadow: 0 0 0 4px rgba(5,83,202,.12); }
+/* 入力OKの項目には✓が付く */
+.form-group { position: relative; }
+.form-group.is-valid .form-label::after {
+  content: '✓'; margin-left: 8px; color: var(--color-success); font-weight: 700;
+  display: inline-block; animation: form-check .4s cubic-bezier(.3,1.6,.5,1);
+}
+@keyframes form-check { from { opacity: 0; transform: scale(1.8); } }
+.form-progress { display: flex; align-items: center; gap: 12px; margin: 4px 0 14px; font-size: 14px; color: var(--color-text-sub); }
+.form-progress-bar { flex: 0 0 160px; height: 6px; border-radius: 6px; background: #e9eef6; overflow: hidden; }
+.form-progress-bar i { display: block; height: 100%; background: var(--color-accent); transform-origin: 0 50%; transform: scaleX(0); transition: transform .45s cubic-bezier(.22,.8,.24,1), background-color .3s ease; }
+.contact-form.is-complete .form-progress-bar i { background: var(--color-success); }
+.contact-form.is-complete .form-progress-text { color: var(--color-success); font-weight: 700; }
+.btn.is-loading { cursor: progress; opacity: .85; }
+.btn.is-loading::before {
+  content: ''; width: 16px; height: 16px; margin-right: 10px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; animation: form-spin .7s linear infinite;
+}
+@keyframes form-spin { to { transform: rotate(360deg); } }
+.form-send-error { margin-top: 14px; padding: 14px 18px; border-radius: 10px; background: #fdf2f4; color: #a50e26; font-size: 15px; font-weight: 700; }
+.form-send-error a { color: #a50e26; text-decoration: underline; }
+/* 送信完了：✓が描かれる */
+#form-success:focus { outline: none; }
+#form-success.is-shown { animation: form-pop .5s cubic-bezier(.22,.8,.24,1); }
+.form-success-check { display: block; margin: 0 auto 16px; }
+.form-success-check circle { stroke: var(--color-accent); stroke-width: 3; stroke-dasharray: 151; stroke-dashoffset: 151; }
+.form-success-check path { stroke: var(--color-accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; }
+#form-success.is-shown .form-success-check circle { animation: form-draw .6s ease .15s forwards; }
+#form-success.is-shown .form-success-check path { animation: form-draw .4s ease .7s forwards; }
+@keyframes form-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .form-success-check circle, .form-success-check path { stroke-dashoffset: 0 !important; }
+}
+
+/* 既存不具合の修正：タップ領域44px化（2026-09）で .mobile-nav a が inline-flex になり、
+   メニューのリンクが横並びになっていた／メニュー内ボタンの文字が紺色になり緑・青の上で読みにくかった */
+.mobile-nav a { display: flex; }
+.mobile-nav .btn { justify-content: center; color: var(--color-white); border-bottom: 0; }
+.mobile-nav .btn:hover { color: var(--color-white); }
+/* display を指定した部品でも hidden 属性で確実に隠す */
+.form-error-msg[hidden], .form-error-summary[hidden], .form-send-error[hidden] { display: none; }

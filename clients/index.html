@@ -19,6 +19,8 @@
   <title>取引実績｜株式会社Salesaurus</title>
   <meta name="description" content="株式会社Salesaurusの取引実績・クライアント企業一覧です。IT・SaaS・HR・コンサルティングなど多様な業種の企業様と取り組みを行っています。">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>/* モーション有効化：動きを減らす設定の人には付けない／motion.jsが来なければ3.5秒で解除して静的表示に戻す */(function(d){if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');setTimeout(function(){if(!window.__moReady)d.classList.remove('mo')},3500)})(document.documentElement)</script>
   <style>
     /* ---- ロゴグリッド ---- */
     .client-logo-grid {
@@ -420,5 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBreadcrumb([{ label: '取引実績' }]);
 });
 </script>
+<script src="js/motion.js"></script>
 </body>
 </html>

@@ -19,6 +19,8 @@
   <title>導入事例｜株式会社Salesaurus</title>
   <meta name="description" content="Salesaurusの営業代行・コンサル・BPO導入事例。IT・製造・コンサル等、多業種での実績をご紹介します。">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>/* モーション有効化：動きを減らす設定の人には付けない／motion.jsが来なければ3.5秒で解除して静的表示に戻す */(function(d){if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');setTimeout(function(){if(!window.__moReady)d.classList.remove('mo')},3500)})(document.documentElement)</script>
 </head>
 <body>
 <div id="header-placeholder"></div>
@@ -71,5 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBreadcrumb([{ label: '導入事例' }]);
 });
 </script>
+<script src="js/motion.js"></script>
 </body>
 </html>

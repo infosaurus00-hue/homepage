@@ -401,6 +401,45 @@ function initGA4Tracking() {
   });
 }
 
+/* ---- スマホの追従相談バー ----
+   ファーストビューを過ぎたら画面下に出し、ページ末尾の相談ブロック・フッターが見えたら引っ込める。
+   問い合わせ・採用・管理画面では出さない（採用は求職者向けの別導線があるため） */
+function initStickyCta() {
+  const path = window.location.pathname;
+  if (/^\/(contact|recruit|saiyo|admin|privacy-policy)(\/|$)/.test(path)) return;
+  const bar = document.createElement('div');
+  bar.className = 'sticky-cta';
+  bar.setAttribute('role', 'region');
+  bar.setAttribute('aria-label', '無料相談');
+  bar.innerHTML = `
+    <a href="${SITE_BASE}/contact/" class="btn btn-primary"><i class="fas fa-envelope" aria-hidden="true"></i> 無料で相談する</a>
+    <a data-line="corporate" class="btn btn-line"><i class="fab fa-line" aria-hidden="true"></i> LINE</a>`;
+  document.body.appendChild(bar);
+
+  const ends = Array.from(document.querySelectorAll('.final-cta, .detail-cta, #site-footer'));
+  const visibleEnds = new Set();
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const menuOpen = document.getElementById('mobile-nav')?.classList.contains('open');
+    const show = window.scrollY > Math.min(600, window.innerHeight * .8) && visibleEnds.size === 0 && !menuOpen;
+    bar.classList.toggle('is-shown', show);
+    // 隠れているあいだはキーボード操作でもフォーカスが入らないようにする
+    bar.querySelectorAll('a').forEach(a => { a.tabIndex = show ? 0 : -1; });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { e.isIntersecting ? visibleEnds.add(e.target) : visibleEnds.delete(e.target); });
+      onScroll();
+    });
+    ends.forEach(el => io.observe(el));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  document.getElementById('hamburger')?.addEventListener('click', () => setTimeout(update, 0));
+  update();
+}
+
 /* ---- 初期化 ---- */
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
@@ -409,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHamburger();
   initFaq();
   initCategoryFilter();
+  initStickyCta();
   initActionLinks();
   initLogoMarquee();
   initGA4Tracking();

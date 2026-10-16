@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!MO) return;
 
   /* ---- 見出しを行ごとに分割（<br>単位） ---- */
-  $$('.hero h1, .section-title, .final-cta h2, .mid-cta-text h3').forEach(function (el) {
+  $$('.hero h1, .page-hero h1, .service-hero h1, .section-title, .final-cta h2, .mid-cta-text h3').forEach(function (el) {
     var parts = el.innerHTML.split(/<br\s*\/?>/i);
     el.innerHTML = parts.map(function (p, i) {
       return '<span class="mo-line"><span class="mo-line-in" style="--i:' + i + '">' + p.trim() + '</span></span>';
@@ -25,10 +25,35 @@ document.addEventListener('DOMContentLoaded', function () {
     el.classList.add('mo-split');
   });
   var heroH1 = document.querySelector('.hero h1');
-  if (heroH1) {
-    heroH1.style.setProperty('--d', '.3s');
-    requestAnimationFrame(function () { requestAnimationFrame(function () { heroH1.classList.add('is-in'); }); });
+  if (heroH1) heroH1.style.setProperty('--d', '.3s');
+
+  /* ---- 下層ページの見出しエリア（ページ最上部なので読み込み時に再生） ---- */
+  var subHeroH1 = $$('.page-hero h1, .service-hero h1');
+  subHeroH1.forEach(function (h) {
+    h.style.setProperty('--d', '.15s');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { h.classList.add('is-in'); }); });
+  });
+
+  /* ---- ヒーロー：文字ブロック／約束カードが見えたら再生（上のCM動画で押し下げられているため） ---- */
+  var heroEl = document.querySelector('.hero');
+  function playHeroText(el) {
+    el.classList.add('is-play');
+    if (heroEl) heroEl.classList.add('is-play');
+    if (heroH1) heroH1.classList.add('is-in');
   }
+  var heroParts = [[document.querySelector('.hero-text'), .6, playHeroText],
+                   [document.querySelector('.hero-image'), .75, function (el) { el.classList.add('is-play'); }]];
+  heroParts.forEach(function (part) {
+    var el = part[0];
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) { part[2](el); return; }
+    var hio = new IntersectionObserver(function (es) {
+      // 要素が画面より高い場合でも、画面の大半を占めていれば再生する
+      var e = es[0], r = e.intersectionRect.height;
+      if (e.intersectionRatio >= part[1] || r >= window.innerHeight * .5) { part[2](el); hio.disconnect(); }
+    }, { threshold: [0, .15, .3, .45, .6, .75, 1] });
+    hio.observe(el);
+  });
 
   /* ---- 本文・補足は控えめに浮上、カード群は順番に ---- */
   $$('.section-desc, .problem-lead, .problem-bridge, .problem-count, .client-notes, .proof-voice, .results-note, ' +
@@ -37,6 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
     .forEach(function (el) { el.setAttribute('data-mo', 'up'); });
   $$('.service-cards, #top-case-container, #top-blog-container, #top-news-container, .recruit-points, .final-cta-buttons, .faq-list')
     .forEach(function (el) { el.setAttribute('data-mo', 'stagger'); });
+  // 下層ページ：同じ部品が並ぶ箇所（課題・提供内容・手順・理由・カード一覧など）は親ごと順番に出す
+  $$('.issue-item, .menu-item, .service-reason-item, .proc-step, .flow-item, .method-card, .product-item, ' +
+     '.client-logo-item, .post-card, .support-service, .recruit-figure, .reason-card, .clients-stat, .target-item')
+    .forEach(function (item) {
+      var parent = item.parentElement;
+      if (!parent || parent.hasAttribute('data-mo') || parent.closest('.reasons-section, [data-mo]')) return;
+      parent.setAttribute('data-mo', 'stagger');
+    });
 
   /* ---- 遅延（--i / --d）の割り振り ---- */
   $$('.stats-bar-item').forEach(setIndex);
@@ -53,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---- スクロールで1度だけ is-in を付ける ---- */
   var targets = $$('.mo-split, .section-label, [data-mo], .stats-bar, .process-map, .steps-row, ' +
                    '.reasons-section .reason-card, .kpi, .founder-figure, .mo-count')
-    .filter(function (el) { return el !== heroH1; });
+    .filter(function (el) { return el !== heroH1 && subHeroH1.indexOf(el) === -1; });
   if (!('IntersectionObserver' in window)) {
     targets.forEach(reveal);
   } else {
@@ -69,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function reveal(el) {
     if (el.getAttribute('data-mo') === 'stagger') {
-      Array.prototype.forEach.call(el.children, function (c, i) { c.style.setProperty('--i', i); });
+      // 数が多い一覧で最後の要素が待たされすぎないよう、遅延は8個目で頭打ち
+      Array.prototype.forEach.call(el.children, function (c, i) { c.style.setProperty('--i', Math.min(i, 8)); });
     }
     if (el.classList.contains('mo-count')) { countUp(el); return; }
     el.classList.add('is-in');
