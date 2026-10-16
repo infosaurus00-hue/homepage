@@ -23,6 +23,8 @@
   <meta property="og:type" content="website">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"株式会社Salesaurus","alternateName":"Salesaurus Inc.","url":"https://sales-saurus.com/","logo":"https://sales-saurus.com/images/logo.png","description":"営業代行・営業コンサル・BPO/CSOレンタルで中小企業・スタートアップの営業成果を支援する営業支援会社。","foundingDate":"2025-10-16","founder":{"@type":"Person","name":"峠 大輝"},"address":{"@type":"PostalAddress","addressCountry":"JP","addressRegion":"埼玉県","addressLocality":"さいたま市中央区","streetAddress":"下落合7丁目11番1-2号"},"email":"contact@sales-saurus.com","slogan":"もう一度頼みたい、と言われる仕事を。"}</script>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>/* モーション有効化：動きを減らす設定の人には付けない／motion.jsが来なければ3.5秒で解除して静的表示に戻す */(function(d){if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');setTimeout(function(){if(!window.__moReady)d.classList.remove('mo')},3500)})(document.documentElement)</script>
 </head>
 <body>
 
@@ -88,19 +90,19 @@
     <div class="container">
       <div class="stats-bar-inner">
         <div class="stats-bar-item">
-          <div class="stats-bar-value">50<span>社+</span></div>
+          <div class="stats-bar-value"><span class="mo-count" data-to="50">50</span><span>社+</span></div>
           <div class="stats-bar-label">設立1年での取引実績</div>
         </div>
         <div class="stats-bar-item">
-          <div class="stats-bar-value">200<span>件</span></div>
+          <div class="stats-bar-value"><span class="mo-count" data-to="200">200</span><span>件</span></div>
           <div class="stats-bar-label">10日間でのアポ獲得</div>
         </div>
         <div class="stats-bar-item">
-          <div class="stats-bar-value">30<span>業種+</span></div>
+          <div class="stats-bar-value"><span class="mo-count" data-to="30">30</span><span>業種+</span></div>
           <div class="stats-bar-label">支援した業種の実績</div>
         </div>
         <div class="stats-bar-item">
-          <div class="stats-bar-value">最短<span>5日</span></div>
+          <div class="stats-bar-value">最短<span><span class="mo-count" data-from="30" data-to="5">5</span>日</span></div>
           <div class="stats-bar-label">稼働開始</div>
         </div>
       </div>
@@ -355,7 +357,7 @@
             <svg viewBox="0 0 250 150" aria-hidden="true"><use href="#laurel" width="250" height="150"/></svg>
             <div class="kpi-body">
               <span class="kpi-label">継続トスアップ</span>
-              <span class="kpi-value">200<small>件/月</small></span>
+              <span class="kpi-value"><span class="mo-count" data-to="200">200</span><small>件/月</small></span>
             </div>
           </div>
           <p class="kpi-note">※ 企業評価額1,000億円超のAIスタートアップ</p>
@@ -365,7 +367,7 @@
             <svg viewBox="0 0 250 150" aria-hidden="true"><use href="#laurel" width="250" height="150"/></svg>
             <div class="kpi-body">
               <span class="kpi-label">稼働10日間で</span>
-              <span class="kpi-value">200<small>件</small></span>
+              <span class="kpi-value"><span class="mo-count" data-to="200">200</span><small>件</small></span>
             </div>
           </div>
           <p class="kpi-note">※ AI SaaS／アポヨロ！<br>商談化率も 7% → 20% に改善</p>
@@ -375,7 +377,7 @@
             <svg viewBox="0 0 250 150" aria-hidden="true"><use href="#laurel" width="250" height="150"/></svg>
             <div class="kpi-body">
               <span class="kpi-label">月間アポ獲得</span>
-              <span class="kpi-value">100<small>件/月</small></span>
+              <span class="kpi-value"><span class="mo-count" data-to="100">100</span><small>件/月</small></span>
             </div>
           </div>
           <p class="kpi-note">※ 大手電子署名SaaS／アポヨロ！<br>稼働期間中の月間実績</p>
@@ -385,7 +387,7 @@
             <svg viewBox="0 0 250 150" aria-hidden="true"><use href="#laurel" width="250" height="150"/></svg>
             <div class="kpi-body">
               <span class="kpi-label">代表アポ獲得</span>
-              <span class="kpi-value"><span class="kv-from">0件</span><span class="kv-arrow" aria-hidden="true">→</span>50<small>件/月</small></span>
+              <span class="kpi-value"><span class="kv-from">0件</span><span class="kv-arrow" aria-hidden="true">→</span><span class="mo-count" data-to="50">50</span><small>件/月</small></span>
             </div>
           </div>
           <p class="kpi-note">※ 大手コンサル会社／セミナー集客<br>他社では集客できず、と伺っていた領域</p>
@@ -604,5 +606,6 @@
 <script src="data/jobs.js"></script>
 <script src="js/main.js"></script>
 <script src="js/dynamic.js"></script>
+<script src="js/motion.js"></script>
 </body>
 </html>

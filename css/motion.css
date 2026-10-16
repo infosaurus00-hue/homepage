@@ -1,0 +1,362 @@
+/* ============================================================
+   トップページ専用モーション（2026-10 UI/UXブラッシュアップ）
+   ------------------------------------------------------------
+   方針：一律のフェードインは使わない。動きに「意味」を持たせる。
+   - 見出し＝行ごとにマスクから立ち上がる（読む順番を作る）
+   - 数字＝数え上がる／最短日数は数え下がる
+   - 課題＝自分でチェックできる（チェック数を表示）
+   - カバー範囲図＝工程が左から並び、守備範囲のバーが伸びる
+   - 月桂樹＝下から輪が育つ → 数字が入る
+   すべて html.mo（head のインラインscriptが付与）配下にスコープ。
+   prefers-reduced-motion の人・JSが動かない環境では従来の静的表示のまま。
+   ============================================================ */
+
+:root {
+  --mo-ease: cubic-bezier(.22, .8, .24, 1);      /* 立ち上がり：速く入って静かに止まる */
+  --mo-ease-io: cubic-bezier(.65, 0, .35, 1);    /* 線・バーの伸び */
+  --mo-dur: .9s;
+}
+
+/* ---- スクロール進捗バー＋ヘッダーの縮み ---- */
+.mo-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1001;
+  background: linear-gradient(90deg, var(--color-accent), #6f9dff);
+  transform-origin: 0 50%; transform: scaleX(0);
+  pointer-events: none;
+}
+html.mo #site-header { transition: box-shadow .3s ease, background-color .3s ease; }
+html.mo #site-header.is-scrolled {
+  background: rgba(255,255,255,.92);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  backdrop-filter: saturate(1.4) blur(10px);
+  box-shadow: 0 6px 24px rgba(0,35,93,.08);
+}
+
+/* ============================================================
+   共通：行マスク・リビール（見出し）
+   ============================================================ */
+.mo-line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.mo-line-in { display: block; }
+html.mo .mo-split .mo-line-in {
+  transform: translateY(110%);
+  transition: transform 1s var(--mo-ease);
+  transition-delay: calc(var(--i, 0) * .11s + var(--d, 0s));
+}
+html.mo .mo-split.is-in .mo-line-in { transform: none; }
+/* 中央寄せ見出しでも行ブロックが中央に来るように */
+.section-title .mo-line, .final-cta h2 .mo-line { text-align: inherit; }
+
+/* 共通：控えめな浮上（本文・補足のみに使う） */
+html.mo [data-mo="up"] {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .8s ease, transform .9s var(--mo-ease);
+  transition-delay: var(--d, 0s);
+}
+html.mo [data-mo="up"].is-in { opacity: 1; transform: none; }
+
+/* 共通：子要素を順番に（カード群・リスト） */
+html.mo [data-mo="stagger"] > * {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .7s ease, transform .9s var(--mo-ease);
+  transition-delay: calc(var(--i, 0) * .09s);
+}
+html.mo [data-mo="stagger"].is-in > * { opacity: 1; transform: none; }
+
+/* セクションラベルの罫が伸びる */
+html.mo .section-label::before {
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform .8s var(--mo-ease-io) .1s;
+}
+html.mo .section-label.is-in::before { transform: none; }
+
+/* ============================================================
+   ヒーロー（読み込み時に1度だけ）
+   ============================================================ */
+html.mo .hero::before {
+  animation: mo-panel 1.3s var(--mo-ease) both;
+}
+@keyframes mo-panel {
+  from { clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 88% 100%); }
+  to   { clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%); }
+}
+html.mo .hero-kicker { animation: mo-rise .8s var(--mo-ease) .15s both; }
+html.mo .hero-desc   { animation: mo-rise .9s var(--mo-ease) .75s both; }
+html.mo .hero-cta    { animation: mo-rise .9s var(--mo-ease) .9s both; }
+html.mo .hero-proof  { animation: mo-card 1.1s var(--mo-ease) .55s both; }
+@keyframes mo-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes mo-card { from { opacity: 0; transform: translateY(40px) scale(.97); } to { opacity: 1; transform: none; } }
+
+/* 「仕事」に下線が引かれる */
+.hero h1 em { position: relative; display: inline-block; }
+.hero h1 em::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: .02em; height: .12em;
+  background: linear-gradient(90deg, var(--color-accent), #6f9dff);
+  border-radius: 2px; transform-origin: 0 50%; opacity: .9;
+}
+html.mo .hero h1 em::after { animation: mo-draw .8s var(--mo-ease-io) 1.15s both; }
+@keyframes mo-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* 約束の✓が順に押される */
+html.mo .hero-promise li { animation: mo-rise .7s var(--mo-ease) both; }
+html.mo .hero-promise li:nth-child(1) { animation-delay: .95s; }
+html.mo .hero-promise li:nth-child(2) { animation-delay: 1.1s; }
+html.mo .hero-promise li:nth-child(3) { animation-delay: 1.25s; }
+html.mo .hero-promise li::before { display: inline-block; animation: mo-stamp .5s cubic-bezier(.3,1.6,.5,1) both; }
+html.mo .hero-promise li:nth-child(1)::before { animation-delay: 1.3s; }
+html.mo .hero-promise li:nth-child(2)::before { animation-delay: 1.45s; }
+html.mo .hero-promise li:nth-child(3)::before { animation-delay: 1.6s; }
+@keyframes mo-stamp { from { opacity: 0; transform: scale(2.2) rotate(-12deg); } to { opacity: 1; transform: none; } }
+
+/* 濃紺面にマウスに追従する光（PCのみ・JSが --mx/--my を更新） */
+.hero-glow {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 75%) var(--my, 40%), rgba(111,157,255,.22), transparent 60%);
+  /* .hero::before（右44%・左端12%斜め）と同じ形に切る */
+  clip-path: polygon(61.28% 0%, 100% 0%, 100% 100%, 56% 100%);
+  opacity: 0; transition: opacity .6s ease;
+}
+@media (max-width: 1024px) { .hero-glow { clip-path: polygon(57.76% 0%, 100% 0%, 100% 100%, 52% 100%); } }
+@media (max-width: 768px)  { .hero-glow { clip-path: none; } }
+.hero:hover .hero-glow { opacity: 1; }
+/* 約束カードがマウスに合わせてわずかに傾く */
+html.mo .hero-image { perspective: 1000px; }
+html.mo .hero-proof.is-tilt { transition: transform .25s ease-out; will-change: transform; }
+
+/* ============================================================
+   数字バー：数え上がる
+   ============================================================ */
+.mo-count { font-variant-numeric: tabular-nums; }
+/* 既存の「.stats-bar-value span＝単位（小さく薄く）」が数字に当たらないように戻す */
+.stats-bar-value > .mo-count { font-size: inherit; color: inherit; margin-left: 0; }
+html.mo .stats-bar-item { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .8s var(--mo-ease); transition-delay: calc(var(--i, 0) * .1s); }
+html.mo .stats-bar.is-in .stats-bar-item { opacity: 1; transform: none; }
+
+/* ============================================================
+   課題チェックリスト：自分でチェックできる
+   ============================================================ */
+.problem-list.is-interactive li { cursor: pointer; transition: background-color .25s ease; border-radius: 6px; }
+.problem-list.is-interactive li:hover { background-color: #f6f9ff; }
+.problem-list.is-interactive li::before { transition: border-color .2s ease, background-color .25s ease, transform .2s ease; }
+.problem-list.is-interactive li::after {
+  border-color: #fff;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path .35s var(--mo-ease-io);
+}
+.problem-list.is-interactive li.is-checked::before { background: var(--color-accent); border-color: var(--color-accent); transform: scale(1.06); }
+.problem-list.is-interactive li.is-checked::after { clip-path: inset(0 0 0 0); }
+.problem-list.is-interactive li.is-checked p { color: var(--color-primary); }
+.problem-list.is-interactive li:active::before { transform: scale(.9); }
+/* 「押せる」ことを最初の1つで知らせる */
+.problem-list.is-interactive.is-hint li:first-child::before { animation: mo-hint 1.6s ease 2; }
+@keyframes mo-hint {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5,83,202,0); }
+  40% { box-shadow: 0 0 0 7px rgba(5,83,202,.18); border-color: var(--color-accent); }
+}
+.problem-count {
+  margin-top: 14px; font-size: 14px; color: var(--color-text-sub);
+  display: flex; align-items: center; gap: 12px; min-height: 24px;
+}
+.problem-meter { flex: 0 0 140px; height: 6px; border-radius: 6px; background: #e9eef6; overflow: hidden; }
+.problem-meter i {
+  display: block; height: 100%; width: 100%; background: var(--color-accent);
+  transform-origin: 0 50%; transform: scaleX(var(--p, 0)); transition: transform .5s var(--mo-ease);
+}
+.problem-count b { font-family: var(--font-num); color: var(--color-accent); font-size: 18px; }
+.problem-bridge { transition: background-color .4s ease, border-color .4s ease; }
+.problem-bridge.is-hot { background: linear-gradient(90deg, #eef3fe, rgba(238,243,254,0)); }
+
+/* ============================================================
+   カバー範囲マップ：工程→守備範囲のバーが伸びる
+   ============================================================ */
+html.mo .pm-stage { opacity: 0; transform: translateX(-14px); transition: opacity .5s ease, transform .6s var(--mo-ease); transition-delay: calc(var(--i, 0) * .09s); }
+html.mo .process-map.is-in .pm-stage { opacity: 1; transform: none; }
+html.mo .pm-covlabel { opacity: 0; transition: opacity .6s ease; transition-delay: calc(.45s + var(--i, 0) * .18s); }
+html.mo .process-map.is-in .pm-covlabel { opacity: 1; }
+html.mo .pm-covbar {
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform 1s var(--mo-ease-io);
+  transition-delay: calc(.55s + var(--i, 0) * .18s);
+}
+html.mo .process-map.is-in .pm-covbar { transform: none; }
+html.mo .pm-covbar > .mo-bartext { opacity: 0; transition: opacity .5s ease; transition-delay: calc(1.25s + var(--i, 0) * .18s); }
+html.mo .process-map.is-in .pm-covbar > .mo-bartext { opacity: 1; }
+/* バーに光が一度だけ走る */
+.pm-covbar { overflow: hidden; }
+.mo-bartext { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: inherit; }
+@media (max-width: 768px) { .pm-covbar { position: relative; } }
+.pm-covbar::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-18deg); opacity: 0;
+}
+html.mo .process-map.is-in .pm-covbar::after { animation: mo-sheen 1.1s ease calc(1.5s + var(--i, 0) * .18s) 1 both; }
+@keyframes mo-sheen { 0% { left: -40%; opacity: 1; } 100% { left: 120%; opacity: 1; } }
+
+/* ============================================================
+   サービスカード：ホバーで面が反応する
+   ============================================================ */
+.service-card { transition: transform .45s var(--mo-ease), box-shadow .45s ease; }
+.service-card-header { position: relative; overflow: hidden; }
+.service-card-header::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(260px circle at var(--cx, 50%) var(--cy, 0%), rgba(255,255,255,.18), transparent 65%);
+  opacity: 0; transition: opacity .35s ease; pointer-events: none;
+}
+.service-card:hover .service-card-header::after { opacity: 1; }
+.service-card:hover { transform: translateY(-6px); }
+.service-card-feature { transition: transform .3s var(--mo-ease); }
+.service-card:hover .service-card-feature { transform: translateX(3px); }
+.service-card:hover .service-card-feature:nth-child(2) { transition-delay: .04s; }
+.service-card:hover .service-card-feature:nth-child(3) { transition-delay: .08s; }
+.service-card:hover .service-card-feature:nth-child(4) { transition-delay: .12s; }
+
+/* ============================================================
+   ご支援の流れ：01→02→03 と矢印が進む
+   ============================================================ */
+html.mo .steps-row .step-col { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .8s var(--mo-ease); }
+html.mo .steps-row .step-arrow { opacity: 0; transition: opacity .4s ease, transform .6s var(--mo-ease); }
+html.mo .steps-row .step-col:nth-child(1) { transition-delay: .05s; }
+html.mo .steps-row .step-arrow:nth-child(2) { transition-delay: .4s; }
+html.mo .steps-row .step-col:nth-child(3) { transition-delay: .55s; }
+html.mo .steps-row .step-arrow:nth-child(4) { transition-delay: .9s; }
+html.mo .steps-row .step-col:nth-child(5) { transition-delay: 1.05s; }
+html.mo .steps-row:not(.is-in) .step-arrow { transform: translateX(-12px); }
+html.mo .steps-row.is-in .step-col,
+html.mo .steps-row.is-in .step-arrow { opacity: 1; transform: none; }
+html.mo .steps-row.is-in .step-arrow { color: var(--color-accent); }
+@media (max-width: 768px) {
+  html.mo .steps-row:not(.is-in) .step-arrow { transform: rotate(90deg) translateX(-12px); }
+  html.mo .steps-row.is-in .step-arrow { transform: rotate(90deg); }
+}
+.step-num { transition: transform .3s var(--mo-ease); }
+.step-col:hover .step-num { transform: translateY(-3px); }
+
+/* ============================================================
+   選ばれる理由：罫が引かれ、番号が立ち上がる
+   ============================================================ */
+.reasons-section .reason-card { position: relative; }
+html.mo .reasons-section .reason-card { border-top-color: transparent; }
+html.mo .reasons-section .reason-card:nth-child(n+3)::after {
+  content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+  background: var(--color-border); transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform 1s var(--mo-ease-io); transition-delay: var(--d, 0s);
+}
+html.mo .reasons-section .reason-card.is-in::after { transform: none; }
+html.mo .reasons-section .reason-number { clip-path: inset(100% 0 0 0); transform: translateY(14px); transition: clip-path .8s var(--mo-ease), transform .8s var(--mo-ease); transition-delay: calc(var(--d, 0s) + .15s); }
+html.mo .reasons-section .reason-card.is-in .reason-number { clip-path: inset(-10% 0 -10% 0); transform: none; }
+html.mo .reasons-section .reason-title,
+html.mo .reasons-section .reason-desc { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .8s var(--mo-ease); transition-delay: calc(var(--d, 0s) + .3s); }
+html.mo .reasons-section .reason-card.is-in .reason-title,
+html.mo .reasons-section .reason-card.is-in .reason-desc { opacity: 1; transform: none; }
+.reasons-section .reason-number { transition: color .3s ease; }
+.reasons-section .reason-card:hover .reason-number { color: var(--color-accent); }
+
+/* ============================================================
+   成果：月桂樹が下から育ち、数字が入る
+   ============================================================ */
+html.mo .kpi-figure svg { clip-path: inset(100% 0 0 0); transition: clip-path 1.3s var(--mo-ease-io); transition-delay: var(--d, 0s); }
+html.mo .kpi.is-in .kpi-figure svg { clip-path: inset(0 0 0 0); }
+html.mo .kpi-body { opacity: 0; transform: scale(.92); transition: opacity .6s ease, transform .8s var(--mo-ease); transition-delay: calc(var(--d, 0s) + .55s); }
+html.mo .kpi.is-in .kpi-body { opacity: 1; transform: none; }
+html.mo .kpi-note { opacity: 0; transition: opacity .6s ease; transition-delay: calc(var(--d, 0s) + .9s); }
+html.mo .kpi.is-in .kpi-note { opacity: 1; }
+.kpi-figure svg { transition: filter .4s ease; }
+.kpi:hover .kpi-figure svg { filter: drop-shadow(0 0 10px rgba(193,154,61,.45)); }
+.kv-arrow { display: inline-block; }
+html.mo .kpi.is-in .kv-arrow { animation: mo-nudge 1.2s ease calc(var(--d, 0s) + 1.1s) 2; }
+@keyframes mo-nudge { 0%, 100% { transform: none; } 50% { transform: translateX(4px); } }
+
+/* ============================================================
+   中間CTA・最終CTA：ゆっくり呼吸する面
+   ============================================================ */
+/* 背景位置のアニメは毎フレーム再描画になり重いので、疑似要素の移動（GPU合成のみ）で動かす */
+html.mo .mid-cta { position: relative; overflow: hidden; isolation: isolate; }
+html.mo .mid-cta::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 220%; z-index: -1;
+  background: linear-gradient(105deg, #00235d 0%, #0553ca 25%, #00235d 50%, #0553ca 75%, #00235d 100%);
+  animation: mo-flow 14s ease-in-out infinite alternate; will-change: transform; pointer-events: none;
+}
+@keyframes mo-flow { from { transform: translateX(0); } to { transform: translateX(-54.5%); } }
+/* 画面外にあるあいだはループ演出を止める（JSが .is-vis を付け外し） */
+html.mo .mid-cta:not(.is-vis)::before,
+html.mo .final-cta:not(.is-vis)::before,
+html.mo .final-cta:not(.is-vis)::after { animation-play-state: paused; }
+.final-cta { position: relative; overflow: hidden; isolation: isolate; }
+.final-cta::before, .final-cta::after {
+  content: ''; position: absolute; z-index: -1; border-radius: 50%; will-change: transform;
+  filter: blur(60px); opacity: .55; pointer-events: none;
+}
+.final-cta::before { width: 520px; height: 520px; left: -160px; top: -220px; background: #0553ca; }
+.final-cta::after  { width: 440px; height: 440px; right: -140px; bottom: -220px; background: #2f7ae8; }
+html.mo .final-cta::before { animation: mo-orb-a 18s ease-in-out infinite alternate; }
+html.mo .final-cta::after  { animation: mo-orb-b 22s ease-in-out infinite alternate; }
+@keyframes mo-orb-a { to { transform: translate(180px, 90px) scale(1.15); } }
+@keyframes mo-orb-b { to { transform: translate(-200px, -70px) scale(1.1); } }
+
+/* ============================================================
+   ボタン：光が走る＋矢印が進む
+   ============================================================ */
+.btn-primary, .btn-line { position: relative; overflow: hidden; isolation: isolate; }
+.btn-primary::after, .btn-line::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: skewX(-20deg); transition: left .7s var(--mo-ease); pointer-events: none;
+}
+.btn-primary:hover::after, .btn-line:hover::after { left: 130%; }
+.mid-cta .btn-primary::after { background: linear-gradient(100deg, transparent, rgba(5,83,202,.14), transparent); }
+.btn { transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .3s ease, transform .3s var(--mo-ease); }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(1px) scale(.98); }
+/* ヒーローのCTAはマウスに少し吸い付く（PCのみ・JS） */
+.btn.is-magnet { transition: transform .25s ease-out, background-color .2s ease, box-shadow .3s ease; }
+
+/* ============================================================
+   代表写真：幕が開くように
+   ============================================================ */
+.founder-figure { overflow: hidden; border-radius: inherit; }
+html.mo .founder-figure img { clip-path: inset(0 100% 0 0); transform: scale(1.08); transition: clip-path 1.2s var(--mo-ease-io), transform 1.8s var(--mo-ease); }
+html.mo .founder-figure.is-in img { clip-path: inset(0 0 0 0); transform: none; }
+html.mo .founder-figure figcaption { opacity: 0; transform: translateY(16px); transition: opacity .7s ease .9s, transform .8s var(--mo-ease) .9s; }
+html.mo .founder-figure.is-in figcaption { opacity: 1; transform: none; }
+
+/* 採用ポイント：右から順に */
+html.mo .recruit-points[data-mo="stagger"] > * { transform: translateX(30px); }
+
+/* ============================================================
+   FAQ：なめらかに開閉
+   ============================================================ */
+html.mo .faq-answer {
+  display: block; overflow: hidden; max-height: 0; padding-bottom: 0;
+  opacity: 0; visibility: hidden;
+  transition: max-height .45s var(--mo-ease-io), padding-bottom .45s var(--mo-ease-io), opacity .3s ease, visibility 0s linear .45s;
+}
+html.mo .faq-item.open .faq-answer {
+  max-height: var(--h, 400px); padding-bottom: 20px; opacity: 1; visibility: visible;
+  transition: max-height .5s var(--mo-ease-io), padding-bottom .5s var(--mo-ease-io), opacity .4s ease .1s, visibility 0s;
+}
+.faq-toggle { transition: transform .35s var(--mo-ease), color .2s ease; }
+
+/* 取引実績ロゴ：ホバーで色が戻る */
+.lm-item img { transition: filter .3s ease, transform .3s var(--mo-ease); }
+.lm-item:hover img { transform: scale(1.04); }
+
+/* ============================================================
+   スマホ・タッチ端末：重い演出を間引く
+   ============================================================ */
+@media (hover: none) {
+  .hero-glow { display: none; }
+  .service-card:hover { transform: none; }
+}
+@media (max-width: 768px) {
+  .final-cta::before { width: 320px; height: 320px; }
+  .final-cta::after  { width: 280px; height: 280px; }
+}
+
+/* 動きを減らす設定の人には、ループ演出も止める（html.mo はそもそも付かないが念のため） */
+@media (prefers-reduced-motion: reduce) {
+  .mo-progress, .hero-glow { display: none; }
+  .final-cta::before, .final-cta::after { animation: none !important; }
+}
+
+/* 既存の不具合修正：「0件→50件/月」だけ横幅が長く、月桂樹の葉に文字が重なっていた */
+.kpi-value:has(.kv-from) { font-size: clamp(1.9rem, 2.8vw, 2.55rem); gap: 4px; }
