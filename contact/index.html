@@ -106,7 +106,7 @@
             </div>
             <div class="form-progress" aria-hidden="true"><span class="form-progress-bar"><i></i></span><span class="form-progress-text"></span></div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">送信する →</button>
-            <div class="form-send-error" id="form-send-error" role="alert" hidden>送信に失敗しました。時間をおいてもう一度お試しいただくか、<a data-line="corporate">公式LINE</a>からご連絡ください。</div>
+            <div class="form-send-error" id="form-send-error" tabindex="-1" role="alert" hidden>送信に失敗しました。時間をおいてもう一度お試しいただくか、<a data-line="corporate">公式LINE</a>からご連絡ください。</div>
           </form>
 
           <!-- 送信完了メッセージ（非表示） -->
@@ -277,6 +277,9 @@ function handleSubmit(e) {
     btn.classList.remove('is-loading');
     btn.textContent = '送信する →';
     sendError.hidden = false;
+    // 送信ボタンの下に出るだけでは画面外で気づけないので、必ず見える位置まで送る
+    sendError.focus();
+    sendError.scrollIntoView({ block: 'center', behavior: 'smooth' });
   };
   fetch(contactForm.action, {
     method: 'POST',

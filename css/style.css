@@ -2567,11 +2567,15 @@ h2, h3, h4, h5, h6 { letter-spacing: .005em; }
 /* ---- フォーカスインジケーター（DADS：Yellowとblackの2重構造） ----
    マウス操作では出さず、キーボード操作のときだけ出す（:focus-visible）。
    どんな背景色の上でも見えるよう、内側=黄／外側=黒の二重で囲む。 */
-:where(a, button, input, textarea, select, summary, [tabindex], [role="button"]):focus-visible {
+:where(a, button, input, textarea, select, summary, [tabindex]:not([tabindex="-1"]), [role="button"]):focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 0;
   box-shadow: 0 0 0 5px var(--color-focus-outer);
 }
+/* tabindex="-1" を除外する理由：
+   main#main-content・送信完了・エラー一覧は、Tabキーでは到達しない「着地点」で、
+   読み上げのために JS から focus() しているだけ。ここにリングを出すと
+   本文全体や完了メッセージが黒枠で囲まれてしまう（2026-10-24 修正）。 */
 /* 注意：この共通ルールに position / border-radius を書くと、
    要素本来の配置（例：スキップリンクの position:absolute）を打ち消してしまう。
    outline は要素の border-radius に自動で沿うので指定不要。 */
@@ -2732,7 +2736,8 @@ p > a:not(.btn):hover, li > a:not(.btn):hover {
 }
 .form-error-summary-title { font-weight: 700; color: #a50e26; margin-bottom: 8px; }
 .form-error-summary ul { padding-left: 1.2em; list-style: disc; color: #a50e26; }
-.form-error-summary a { color: #a50e26; text-decoration: underline; }
+/* 記事本文用の「li > a は青」ルールに負けるため、IDで詳細度を上げて赤を通す（2026-10-24）*/
+#form-error-summary a { color: #a50e26; text-decoration: underline; }
 .form-error-msg {
   display: flex; align-items: center; gap: 6px;
   margin-top: 8px; font-size: 14px; font-weight: 700; color: #a50e26;
@@ -2766,7 +2771,7 @@ p > a:not(.btn):hover, li > a:not(.btn):hover {
 .form-send-error { margin-top: 14px; padding: 14px 18px; border-radius: 10px; background: #fdf2f4; color: #a50e26; font-size: 15px; font-weight: 700; }
 .form-send-error a { color: #a50e26; text-decoration: underline; }
 /* 送信完了：✓が描かれる */
-#form-success:focus { outline: none; }
+#form-success:focus, #form-error-summary:focus, #form-send-error:focus, main[tabindex="-1"]:focus { outline: none; box-shadow: none; }
 #form-success.is-shown { animation: form-pop .5s cubic-bezier(.22,.8,.24,1); }
 .form-success-check { display: block; margin: 0 auto 16px; }
 .form-success-check circle { stroke: var(--color-accent); stroke-width: 3; stroke-dasharray: 151; stroke-dashoffset: 151; }
