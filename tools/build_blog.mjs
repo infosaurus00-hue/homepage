@@ -240,7 +240,7 @@ for (const post of internal) {
 }
 
 /* ---- sitemap.xml ---- */
-const staticPaths = ['/', '/services/', '/services/apo-yoro/', '/services/sales-pilot/', '/services/bpo-cso-rental/', '/services/support/', '/case/', '/clients/', '/blog/', '/news/', '/flow/', '/faq/', '/company/', '/message/', '/recruit/', '/contact/', '/privacy-policy/'];
+const staticPaths = ['/', '/services/', '/services/apo-yoro/', '/services/sales-pilot/', '/services/bpo-cso-rental/', '/services/support/', '/case/', '/clients/', '/blog/', '/news/', '/flow/', '/faq/', '/company/', '/message/', '/recruit/', '/saiyo/', '/contact/', '/privacy-policy/'];
 const urls = [
   ...staticPaths.map(p => ({ loc: ORIGIN + p })),
   ...internal.map(p => ({ loc: `${ORIGIN}/blog/${p.slug}/`, lastmod: p.date })),
