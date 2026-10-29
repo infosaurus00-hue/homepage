@@ -125,7 +125,7 @@ function renderFooter() {
           <div class="footer-logo">
             <img src="${SITE_BASE}/images/logo.png" alt="Salesaurus" class="footer-logo-img">
           </div>
-          <p class="footer-tagline">${cfg.tagline}<br>営業代行・営業コンサル・BPOで<br>御社の営業成果を最大化します。</p>
+          <p class="footer-tagline">${cfg.tagline}<br>成果報酬のテレアポ代行と、<br>営業人材のレンタルを中心にした<br>さいたま市の営業支援会社です。</p>
           <div class="footer-contact-info">
             <div><i class="fas fa-map-marker-alt"></i> ${cfg.address}</div>
             <div><i class="fas fa-envelope"></i> ${cfg.email}</div>

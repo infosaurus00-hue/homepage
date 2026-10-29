@@ -2790,3 +2790,23 @@ p > a:not(.btn):hover, li > a:not(.btn):hover {
 .mobile-nav .btn:hover { color: var(--color-white); }
 /* display を指定した部品でも hidden 属性で確実に隠す */
 .form-error-msg[hidden], .form-error-summary[hidden], .form-send-error[hidden] { display: none; }
+
+/* ============================================================
+   2026-10 脱AI診断の反映：営業人材レンタルの比較表
+   ============================================================ */
+.compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 8px; }
+.compare-table { width: 100%; min-width: 560px; border-collapse: separate; border-spacing: 0; background: var(--color-white); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+.compare-table th, .compare-table td { padding: 16px 18px; font-size: 15px; line-height: 1.6; text-align: center; border-bottom: 1px solid var(--color-border-light); vertical-align: middle; }
+.compare-table thead th { background: var(--color-primary); color: var(--color-white); font-weight: 700; }
+.compare-table tbody th { background: var(--color-bg); color: var(--color-primary); font-weight: 700; text-align: left; white-space: nowrap; }
+.compare-table tr:last-child th, .compare-table tr:last-child td { border-bottom: 0; }
+.compare-table thead th.is-ours { background: var(--color-accent); }
+.compare-table td.is-ours { color: var(--color-primary); font-weight: 700; background: #eef3fc; }
+/* サービス詳細のヒーローは行内styleで2列指定されているため、スマホでは1列に戻す */
+@media (max-width: 768px) {
+  .service-hero-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .service-hero .hero-proof { width: 100%; }
+}
+/* 採用欄の登場アニメ（右から30px）がスマホで横スクロールを生まないように */
+.recruit-teaser { overflow-x: clip; }
+.message-body > p { margin-bottom: 1.4em; }

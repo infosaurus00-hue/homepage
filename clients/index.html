@@ -197,7 +197,9 @@
       .product-item:nth-child(3n) { border-right: none; }
     }
     @media (max-width: 768px) {
-      .client-logo-grid { grid-template-columns: repeat(2, 1fr); row-gap: 40px; column-gap: 24px; }
+      .client-logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; column-gap: 24px; }
+      .client-logo-item { min-width: 0; }
+      .client-logo-item.logo-pending span { width: 100%; max-width: 240px; height: auto; min-height: 110px; }
       .clients-stats { gap: 40px; }
       .clients-stat-value { font-size: 2.8rem; }
       .method-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -348,16 +350,13 @@
 
         <!-- 社名は業種で表記 -->
         <div class="client-logo-item logo-pending">
-          <span><b>AI SaaS</b></span>
-        </div>
-        <div class="client-logo-item logo-pending">
           <span><b>大手電子署名SaaS</b></span>
         </div>
         <div class="client-logo-item logo-pending">
           <span><b>大手コンサルティング会社</b></span>
         </div>
         <div class="client-logo-item logo-pending">
-          <span><b>大手AI研修</b></span>
+          <span><b>AIスタートアップ</b><i>企業評価額1,000億円超</i></span>
         </div>
         <div class="client-logo-item logo-pending">
           <span><b>製造業SaaS</b></span>
@@ -384,10 +383,10 @@
       <div class="results-banner">
         <h3>毎月、約500件のアポをお届けしています</h3>
         <ul>
-          <li><strong style="color:#fff;">AI SaaS：稼働10日間で200件のアポ獲得（商談化率 7%→20%）</strong></li>
-          <li>大手電子署名SaaS：月100件のアポを継続供給</li>
+          <li><strong style="color:#fff;">AI SaaS：稼働10日間で約200件のアポ獲得。その後の営業コンサルで商談成功率 7%→20%</strong></li>
+          <li>大手電子署名SaaS：稼働期間中に月100件のアポ</li>
           <li>大手コンサルティング会社：他社が取れなかったセミナー集客・代表アポを月50件</li>
-          <li>大手AI研修：月50件のアポトスアップ</li>
+          <li>企業評価額1,000億円超のAIスタートアップ：月200件のアポを継続トスアップ</li>
           <li>製造業SaaS：月50件のアポトスアップ</li>
           <li>建設業SaaS・小売業SaaS：それぞれ月50件のアポトスアップ</li>
         </ul>
