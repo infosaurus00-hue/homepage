@@ -304,7 +304,7 @@ function renderSalesPilotCTA(ctaText = 'まずはお気軽にご相談くださ�
     <h3>${ctaText}</h3>
     <p>初回相談は無料です。営業設計の課題を一緒に整理しましょう。</p>
     <div class="detail-cta-buttons">
-      <a href="${SITE_BASE}/lp/sales-pilot/" class="btn btn-primary btn-lg"><i class="fas fa-ship"></i> セールス航海士について詳しく見る</a>
+      <a href="${SITE_BASE}/services/sales-pilot/" class="btn btn-primary btn-lg"><i class="fas fa-ship"></i> セールス航海士について詳しく見る</a>
       <a href="${SITE_CONFIG.lineUrl}" target="_blank" rel="noopener" class="btn btn-line btn-lg"><i class="fab fa-line"></i> LINEで相談する</a>
     </div>
   </div>`;
